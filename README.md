@@ -8,7 +8,7 @@
 Ruby 2.6.5
 Rails 5.2.4
 # カタログ設計
-![catalog](https://user-images.githubusercontent.com/56712012/89123602-8ae76b00-d50b-11ea-85cb-e2121287712b.png)
+<img width="1241" alt="catalog" src="https://user-images.githubusercontent.com/56712012/89412998-faa36300-d762-11ea-9130-2959141f268c.png">
 # テーブル設計
 ![table structure](https://user-images.githubusercontent.com/56712012/89123640-c7b36200-d50b-11ea-9ee1-f245e20d8da1.png)
 # ER図
