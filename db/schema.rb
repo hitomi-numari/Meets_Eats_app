@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_14_051930) do
+ActiveRecord::Schema.define(version: 2020_08_14_120659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,15 +68,17 @@ ActiveRecord::Schema.define(version: 2020_08_14_051930) do
   end
 
   create_table "profiles", force: :cascade do |t|
-    t.string "nickname", default: "", null: false
-    t.string "icon", default: "", null: false
-    t.date "birthday", null: false
-    t.integer "gender", default: 0, null: false
-    t.string "instagram_url", default: "", null: false
-    t.string "facebook_url", default: "", null: false
-    t.text "details", null: false
+    t.string "nickname"
+    t.string "icon"
+    t.date "birthday"
+    t.integer "gender"
+    t.string "instagram_url"
+    t.string "facebook_url"
+    t.text "details"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -97,4 +99,5 @@ ActiveRecord::Schema.define(version: 2020_08_14_051930) do
   add_foreign_key "genre_tags", "genres"
   add_foreign_key "genru_tags", "events"
   add_foreign_key "genru_tags", "genrus"
+  add_foreign_key "profiles", "users"
 end
