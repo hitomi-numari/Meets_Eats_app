@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
-  get 'events/index'
-  get 'events/show'
-  get 'events/new'
+  resources :events do
+  end
   devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root 'events#index'
+  devise_scope :user do
+    authenticated :user do
+      root :to => 'events#index', as: :authenticated_root
+    end
+    unauthenticated :user do
+      root :to => 'devise/sessions#new', as: :unauthenticated_root
+    end
+  end
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
