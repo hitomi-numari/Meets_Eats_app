@@ -13,9 +13,10 @@
     <% if user_signed_in? %>
       <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
       <% if current_user.profile.nil? %>
-        <div>こんにちは、ゲストさん</div>
+        <li>こんにちは、ゲストさん</li>
       <% else %>
-        <div>こんにちは、<%= current_user.profile.nickname %>さん</div>
+        <li>こんにちは、<%= current_user.profile.nickname %>さん</li>
+        <li><%= link_to 'イベント一覧', events_path %></li>
       <% end %>
     <% else %>
       <li><%= link_to 'ログイン', new_user_session_path %></li>
