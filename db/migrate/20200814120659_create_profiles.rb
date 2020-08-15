@@ -8,7 +8,7 @@ class CreateProfiles < ActiveRecord::Migration[5.2]
       t.string :instagram_url
       t.string :facebook_url
       t.text :details
-      t.references :user, foreign_key: true
+      t.references :user, index: { unique: true }, foreign_key: true
 
       t.timestamps
     end

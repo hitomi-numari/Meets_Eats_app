@@ -1,0 +1,29 @@
+<% flash.each do |key, value| %>
+  <div class="alert <%= bootstrap_class_for(key) %>" ><%= value %></div>
+<% end %>
+
+  <div style="margin: 0 20px">
+    <% if @profile.icon.present? %>
+      <p><%= image_tag(@profile.icon.url, size: "50x50") %></p>
+    <% else %>
+      <p><%= image_tag("default.png", size: "50x50") %></p>
+    <% end %>
+  </div>
+
+    <div><%= @profile.nickname %></div>
+
+    <div><%= calc_ages(@profile.calc_age) %></div>
+
+    <div><%= gender_view(@profile.gender) %></div>
+
+    <div><%= @profile.details %></div>
+
+    <div><%= @profile.instagram_url %></div>
+
+    <div><%= @profile.facebook_url %></div>
+
+  <div style="margin: 0 20px">
+    <% if @profile.user == current_user %>
+      <%= link_to '編集', edit_profile_path(@profile.id), class: 'btn btn-default btn-sm' %>
+    <% end %>
+  </div>
