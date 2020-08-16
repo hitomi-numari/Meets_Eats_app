@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :users, only: [:show, :my_events] do
+    get "my_events", :on => :member
+  end
   resources :profiles
   resources :events do
   end

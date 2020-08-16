@@ -1,7 +1,7 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :update]
   before_action :set_profile, only: [:show, :edit, :update]
-
+  layout '_sidebar', only: [:show]
   def new
     if user_signed_in? && has_profile?
       @events = Event.all

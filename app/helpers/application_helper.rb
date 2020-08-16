@@ -13,4 +13,5 @@ module ApplicationHelper
         puts flash_type.to_s
     end
   end
+
 end

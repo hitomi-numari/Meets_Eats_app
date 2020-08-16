@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
   <head>
     <title>MeetsEats</title>
@@ -10,7 +9,6 @@
   </head>
 
   <body>
-    <ul>
     <% if user_signed_in? %>
       <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
       <% if current_user.profile.nil? %>
@@ -18,13 +16,31 @@
       <% else %>
         <li>こんにちは、<%= current_user.profile.nickname %>さん</li>
         <li><%= link_to 'イベント一覧', events_path %></li>
-        <li><%= link_to "マイページ", my_events_user_path(current_user.id) %></li>
+        <li><%= link_to "マイページ", user_path(current_user.id) %></li>
       <% end %>
     <% else %>
       <li><%= link_to 'ログイン', new_user_session_path %></li>
       <li><%= link_to 'サインアップ', new_user_registration_path %></li>
     <% end %>
-    <%= yield %>
-    </ul>
-  </body>
-</html>
+    <h1>マイページ</h1>
+      <div class="container">
+        <div class="row">
+          <div class="col-3">
+            <div sidebar_fixed">
+              <p>Menu</p>
+                <ul>
+                  <li><%= link_to 'マイトップページ', my_events_user_path(current_user.id) %></li>
+                  <li><%= link_to 'プロフィール編集', profile_path(current_user.profile.id) %></li>
+                  <li><%= link_to 'イベント履歴' %></li>
+                  <li><%= link_to 'イベント参加履歴' %></li>
+                  <li><%= link_to 'お気に入り' %></li>
+                </ul>
+            </div>
+          </div>
+          <div class="col">
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+    </body>
+  </html>
