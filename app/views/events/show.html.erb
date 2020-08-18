@@ -1,2 +1,60 @@
-<h1>Events#show</h1>
-<p>Find me in app/views/events/show.html.erb</p>
+<h1>イベント詳細</h1>
+
+<p>
+  <strong>タイトル</strong>
+  <%= @event.title %>
+</p>
+
+<p>
+  <strong>詳細</strong>
+  <%= @event.content %>
+</p>
+
+<p>
+  <strong>年齢</strong>
+  <%= @event.user.profile.calc_age %>
+</p>
+
+<p>
+  <strong>性別</strong>
+  <%= gender_view(@event.user.profile.gender) %>
+</p>
+
+<p>
+  <strong>料理</strong>
+  <% @event.genres.each do |genre| %>
+    <span><%= genre.name %></span>
+  <% end %>
+</p>
+
+<p>
+  <strong>レストランURL</strong>
+  <%= @event.restaurant_url %>
+</p>
+
+<p>
+  <strong>予算</strong>
+  <%= @event.budget %>
+</p>
+
+<p>
+  <!-- <strong>エリア</strong> -->
+  <%# <% @event.areas.each do |area| %> %>
+    <!-- <span>
+      <%# <%= area.name %> %>
+    </span> -->
+  <%# <% end %> %>
+</p>
+
+<p>
+  <strong>時間</strong>
+  <%= @event.start_at %> ~ <%= @event.end_at %>
+</p>
+
+<p>
+  <strong>受付終了時間</strong>
+  <%= @event.check_in_time %>
+</p>
+
+<%= link_to "編集", action: "edit" %>
+<%= link_to "戻る", action: "index" %>
