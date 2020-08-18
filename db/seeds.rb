@@ -6,22 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Genre.create!(
-  name:'イタリアン'
-)
-Genre.create!(
-  name:'和食'
-)
-Genre.create!(
-  name:'洋食'
-)
-Genre.create!(
-  name:'中華'
-)
-Genre.create!(
-  name:'その他'
-)
-
 Area.create!(
   name:'千代田区'
 )
@@ -90,4 +74,23 @@ Area.create!(
 )
 Area.create!(
   name:'江戸川区'
+)
+
+Genre.create!(
+  name:'恋愛'
+)
+Genre.create!(
+  name:'仕事'
+)
+Genre.create!(
+  name:'家族'
+)
+Genre.create!(
+  name:'人間関係'
+)
+Genre.create!(
+  name:'趣味'
+)
+Genre.create!(
+  name:'その他'
 )

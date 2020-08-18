@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_18_013700) do
+ActiveRecord::Schema.define(version: 2020_08_18_051348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,9 @@ ActiveRecord::Schema.define(version: 2020_08_18_013700) do
     t.integer "check_in_time", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "food_category", default: 0, null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_events_on_user_id"
   end
 
   create_table "genre_tags", force: :cascade do |t|
@@ -97,6 +100,7 @@ ActiveRecord::Schema.define(version: 2020_08_18_013700) do
   add_foreign_key "apply_for_events", "users"
   add_foreign_key "area_tags", "areas"
   add_foreign_key "area_tags", "events"
+  add_foreign_key "events", "users"
   add_foreign_key "genre_tags", "events"
   add_foreign_key "genre_tags", "genres"
   add_foreign_key "profiles", "users"

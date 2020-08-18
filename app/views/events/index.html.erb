@@ -5,6 +5,7 @@
 <table class="table table-hover">
   <thead>
     <tr>
+      <th>投稿者</th>
       <th>タイトル</th>
       <th>詳細</th>
       <th>年代</th>
@@ -23,32 +24,28 @@
     <% @events.each do |event| %>
       <tr>
         <td class="task_row"><%= event.title %></td>
+        <td><%= event.user.profile.nickname %></td>
         <td><%= event.content %></td>
         <td><%= event.user.profile %></td>
         <td><%= event.user.profile.calc_age %></td>
-        <td>
+        <!-- タグ機能未設定のため保留 -->
+        <!-- <td> -->
           <%# <%= event.genre %> %>
-        </td>
+        <!-- </td> -->
+        <td><%= event.food_category_i18n %></td>
         <td><%= event.restaurant_url %></td>
-        <td>
-          <%# <%= event.budget %> %>
-        </td>
+        <td><%= event.budget_i18n %></td>
+        <!-- タグ機能未設定のため保留 -->
+        <!-- <td> -->
+          <%# <%= event.area.name %> %>
+        <!-- </td> -->
         <td><%= event.start_at %></td>
         <td><%= event.end_at %></td>
-        <td>
-          <%# <%= event.check_in_time %>時間前 %>
-        </td>
+        <td><%= event.check_in_time_i18n %></td>
 
         <td><%= link_to "詳細", event_path(event.id) %></td>
         <td><%= link_to "編集", edit_event_path(event.id) %></td>
         <td><%= link_to "削除", event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td>
-          <!-- エリアテーブル未設定のため、仮記入 -->
-          <%# <% event.areas.each do |area| %> %>
-          <%# <%= area.name %> %>
-          <%# <% end %> %>
-        </td>
-        <td><%= event.user.profile.nickname %></td>
       </tr>
     <% end %>
   </tbody>

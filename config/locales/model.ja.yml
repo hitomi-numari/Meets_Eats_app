@@ -1,0 +1,34 @@
+ja:
+  activerecord:
+    models:
+      user: "ユーザー"
+      event: "イベント"
+      genre: "相談ジャンル"
+      area: "場所"
+      profile: "プロフィール"
+    attributes:
+      user:
+        id: "登録ID"
+        name: "氏名"
+        email: "メールアドレス"
+        admin: "管理者権限"
+        password: "パスワード"
+        password_confirmation: "パスワード（確認用）"
+        created_at: "登録日時"
+        updated_at: "更新日時"
+      event:
+        id: "ID"
+        title: "名前"
+        content: "詳細"
+        deadline: "終了期限"
+        status: "ステータス"
+        priority: "優先順位"
+        created_at: "作成日時"
+        updated_at: "更新日時"
+      genre:
+        name: "相談ジャンル"
+      area:
+        name: "場所"
+  errors:
+    messages:
+      admin: "は最低１名必要です。解除する必要がある場合は、新たに管理者権限を持つユーザーを登録してください。"

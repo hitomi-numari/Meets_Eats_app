@@ -1,10 +1,4 @@
 Rails.application.routes.draw do
-  resources :users, only: [:show, :my_events] do
-    get "my_events", :on => :member
-  end
-  resources :profiles
-  resources :events do
-  end
   devise_for :users, controllers: { registrations: 'users/registrations' }
   devise_scope :user do
     authenticated :user do
@@ -13,6 +7,11 @@ Rails.application.routes.draw do
     unauthenticated :user do
       root :to => 'devise/sessions#new', as: :unauthenticated_root
     end
+  end
+  resources :profiles
+  resources :events
+  resources :users, only: [:show, :my_events] do
+    get "my_events", :on => :member
   end
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
