@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_17_060725) do
+ActiveRecord::Schema.define(version: 2020_08_18_013700) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,18 +25,31 @@ ActiveRecord::Schema.define(version: 2020_08_17_060725) do
     t.index ["user_id"], name: "index_apply_for_events_on_user_id"
   end
 
+  create_table "area_tags", force: :cascade do |t|
+    t.bigint "area_id"
+    t.bigint "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["area_id"], name: "index_area_tags_on_area_id"
+    t.index ["event_id"], name: "index_area_tags_on_event_id"
+  end
+
+  create_table "areas", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "events", force: :cascade do |t|
     t.string "title", default: "", null: false
     t.text "content", default: "", null: false
-    t.integer "restaurant_url", null: false
+    t.string "restaurant_url", default: "", null: false
     t.integer "budget", default: 0, null: false
     t.datetime "start_at"
     t.datetime "end_at"
     t.integer "check_in_time", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
-    t.index ["user_id"], name: "index_events_on_user_id"
   end
 
   create_table "genre_tags", force: :cascade do |t|
@@ -50,21 +63,6 @@ ActiveRecord::Schema.define(version: 2020_08_17_060725) do
 
   create_table "genres", force: :cascade do |t|
     t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "genru_tags", force: :cascade do |t|
-    t.bigint "event_id"
-    t.bigint "genru_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["event_id"], name: "index_genru_tags_on_event_id"
-    t.index ["genru_id"], name: "index_genru_tags_on_genru_id"
-  end
-
-  create_table "genrus", force: :cascade do |t|
-    t.string "name", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -97,10 +95,9 @@ ActiveRecord::Schema.define(version: 2020_08_17_060725) do
 
   add_foreign_key "apply_for_events", "events"
   add_foreign_key "apply_for_events", "users"
-  add_foreign_key "events", "users"
+  add_foreign_key "area_tags", "areas"
+  add_foreign_key "area_tags", "events"
   add_foreign_key "genre_tags", "events"
   add_foreign_key "genre_tags", "genres"
-  add_foreign_key "genru_tags", "events"
-  add_foreign_key "genru_tags", "genrus"
   add_foreign_key "profiles", "users"
 end

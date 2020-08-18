@@ -21,24 +21,24 @@
     <%= form.text_area :content %>
   </div>
 
-  <!-- <div class="form-group"> -->
-    <%# <%= form.collection_radio_buttons(:genre_ids, Genre.all, :id, :name) %> %>
-  <!-- </div> -->
+  <div class="form-group">
+    <%= form.collection_radio_buttons(:genre_ids, Genre.all, :id, :name) %>
+  </div>
 
   <div class="form-group">
     <%= form.label :restaurant_url %>
     <%= form.text_field :restaurant_url %>
   </div>
 
-  <!-- <div class="form-group"> -->
-    <%# <%= form.label :budget %> %>
-    <%# <%= form.select :budget, Event.budgets.keys.map {|k| [I18n.t("enums.events.budget.#{k}"), k]}, include_blank: "選択して下さい" %> %>
-  <!-- </div> -->
+  <div class="form-group">
+    <%= form.label :budget %>
+    <% f.select :budget, Event.budgets.keys.map {|k| [I18n.t("enums.events.budget.#{k}"), k]}, include_blank: "選択して下さい" %>
+  </div>
 
-  <!-- <div class="form-group"> -->
-    <%# <%= form.label :area %> %>
-    <%# <%= form.select :area, Area.names.keys.map {|k| [I18n.t("enums.areas.name.#{k}"), k]}, include_blank: "選択して下さい" %> %>
-  <!-- </div> -->
+  <div class="form-group">
+    <%= form.label :area %>
+    <%= form.select :area, Area.names.keys.map {|k| [I18n.t("enums.areas.name.#{k}"), k]}, include_blank: "選択して下さい" %>
+  </div>
 
   <div class="form-group">
     <%= form.label :start_at %>

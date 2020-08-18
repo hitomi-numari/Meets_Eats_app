@@ -5,3 +5,89 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Genre.create!(
+  name:'イタリアン'
+)
+Genre.create!(
+  name:'和食'
+)
+Genre.create!(
+  name:'洋食'
+)
+Genre.create!(
+  name:'中華'
+)
+Genre.create!(
+  name:'その他'
+)
+
+Area.create!(
+  name:'千代田区'
+)
+Area.create!(
+  name:'中央区'
+)
+Area.create!(
+  name:'港区'
+)
+Area.create!(
+  name:'新宿区'
+)
+Area.create!(
+  name:'文京区'
+)
+Area.create!(
+  name:'台東区'
+)
+Area.create!(
+  name:'墨田区'
+)
+Area.create!(
+  name:'江東区'
+)
+Area.create!(
+  name:'品川区'
+)
+Area.create!(
+  name:'目黒区'
+)
+Area.create!(
+  name:'太田区'
+)
+Area.create!(
+  name:'世田谷区'
+)
+Area.create!(
+  name:'渋谷区'
+)
+Area.create!(
+  name:'中野区'
+)
+Area.create!(
+  name:'杉並区'
+)
+Area.create!(
+  name:'豊島区'
+)
+Area.create!(
+  name:'北区'
+)
+Area.create!(
+  name:'荒川区'
+)
+Area.create!(
+  name:'板橋区'
+)
+Area.create!(
+  name:'練馬区'
+)
+Area.create!(
+  name:'足立区'
+)
+Area.create!(
+  name:'葛飾区'
+)
+Area.create!(
+  name:'江戸川区'
+)

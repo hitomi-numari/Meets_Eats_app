@@ -3,7 +3,7 @@ class CreateEvents < ActiveRecord::Migration[5.2]
     create_table :events do |t|
       t.string :title, null:false, default:""
       t.text :content, null:false, default:""
-      t.integer :restaurant_url, null:false, default:""
+      t.string :restaurant_url, null:false, default:""
       t.integer :budget, null:false, default: 0
       t.datetime :start_at
       t.datetime :end_at

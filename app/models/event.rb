@@ -10,8 +10,15 @@ class Event < ApplicationRecord
   validates :start_at, presence: true
   validates :end_at, presence: true
   # validates :check_in_time, presence: true
-
-  # enum genre: {other:0, italian:1, japanese:2, western:3, chinese:4}
+  enum budget_d: {
+      default: 0,
+      till_1000: 1,
+      till_2000: 2,
+      till_3000: 3,
+      till_4000: 4,
+      till_5000: 5,
+      over_6000: 6,
+    },  _prefix: true
 
   has_many :apply_for_events, dependent: :destroy
   has_many :apply_for_events_of_user, through: :apply_for_events, source: :user
