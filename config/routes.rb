@@ -9,9 +9,15 @@ Rails.application.routes.draw do
     end
   end
   resources :profiles
-  resources :events
+  resources :events do
+    get 'apply_members', :on => :member
+    get 'complete', :on => :collection
+  end
   resources :users, only: [:show, :my_events] do
     get "my_events", :on => :member
+  end
+  resources :apply_for_events, only: [:create, :destroy, :apply_members, :complete] do
+    patch :toggle_status
   end
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"

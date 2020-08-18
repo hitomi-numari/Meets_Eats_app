@@ -56,5 +56,13 @@
   <%= @event.check_in_time %>
 </p>
 
+<% unless @event.user_id == current_user.id %>
+  <% if @apply.present? %>
+    <%= link_to 'キャンセルする', apply_for_event_path(id: @apply.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+  <% else %>
+    <%= link_to '参加する', apply_for_events_path(event_id: @event.id), method: :post, class: 'btn btn-primary' %>
+  <% end %>
+<% end %>
+
 <%= link_to "編集", action: "edit" %>
 <%= link_to "戻る", action: "index" %>

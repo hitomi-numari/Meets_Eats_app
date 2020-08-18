@@ -1,0 +1,17 @@
+<h2>応募者一覧</h2>
+<% @event.apply_for_events.each do |apply| %>
+<table>
+  <thead>
+    <tr>
+      <th>応募者</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td><%= apply.user.profile.nickname %></td>
+      <td><%= link_to apply.status, apply_for_event_toggle_status_path(apply), method: :patch %></td>
+    </tr>
+  </tbody>
+<% end %>

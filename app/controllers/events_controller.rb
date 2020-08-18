@@ -1,12 +1,12 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :apply_members]
 
   def index
     @events = Event.all
   end
 
   def show
-    # @apply = current_user.apply_for_events.find_by(event_id: @event.id)
+    @apply = current_user.apply_for_events.find_by(event_id: @event.id)
   end
 
   def new
@@ -26,7 +26,6 @@ class EventsController < ApplicationController
     if params[:back]
       render :new
     else
-      # binding.pry
       if @event.save
         redirect_to events_path
       else
@@ -49,6 +48,7 @@ class EventsController < ApplicationController
   end
 
   def apply_members
+    # binding.pry
   end
 
   private
