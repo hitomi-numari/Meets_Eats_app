@@ -2,9 +2,9 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy, :apply_members]
 
   def index
-    @events = Event.all
-    @genres = Genre.all
-    @areas = Area.all
+    @search = Event.ransack(params[:q])
+    @profiles = Profile.all
+    @events = @search.result.includes(:user).page(params[:page])
   end
 
   def show
@@ -23,6 +23,8 @@ class EventsController < ApplicationController
   end
 
   def create
+    area_ids = params[:event][:area_ids]
+    params[:event][:area_ids] = [area_ids]
     @event = Event.new(event_params)
     @event.user_id = current_user.id
     if params[:back]
@@ -50,7 +52,6 @@ class EventsController < ApplicationController
   end
 
   def apply_members
-    # binding.pry
   end
 
   private
@@ -60,6 +61,7 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:title, :content, :restaurant_url, :budget, :start_at, :end_at, :check_in_time, {genre_ids: []}, {area_id: []})
+    params.require(:event).permit(:title, :content, :restaurant_url, :budget, :start_at, :end_at, :check_in_time, :food_category, { area_ids: []}, { genre_ids: [] })
   end
+
 end

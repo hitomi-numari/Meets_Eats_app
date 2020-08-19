@@ -1,6 +1,5 @@
 class Event < ApplicationRecord
   belongs_to :user
-
   validates :title, presence: true
   validates :content, presence: true
   # validates :genre, presence: true
@@ -43,4 +42,5 @@ class Event < ApplicationRecord
   has_many :genres, through: :genre_tags
   has_many :area_tags, dependent: :destroy
   has_many :areas, through: :area_tags
+
 end
