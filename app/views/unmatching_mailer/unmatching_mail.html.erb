@@ -1,2 +1,4 @@
-<h1>マッチングが不成立です</h1>
-<h4>name: <%= @unmatching_member.profile.nickname %></h4>
+<p><%= @unmatching_info.user.profile.nickname %>様</p>
+<p>この度は<%= @unmatching_info.event.title %>にご応募頂きありがとうございました。</p>
+<p>誠に残念ながら、<%= @unmatching_info.event.user.profile.nickname %>様は他の応募者様とのマッチングが成立致しました。</p>
+<p>今回はご希望に添えない結果となりましたが、また次の機会のご利用をお待ち申し上げております！</p>

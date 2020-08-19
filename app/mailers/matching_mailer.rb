@@ -1,6 +1,6 @@
 class MatchingMailer < ApplicationMailer
-  def matching_mail(matching_member)
-    @matching_member = matching_member
-    mail to: @matching_member.email, subject: "マッチング成立のお知らせ"
+  def matching_mail(matching_info)
+    @matching_info = matching_info
+    mail to: @matching_info.user.email, subject: 'イベントの募集結果に関するお知らせ'
   end
 end

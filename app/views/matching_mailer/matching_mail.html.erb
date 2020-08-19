@@ -1,2 +1,5 @@
-<h1>マッチングが成立しました！</h1>
-<h4>name: <%= @matching_member.profile.nickname %></h4>
+<p><%= @matching_info.user.profile.nickname %>様</p>
+<p>この度は<%= @matching_info.event.title %>にご応募頂きありがとうございました。</p>
+<p><%= @matching_info.event.user.profile.nickname %>様が<%= @matching_info.user.profile.nickname %>様とのマッチングを決めました！</p>
+<p>早速、<%= @matching_info.event.user.profile.nickname %>様にチャットでご挨拶して交流を深めましょう！</p>
+<p>尚、イベントが終わりましたら下記ページより食事相手を評価してください。</p>
