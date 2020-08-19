@@ -23,11 +23,14 @@
 
   <div class="form-group">
     <%= form.label t('view.genre.name') %>
-    <%= form.collection_check_boxes(:genre_ids, Genre.all, :id, :name) %>
+    <% Genre.all.each do |genre| %>
+      <%= form.check_box :genre_ids, { multiple: true, checked: genre[:checked], disabled: genre[:disabled], include_hidden: false }, genre[:id] %>
+    <%= genre.name %>
+    <% end %>
   </div>
 
   <div class="form-group">
-    <%= form.label t('view.event.food_category') %>  
+    <%= form.label t('view.event.food_category') %>
     <%= form.collection_radio_buttons(:food_category, Event.food_categories_i18n, :first, :last) do |r| %>
       <%= r.label(class: "radio_button") { r.radio_button(class: "radio_button") + r.text } %>
     <% end %>
@@ -43,10 +46,10 @@
     <%= form.select :budget, Event.budgets_i18n.keys.map {|k| [I18n.t("enums.events.budget.#{k}"), k]}, include_blank: "選択して下さい" %>
   </div>
 
-  <div class="form-group">
-    <%= form.label t('view.area.name') %>
-    <%= form.collection_select :name, Area.all, :id, :name, { prompt: "選択してください" } %>
-  </div>
+  <!-- <div class="form-group"> -->
+    <%#= form.label t('view.area.name') %>
+    <%#= form.collection_select :name, Area.all, :id, :name, { prompt: "選択してください" } %>
+  <!-- </div> -->
 
   <div class="form-group">
     <%= form.label t('view.event.start_at') %>
@@ -63,7 +66,6 @@
     <%= form.label t('view.event.check_in_time') %>
     <%= form.select :check_in_time, Event.check_in_times.keys.map {|k| [I18n.t("enums.events.check_in_time.#{k}"), k]}, include_blank: "選択して下さい" %>
   </div>
-
   <div class="actions">
     <%= form.submit "投稿する", class:"btn btn-default"%>
   </div>

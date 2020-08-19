@@ -3,6 +3,8 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.all
+    @genres = Genre.all
+    @areas = Area.all
   end
 
   def show
@@ -58,6 +60,6 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:title, :content, :restaurant_url, :budget, :start_at, :end_at, :check_in_time)
+    params.require(:event).permit(:title, :content, :restaurant_url, :budget, :start_at, :end_at, :check_in_time, {genre_ids: []}, {area_id: []})
   end
 end

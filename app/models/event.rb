@@ -41,4 +41,6 @@ class Event < ApplicationRecord
   has_many :apply_for_events_of_user, through: :apply_for_events, source: :user
   has_many :genre_tags, dependent: :destroy
   has_many :genres, through: :genre_tags
+  has_many :area_tags, dependent: :destroy
+  has_many :areas, through: :area_tags
 end

@@ -5,11 +5,12 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>投稿者</th>
       <th>タイトル</th>
+      <th>投稿者</th>
       <th>詳細</th>
-      <th>年代</th>
+      <th>年齢</th>
       <th>料理ジャンル</th>
+      <th>相談ジャンル</th>
       <th>レストランURL</th>
       <th>予算</th>
       <th>エリア</th>
@@ -27,16 +28,17 @@
         <td><%= event.user.profile.nickname %></td>
         <td><%= event.content %></td>
         <td><%= event.user.profile.calc_age %></td>
-        <!-- タグ機能未設定のため保留 -->
-        <!-- <td> -->
-          <%# <%= event.genre %> %>
-        <!-- </td> -->
+        <td>
+          <% event.genre_tags.each do |genre| %>
+          <%= genre.genre.name %>
+          <% end %>
+        </td>
         <td><%= event.food_category_i18n %></td>
         <td><%= event.restaurant_url %></td>
         <td><%= event.budget_i18n %></td>
         <!-- タグ機能未設定のため保留 -->
         <!-- <td> -->
-          <%# <%= event.area.name %> %>
+          <%#= event.area.name %>
         <!-- </td> -->
         <td><%= event.start_at %></td>
         <td><%= event.end_at %></td>
