@@ -11,12 +11,12 @@ class ApplyForEventsController < ApplicationController
   def toggle_status
     apply = ApplyForEvent.find(params[:apply_for_event_id])
     apply.toggle_status!(status: apply.status)
-    # @matching_member = apply.user
-    # MatchingMailer.matching_mail(@matching_member).deliver
-    # @unmatching_members = ApplyForEvent.where.not(user_id: apply.user_id)
-    # @unmatching_members.each do |unmatching_member|
-    # UnmatchingMailer.unmatching_mail(unmatching_member.user).deliver
-    # end
+    @matching_member = apply.user
+    MatchingMailer.matching_mail(@matching_member).deliver
+    @unmatching_members = ApplyForEvent.where.not(user_id: apply.user_id)
+    @unmatching_members.each do |unmatching_member|
+    UnmatchingMailer.unmatching_mail(unmatching_member.user).deliver
+    end
     render complete_events_path
   end
 end

@@ -20,7 +20,7 @@ ja:
         id: "ID"
         title: "名前"
         content: "詳細"
-        deadline: "終了期限"
+        budget: "予算"
         status: "ステータス"
         priority: "優先順位"
         created_at: "作成日時"
