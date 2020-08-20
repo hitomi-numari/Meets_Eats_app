@@ -2,6 +2,7 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy, :apply_members]
 
   def index
+    binding.pry
     @genre = Genre.find(params[:genre_id])
     # @search = Event.ransack(params[:q])
     # @profiles = Profile.all
