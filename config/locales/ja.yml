@@ -93,11 +93,11 @@ ja:
         before_24hours: 1日前
         before_48hours: 2日前
       food_category:
-        italian: イタリアン
-        japanese: 和食
-        western: 洋食
-        chinese: 中華
-        other: その他
+        italian:　イタリアン
+        japanese:　和食
+        western:　洋食
+        chinese:　中華
+        other::　その他
     task:
       status:
         no_started: 未着手

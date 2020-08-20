@@ -26,6 +26,11 @@ module ApplicationHelper
         puts "非表示"
     end
   end
-
+  def simple_time_start_at(time)
+    time.strftime("%Y-%m-%d %H:%M")
+  end
+  def simple_time_end_at(time)
+    time.strftime("%H:%M")
+  end
 
 end

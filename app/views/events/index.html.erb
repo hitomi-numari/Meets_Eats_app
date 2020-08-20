@@ -21,8 +21,7 @@
       <th>レストランURL</th>
       <th>予算</th>
       <th>エリア</th>
-      <th>開始時間</th>
-      <th>終了時間</th>
+      <th>時間</th>
       <th>受付終了時間</th>
       <th colspan="3"></th>
     </tr>
@@ -35,21 +34,20 @@
         <td><%= event.user.profile.nickname %></td>
         <td><%= event.content %></td>
         <td><%= event.user.profile.calc_age %></td>
+        <td><%= event.food_category_i18n %></td>
         <td>
           <% event.genre_tags.each do |genre| %>
           <%= genre.genre.name %>
           <% end %>
         </td>
-        <td><%= event.food_category_i18n %></td>
-        <td><%= event.restaurant_url %></td>
+        <td><%= link_to event.restaurant_url %></td>
         <td><%= event.budget_i18n %></td>
         <td>
           <% event.area_tags.each do |area| %>
             <%= area.area.name %>
           <% end %>
         </td>
-        <td><%= event.start_at %></td>
-        <td><%= event.end_at %></td>
+        <td><%= simple_time_start_at(event.start_at) %>~<%= simple_time_end_at(event.end_at) %></td>
         <td><%= event.check_in_time_i18n %></td>
 
         <td><%= link_to "詳細", event_path(event.id) %></td>

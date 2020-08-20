@@ -2,13 +2,13 @@ class Event < ApplicationRecord
   belongs_to :user
   validates :title, presence: true
   validates :content, presence: true
-  # validates :genre, presence: true
-  validates :restaurant_url, presence: true
-  # validates :budget, presence: true
-  # validates :area, presence: true
+  validates :food_category, presence: true
+  validates :restaurant_url, presence: true,
+            format: URI::regexp(%w(http https))
+  validates :budget, presence: true
   validates :start_at, presence: true
   validates :end_at, presence: true
-  # validates :check_in_time, presence: true
+  validates :check_in_time, presence: true
   enum budget: {
       default: 0,
       till_1000: 1,

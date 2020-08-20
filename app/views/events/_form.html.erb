@@ -31,8 +31,8 @@
 
   <div class="form-group">
     <%= form.label t('view.event.food_category') %>
-    <%= form.collection_radio_buttons(:food_category, Event.food_categories_i18n, :first, :last) do |r| %>
-      <%= r.label(class: "radio_button") { r.radio_button(class: "radio_button") + r.text } %>
+    <%= form.collection_radio_buttons :food_category, Event.food_categories_i18n, :first, :last, include_hidden: false do |b| %>
+      <%= b.radio_button + b.label %>
     <% end %>
   </div>
 
