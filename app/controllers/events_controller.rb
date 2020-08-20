@@ -2,9 +2,10 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy, :apply_members]
 
   def index
-    @search = Event.ransack(params[:q])
-    @profiles = Profile.all
-    @events = @search.result.includes(:user).page(params[:page])
+    @genre = Genre.find(params[:genre_id])
+    # @search = Event.ransack(params[:q])
+    # @profiles = Profile.all
+    # @events = @search.result.includes(:user).page(params[:page])
   end
 
   def show
@@ -52,6 +53,10 @@ class EventsController < ApplicationController
   end
 
   def apply_members
+  end
+
+  def search_top
+    @genres = Genre.all
   end
 
   private

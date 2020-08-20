@@ -1,0 +1,5 @@
+<% @genres.each do |genre| %>
+<%= link_to genre.name,
+  {controller: "events", action: "index", genre_id: genre.id},
+  class: "color_gray no-underline"%>
+<% end %>
