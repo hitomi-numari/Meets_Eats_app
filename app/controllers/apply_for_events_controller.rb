@@ -6,7 +6,6 @@ class ApplyForEventsController < ApplicationController
   def destroy
     apply = current_user.apply_for_events.find_by(id: params[:id]).destroy
     redirect_to events_path, notice: "#{apply.event.user.profile.nickname}さんのブログをお気に入り解除しました"
-    end
   end
 
   def toggle_status
