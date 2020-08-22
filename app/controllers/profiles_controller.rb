@@ -6,7 +6,7 @@ class ProfilesController < ApplicationController
     if user_signed_in? && has_profile?
       # @events = Event.all
       @genres = Genre.all
-       redirect_to search_top_events_path
+       redirect_to events_path
       # render 'events/index'
     else
       @profile = Profile.new

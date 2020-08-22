@@ -12,10 +12,10 @@ Rails.application.routes.draw do
   resources :events do
     get 'apply_members', :on => :member
     get 'complete', :on => :collection
-    get 'search_top', :on => :collection
   end
   resources :users, only: [:show, :my_events] do
     get "my_events", :on => :member
+    get "event_history", :on => :member
   end
   resources :apply_for_events, only: [:create, :destroy, :apply_members, :complete] do
     patch :toggle_status

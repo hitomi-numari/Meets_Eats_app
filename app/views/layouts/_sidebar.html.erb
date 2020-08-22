@@ -15,8 +15,8 @@
         <li>こんにちは、ゲストさん</li>
       <% else %>
         <li>こんにちは、<%= current_user.profile.nickname %>さん</li>
-        <li><%= link_to '何からイベントを探す？', search_top_events_path %></li>
-        <li><%= link_to "マイページ", user_path(current_user.id) %></li>
+        <li><%= link_to 'イベント一覧', events_path %></li>
+        <li><%= link_to "マイページ", my_events_user_path(current_user.id) %></li>
       <% end %>
     <% else %>
       <li><%= link_to 'ログイン', new_user_session_path %></li>
@@ -31,7 +31,7 @@
                 <ul>
                   <li><%= link_to 'マイトップページ', my_events_user_path(current_user.id) %></li>
                   <li><%= link_to 'プロフィール編集', profile_path(current_user.profile.id) %></li>
-                  <li><%= link_to 'イベント履歴' %></li>
+                  <li><%= link_to 'イベント履歴', event_history_user_path(current_user.id) %></li>
                   <li><%= link_to 'イベント参加履歴' %></li>
                   <li><%= link_to 'お気に入り' %></li>
                 </ul>

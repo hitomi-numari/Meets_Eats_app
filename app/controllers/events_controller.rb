@@ -1,18 +1,17 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy, :apply_members]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :apply_members, :prohibit_selected]
+  before_action :prohibit_selected, only: [:apply_members]
 
   def index
-    @genre = Genre.find(params[:genre_id])
-    @genre_events = @genre.genre_tags
-    @events = []
-    @genre_events.each do |genre_event|
-      genre_event.event
-      @events << genre_event.event
+    @events = Event.all
+    @unselected_events = []
+    @events.each do |apply|
+      if apply.apply_for_events.exists?(status: 'selected')
+      else
+        @unselected_events << @events.find(apply.id)
+      end
     end
-    # binding.pry
-    # @search = Event.ransack(params[:q])
-    # @profiles = Profile.all
-    # @events = @search.result.includes(:user).page(params[:page])
+    # @search = @unselected_events.ransack(params[:q])
   end
 
   def show
@@ -62,10 +61,6 @@ class EventsController < ApplicationController
   def apply_members
   end
 
-  def search_top
-    @genres = Genre.all
-  end
-
   private
 
   def set_event
@@ -74,6 +69,12 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:title, :content, :restaurant_url, :budget, :start_at, :end_at, :check_in_time, :food_category, { area_ids: []}, { genre_ids: [] })
+  end
+
+  def prohibit_selected
+    if @event.apply_for_events.exists?(status: 'selected')
+      redirect_to my_events_user_path(current_user.id)
+    end
   end
 
 end

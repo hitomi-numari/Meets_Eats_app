@@ -43,7 +43,7 @@
 
   <div class="form-group">
     <%= form.label t('view.event.budget') %>
-    <%= form.select :budget, Event.budgets_i18n.keys.map {|k| [I18n.t("enums.events.budget.#{k}"), k]}, include_blank: "選択して下さい" %>
+    <%= form.select :budget, Event.budgets_i18n.keys.map {|k| [I18n.t("enums.event.budget.#{k}"), k]}, include_blank: "選択して下さい" %>
   </div>
 
   <div class="form-group">
@@ -64,7 +64,7 @@
 
   <div class="form-group">
     <%= form.label t('view.event.check_in_time') %>
-    <%= form.select :check_in_time, Event.check_in_times.keys.map {|k| [I18n.t("enums.events.check_in_time.#{k}"), k]}, include_blank: "選択して下さい" %>
+    <%= form.select :check_in_time, Event.check_in_times.keys.map {|k| [I18n.t("enums.event.check_in_time.#{k}"), k]}, include_blank: "選択して下さい" %>
   </div>
   <div class="actions">
     <%= form.submit "投稿する", class:"btn btn-default"%>

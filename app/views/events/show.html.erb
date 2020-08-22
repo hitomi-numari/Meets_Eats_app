@@ -22,6 +22,11 @@
 
 <p>
   <strong>料理</strong>
+  <%= @event.food_category %>
+</p>
+
+<p>
+  <strong>料理</strong>
   <% @event.genres.each do |genre| %>
     <span><%= genre.name %></span>
   <% end %>
@@ -29,12 +34,12 @@
 
 <p>
   <strong>レストランURL</strong>
-  <%= @event.restaurant_url %>
+  <%=link_to @event.restaurant_url %>
 </p>
 
 <p>
   <strong>予算</strong>
-  <%= @event.budget %>
+  <%= @event.budget_i18n %>
 </p>
 
 <p>
@@ -48,12 +53,12 @@
 
 <p>
   <strong>時間</strong>
-  <%= @event.start_at %> ~ <%= @event.end_at %>
+  <%= simple_time_start_at(@event.start_at) %>~<%= simple_time_end_at(@event.end_at) %>
 </p>
 
 <p>
   <strong>受付終了時間</strong>
-  <%= @event.check_in_time %>
+  <%= @event.check_in_time_i18n %>
 </p>
 
 <% unless @event.user_id == current_user.id %>

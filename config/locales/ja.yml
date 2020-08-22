@@ -76,7 +76,7 @@ ja:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
   enums:
-    events:
+    event:
       budget:
         default: --
         till_1000: ~¥999

@@ -1,15 +1,14 @@
-<h2>募集中のイベント</h2>
+<h2>イベント履歴</h2>
 <table>
   <tr>
     <th>タイトル</th>
     <th>内容</th>
   </tr>
-<% @unselected_events.each do |event| %>
+<% @unrated_events.each do |event| %>
   <tr>
     <td><%= event.title %></td>
     <td><%= event.content %></td>
     <td>
-      <%= link_to "応募者一覧", apply_members_event_path(event.id) if user_signed_in? %>
     </td>
   </tr>
     <% end %>
