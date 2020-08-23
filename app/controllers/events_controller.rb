@@ -4,14 +4,15 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.all
-    @unselected_events = []
-    @events.each do |apply|
-      if apply.apply_for_events.exists?(status: 'selected')
-      else
-        @unselected_events << @events.find(apply.id)
-      end
-    end
-    # @search = @unselected_events.ransack(params[:q])
+    # @unselected_events = []
+    # @events.each do |apply|
+    #   if apply.apply_for_events.exists?(status: 'selected')
+    #   else
+    #     @unselected_events << @events.find(apply.id)
+    #   end
+    # end
+    # @q = Event.ransack(params[:q])
+    # @event = @q.result(distinct: true)
   end
 
   def show
@@ -68,7 +69,8 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:title, :content, :restaurant_url, :budget, :start_at, :end_at, :check_in_time, :food_category, { area_ids: []}, { genre_ids: [] })
+    params.require(:event).permit(:title, :content, :restaurant_url, :budget, :start_at, :end_at,
+                                  :check_in_time, :food_category, { area_ids: []}, { genre_ids: [] })
   end
 
   def prohibit_selected

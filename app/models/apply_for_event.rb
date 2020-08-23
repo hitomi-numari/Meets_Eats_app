@@ -12,4 +12,12 @@ class ApplyForEvent < ApplicationRecord
     end
   end
 
+  # def toggle_event_status(event_status)
+  #   if pending?
+  #     done!
+  #   else
+  #     pending!
+  #   end
+  # end
+
 end

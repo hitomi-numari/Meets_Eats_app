@@ -10,6 +10,7 @@ class ApplyForEventsController < ApplicationController
   end
 
   def toggle_status
+    # binding.pry
     apply = ApplyForEvent.find(params[:apply_for_event_id])
     apply.toggle_status!(status: apply.status)
     @matching_info = apply
