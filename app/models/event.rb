@@ -48,4 +48,5 @@ class Event < ApplicationRecord
   has_many :area_tags, dependent: :destroy
   has_many :areas, through: :area_tags
 
+
 end

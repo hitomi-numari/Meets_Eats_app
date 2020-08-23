@@ -10,9 +10,11 @@ class ApplyForEventsController < ApplicationController
   end
 
   def toggle_status
-    # binding.pry
     apply = ApplyForEvent.find(params[:apply_for_event_id])
     apply.toggle_status!(status: apply.status)
+    @event_state = Event.find(apply.event.id)
+    @event_state.event_status = "done"
+    @event_state.save
     @matching_info = apply
     MatchingMailer.matching_mail(@matching_info).deliver
     @unmatching_info = ApplyForEvent.where.not(id: apply.id)
@@ -21,4 +23,5 @@ class ApplyForEventsController < ApplicationController
     end
     redirect_to complete_events_path
   end
+
 end

@@ -1,9 +1,9 @@
 class ApplyForEvent < ApplicationRecord
   belongs_to :user
   belongs_to :event
+  accepts_nested_attributes_for :event, allow_destroy: true
   enum status:{ unselected:0, selected:1}
 
-  # def toggle_status!(status, apply)
   def toggle_status!(status)
     if unselected?
       selected!
@@ -11,13 +11,4 @@ class ApplyForEvent < ApplicationRecord
       unselected!
     end
   end
-
-  # def toggle_event_status(event_status)
-  #   if pending?
-  #     done!
-  #   else
-  #     pending!
-  #   end
-  # end
-
 end
