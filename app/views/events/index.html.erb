@@ -1,13 +1,11 @@
 <div class="container-fluid">
-
 <h1>イベント一覧</h1>
 <div class="form_group">
-  <%# <%= search_form_for @q, url: events_path do |f| %> %>
-    <%# <%= f.search_field :title_cont, placeholder: 'キーワードを入力', required: true %> %>
-    <%#= f.submit %> | <%#= link_to "全件表示", action: "index" %>
-  <%# <% end %> %>
+  <%= search_form_for @q, url: events_path do |f| %>
+    <%= f.search_field :title_cont, placeholder: 'キーワードを入力', required: true %>
+    <%= f.submit %> | <%= link_to "全件表示", action: "index" %>
+  <% end %>
 </div>
-
 <table class="table table-hover">
   <thead>
     <tr>
@@ -26,11 +24,9 @@
       <th colspan="3"></th>
     </tr>
   </thead>
-
   <tbody>
     <% @events.each do |event| %>
-    <% apply = ApplyForEvent.find(event_id: event.id) %>
- <% if apply.blank? %> 
+      <% unless event.apply_for_events.exists?(status: "selected") %>
       <tr>
         <td class="task_row"><%= image_tag(event.user.profile.icon_url, size: "32x32", class: "img-circle" ) %></td>
         <td><%=event.title %></td>
@@ -52,19 +48,14 @@
         </td>
         <td><%= simple_time_start_at(event.start_at) %>~<%= simple_time_end_at(event.end_at) %></td>
         <td><%= event.check_in_time_i18n %></td>
-
         <td><%= link_to "詳細", event_path(event.id) %></td>
         <td><%= link_to "編集", edit_event_path(event.id) %></td>
         <td><%= link_to "削除", event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
-    <% else %> 
-      <%= "表示しない" %> 
-    <% end %> 
-  <% end %>
-</tbody>
+      <% else %>
+      <% end %>
+    <% end %>
+  </tbody>
 </table>
-
-
 <%= link_to 'イベントを登録する', new_event_path, class:"btn btn-default btn-block" %>
-
 </div>

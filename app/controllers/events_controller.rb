@@ -3,16 +3,8 @@ class EventsController < ApplicationController
   before_action :prohibit_selected, only: [:apply_members]
 
   def index
-    @events = Event.all
-    # @unselected_events = []
-    # @events.each do |apply|
-    #   if apply.apply_for_events.exists?(status: 'selected')
-    #   else
-    #     @unselected_events << @events.find(apply.id)
-    #   end
-    # end
-    # @q = Event.ransack(params[:q])
-    # @event = @q.result(distinct: true)
+    @q = Event.ransack(params[:q])
+    @events = @q.result(distinct: true)
   end
 
   def show
