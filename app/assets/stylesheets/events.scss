@@ -1,3 +1,27 @@
 // Place all the styles related to the events controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.profile {
+  text-align: center;
+}
+
+.list-group-item {
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    font-weight: bold;
+    color: #6091d3;/*文字色*/
+    background: #FFF;
+    border: solid 3px #6091d3;/*線*/
+    border-radius: 10px;/*角の丸み*/
+}

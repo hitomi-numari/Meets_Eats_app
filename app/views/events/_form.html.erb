@@ -53,13 +53,36 @@
 
   <div class="form-group">
     <%= form.label t('view.event.start_at') %>
-    <%= form.datetime_select :start_at, {} %>
+    <%= raw sprintf(
+            form.datetime_select(
+                  :start_at,
+                   use_month_numbers: true,
+                  :start_year => Time.now.year,
+                  :end_year => Time.now.year + 1,
+                  :minute_step => 10,
+                  default: {},
+                  date_separator: '%s',
+                  datetime_separator: '%s',
+                  time_separator: '%s'),
+                  '年', '月', '日', '時') + '分' %>
 
   </div>
 
   <div class="form-group">
     <%= form.label t('view.event.end_at') %>
-    <%= form.datetime_select :end_at, {} %>
+    <%= raw sprintf(
+            form.datetime_select(
+                  :end_at,
+                   use_month_numbers: true,
+                  :start_year => Time.now.year,
+                  :end_year => Time.now.year + 1,
+                  :minute_step => 10,
+                  default: {},
+                  date_separator: '%s',
+                  datetime_separator: '%s',
+                  time_separator: '%s'),
+                  '年', '月', '日', '時') + '分' %>
+
   </div>
 
   <div class="form-group">

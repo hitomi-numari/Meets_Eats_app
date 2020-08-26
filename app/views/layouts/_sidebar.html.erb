@@ -46,32 +46,34 @@
       </nav>
     </header>
 
+    <div class= "mypage">
       <div class= "container">
         <div class= "row">
-          <div class= "col-3 height:600px;">
+          <div class= "col-md-12">
+            <div class= "col-md-2">
             <h2>マイページ</h2>
               <div class = "my_menu_buttons">
-              <div class= "menu">
+              <div class= "menu box11">
                 <p>Menu</p>
+                  <p><%= link_to 'マイトップページ', my_events_user_path(current_user.id) %></p>
+                  <p><%= link_to 'プロフィール編集', profile_path(current_user.profile.id) %></p>
+                  <p><%= link_to 'イベント履歴', event_history_user_path(current_user.id) %></p>
+                  <p><%= link_to 'イベント参加履歴' %></p>
+                  <p><%= link_to 'お気に入り' %></p>
               </div>
-                <ul>
-                  <li><%= link_to 'マイトップページ', my_events_user_path(current_user.id) %></li>
-                  <li><%= link_to 'プロフィール編集', profile_path(current_user.profile.id) %></li>
-                  <li><%= link_to 'イベント履歴', event_history_user_path(current_user.id) %></li>
-                  <li><%= link_to 'イベント参加履歴' %></li>
-                  <li><%= link_to 'お気に入り' %></li>
-                </ul>
-              </div>
+            </div>
           </div>
-          <div class= "col-9 height:600px;">
+          <div class= "col-md-7 float-right">
             <div class = "middle_contents">
               <% flash.each do |key, value| %>
                 <div class="alert <%= bootstrap_class_for(key) %>" ><%= value %></div>
               <% end %>
               <%= yield %>
             </div>
+            </div>
           </div>
         </div>
       </div>
+    </div>
   </body>
 </html>

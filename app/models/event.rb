@@ -1,5 +1,12 @@
 class Event < ApplicationRecord
   belongs_to :user
+  has_many :apply_for_events, dependent: :destroy
+  has_many :apply_for_events_of_user, through: :apply_for_events, source: :user
+  has_many :genre_tags, dependent: :destroy
+  has_many :genres, through: :genre_tags
+  has_many :area_tags, dependent: :destroy
+  has_many :areas, through: :area_tags
+
   validates :title, presence: true
   validates :content, presence: true
   validates :food_category, presence: true
@@ -29,11 +36,11 @@ class Event < ApplicationRecord
     },  _prefix: true
 
   enum food_category: {
-    italian: 0,
-    japanese: 1,
-    western: 2,
-    chinese: 3,
-    other: 4
+    イタリアン: 0,
+    和食: 1,
+    洋食: 2,
+    中華: 3,
+    その他: 4
   }
 
   enum event_status: {
@@ -41,12 +48,8 @@ class Event < ApplicationRecord
     done: 1
   }
 
-  has_many :apply_for_events, dependent: :destroy
-  has_many :apply_for_events_of_user, through: :apply_for_events, source: :user
-  has_many :genre_tags, dependent: :destroy
-  has_many :genres, through: :genre_tags
-  has_many :area_tags, dependent: :destroy
-  has_many :areas, through: :area_tags
-
+  def required_time
+    required_time = (end_at.strftime("%H:%M").to_i - start_at.strftime("%H:%M").to_i)
+  end
 
 end

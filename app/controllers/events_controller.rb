@@ -3,8 +3,9 @@ class EventsController < ApplicationController
   before_action :prohibit_selected, only: [:apply_members]
 
   def index
-    @q = Event.ransack(params[:q])
-    @events = @q.result(distinct: true)
+    @q = Event.where(event_status: "pending").ransack(params[:q])
+    # @events = @q.result(distinct: true).page(params[:page]).per(20)
+    @events = @q.result.joins(user: :profile)
   end
 
   def show

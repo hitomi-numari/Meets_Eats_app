@@ -15,6 +15,7 @@
 *= require_self
 */
 
-li{
-  list-style: none;
+
+.mypage{
+  padding-top: 50px
 }
