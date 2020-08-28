@@ -1,4 +1,4 @@
 class Area < ApplicationRecord
-  has_many :area_tags, dependent: :destroy
-  has_many :events, through: :area_tags
+  has_many :events, dependent: :destroy
+  accepts_nested_attributes_for :events, allow_destroy: true 
 end

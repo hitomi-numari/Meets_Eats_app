@@ -49,7 +49,8 @@
               <p><%= link_to event.restaurant_url %></p>
             </div>
               <ul class="restaurant_info">
-                <li><%=event.food_category_i18n %><li>
+                <li><%=event.area.name %></li>/
+                <li><%=event.food_category_i18n %><li>/
                 <li>予算：<%= event.budget_i18n %></li>
               </ul>
             <div class="bottom_contents">

@@ -24,8 +24,6 @@ class EventsController < ApplicationController
   end
 
   def create
-    area_ids = params[:event][:area_ids]
-    params[:event][:area_ids] = [area_ids]
     @event = Event.new(event_params)
     @event.user_id = current_user.id
     if params[:back]
@@ -63,7 +61,7 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:title, :content, :restaurant_url, :budget, :start_at, :end_at,
-                                  :check_in_time, :food_category, { area_ids: []}, { genre_ids: [] })
+                                  :check_in_time, :food_category, :area_id, { genre_ids: [] })
   end
 
   def prohibit_selected
