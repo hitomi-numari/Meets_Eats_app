@@ -4,8 +4,8 @@
   <%= search_form_for @q do |f| %>
     <%= f.search_field :title_cont %>
     <%= f.select :food_category_eq, [['イタリアン', 0], ['和食', 1], ['洋食', 2], ['中華', 3], ['その他', 4]], include_blank: 'ラベル' %>
-    <%#= f.label :gender, '性別' %>
-    <%#= f.select :gender_eq,  options_from_collection_for_select(Profile.all, :id, :gender , 1) %>
+    <%= f.select :user_profile_gender_eq, options_from_collection_for_select(Profile.all, :id, :gender ) %>
+    <%= f.select :user_profile_birthday_eq, options_from_collection_for_select(Profile.all, :id, :birthday ) %>
     <%= f.submit "search" %>
   <% end %>
 
@@ -20,6 +20,7 @@
             <div class="profile">
               <h3><%=event.user.profile.nickname %></h3>
               <h4><%=event.user.profile.calc_age %>歳</h4>
+              <h4><%=gender_view(event.user.profile.gender) %></h4>
             </div>
         </div>
         <div class="media-body">

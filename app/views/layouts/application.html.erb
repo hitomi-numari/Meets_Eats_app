@@ -37,7 +37,7 @@
               <li>こんにちは、ゲストさん</li>
             <% else %>
               <li>こんにちは、<%= current_user.profile.nickname %>さん</li>
-              <li><%= link_to 'イベント一覧', events_path %></li>
+              <li><%= link_to 'イベント一覧', search_top_events_path %></li>
               <li><%= link_to "マイページ", my_events_user_path(current_user.id) %></li>
             <% end %>
           <% end %>

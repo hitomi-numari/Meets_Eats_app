@@ -4,10 +4,9 @@ class ProfilesController < ApplicationController
   layout '_sidebar', only: [:show]
   def new
     if user_signed_in? && has_profile?
-      # @events = Event.all
       @genres = Genre.all
-       redirect_to events_path
-      # render 'events/index'
+      @areas = Area.all
+       redirect_to search_top_events_path
     else
       @profile = Profile.new
       render :new

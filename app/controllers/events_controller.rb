@@ -3,9 +3,19 @@ class EventsController < ApplicationController
   before_action :prohibit_selected, only: [:apply_members]
 
   def index
-    @q = Event.where(event_status: "pending").ransack(params[:q])
-    # @events = @q.result(distinct: true).page(params[:page]).per(20)
-    @events = @q.result.joins(user: :profile)
+    # binding.pry
+    if params[:genre_id]
+      @genre = Genre.find(params[:genre_id])
+      @q = @genre.genre_tag_events.where(event_status: "pending").joins(user: :profile).ransack(params[:q])
+      @events = @q.result(distinct: true).page(params[:page]).per(20)
+    elsif params[:area_id]
+      @area = Area.find(params[:area_id])
+      @q = @area.events.where(event_status: "pending").joins(user: :profile).ransack(params[:q])
+      @events = @q.result(distinct: true).page(params[:page]).per(20)
+    else
+      @q = Event.where(event_status: "pending").joins(user: :profile).ransack(params[:q])
+      @events = @q.result(distinct: true).page(params[:page]).per(20)
+    end
   end
 
   def show
@@ -51,6 +61,11 @@ class EventsController < ApplicationController
   end
 
   def apply_members
+  end
+
+  def search_top
+    @genres = Genre.all
+    @areas = Area.all
   end
 
   private

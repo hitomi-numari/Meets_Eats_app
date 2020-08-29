@@ -1,0 +1,17 @@
+<h2>ジャンル別から探す</h2>
+<div class="genre">
+<% @genres.each do |genre| %>
+<%= link_to genre.name,
+  {controller: "events", action: "index", genre_id: genre.id},
+  class: "color_gray no-underline"%>
+<% end %>
+</div>
+
+<h2>エリア別から探す</h2>
+<div class="area">
+<% @areas.each do |area| %>
+<%= link_to area.name,
+  {controller: "events", action: "index", area_id: area.id},
+  class: "color_gray no-underline"%>
+<% end %>
+</div>

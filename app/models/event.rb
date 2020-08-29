@@ -50,4 +50,8 @@ class Event < ApplicationRecord
     required_time = (end_at.strftime("%H:%M").to_i - start_at.strftime("%H:%M").to_i)
   end
 
+  def datetime_not_before_start_at
+    errors.add(:end_at, "は開始時間以降のものを選択してください") if end_at.nil? || end_at < start_at
+  end
+
 end
