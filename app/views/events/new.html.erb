@@ -1,3 +1,8 @@
 <h1>イベント作成</h1>
-
-<%= render 'form' %>
+<% if @genre.present? %>
+  <%= render 'form', genre_id: @genre.id %>
+<% elsif @area.present? %>
+  <%= render 'form', area_id: @area.id %>
+<% else %>
+  <%= render 'form' %>
+<% end %>

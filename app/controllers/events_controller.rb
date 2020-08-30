@@ -1,21 +1,24 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy, :apply_members, :prohibit_selected]
   before_action :prohibit_selected, only: [:apply_members]
+  before_action :ensure_correct_post, only: [:edit, :update, :destroy]
 
   def index
     # binding.pry
     if params[:genre_id]
       @genre = Genre.find(params[:genre_id])
-      @q = @genre.genre_tag_events.where(event_status: "pending").joins(user: :profile).ransack(params[:q])
+      @q = @genre.genre_tag_events.where(event_status: "pending").order(created_at: :desc).ransack(params[:q])
+      #性別・年代の絞り込み　さらに＠qで絞り込む
       @events = @q.result(distinct: true).page(params[:page]).per(20)
     elsif params[:area_id]
       @area = Area.find(params[:area_id])
-      @q = @area.events.where(event_status: "pending").joins(user: :profile).ransack(params[:q])
+      @q = @area.events.where(event_status: "pending").order(created_at: :desc).ransack(params[:q])
       @events = @q.result(distinct: true).page(params[:page]).per(20)
     else
-      @q = Event.where(event_status: "pending").joins(user: :profile).ransack(params[:q])
+      @q = Event.where(event_status: "pending").order(created_at: :desc).ransack(params[:q])
       @events = @q.result(distinct: true).page(params[:page]).per(20)
     end
+    #@eventsに対して年齢指定があれば、該当しない結果を取り除く。
   end
 
   def show
@@ -23,6 +26,12 @@ class EventsController < ApplicationController
   end
 
   def new
+    if params[:genre_id]
+      @genre = Genre.find(params[:genre_id])
+    else params[:area_name]
+      @area = Area.find(params[:area_id])
+    end
+
     if params[:back]
       @event = Event.new(event_params)
     else
@@ -82,6 +91,14 @@ class EventsController < ApplicationController
   def prohibit_selected
     if @event.apply_for_events.exists?(status: 'selected')
       redirect_to my_events_user_path(current_user.id)
+    end
+  end
+
+  def ensure_correct_post
+    # @picture = Picture.find_by(id: params[:id])
+    if current_user.id != @event.user_id
+      flash[:danger] = "権限がありません"
+      redirect_to action: "index"
     end
   end
 

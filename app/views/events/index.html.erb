@@ -1,14 +1,29 @@
 <div class="container">
-<h1>イベント一覧</h1>
-<div class="form_group">
+<div class="search">
+  <h1 class="text-center">イベント一覧</h1>
   <%= search_form_for @q do |f| %>
-    <%= f.search_field :title_cont %>
-    <%= f.select :food_category_eq, [['イタリアン', 0], ['和食', 1], ['洋食', 2], ['中華', 3], ['その他', 4]], include_blank: 'ラベル' %>
-    <%= f.select :user_profile_gender_eq, options_from_collection_for_select(Profile.all, :id, :gender ) %>
-    <%= f.select :user_profile_birthday_eq, options_from_collection_for_select(Profile.all, :id, :birthday ) %>
-    <%= f.submit "search" %>
+  <div class="search title">
+    <%= f.search_field :title_cont, placeholder: "タイトル検索" %>
+  </div>
+  <ul class="search pulldown">
+    <li><%= f.select :food_category_eq, [['イタリアン', 0], ['和食', 1], ['洋食', 2], ['中華', 3], ['その他', 4]], include_blank: '料理ジャンル' %></li>
+    <li><%= f.select :area_id_eq, options_from_collection_for_select(Area.all, :id, :name), include_blank: 'エリア'%></li>
+    <%#= f.select :user_profile_gender_eq, options_from_collection_for_select(Profile.all, :id, :gender ) %>
+    <%#= f.select :user_profile_birthday_eq, options_from_collection_for_select(Profile.all, :id, :birthday ) %>
+  </ul>
+  <div class="search submit">
+    <%= f.submit "検索" %>
+  </div>
   <% end %>
-
+</div>
+<div class="new_post">
+  <% if @genre.present? %>
+    <%= link_to 'イベントを登録する', new_event_path(genre_id: @genre.id), class:"btn btn-default btn-block" %>
+  <% elsif @area.present? %>
+    <%= link_to 'イベントを登録する', new_event_path(area_id: @area.id), class:"btn btn-default btn-block" %>
+  <% else %>
+    <%= link_to 'イベントを登録する', new_event_path, class:"btn btn-default btn-block" %>
+  <% end %>
 </div>
 <% @events.each do |event| %>
   <div class="list-group">
@@ -87,5 +102,4 @@
     </div>
   </div>
 <% end %>
-<%= link_to 'イベントを登録する', new_event_path, class:"btn btn-default btn-block" %>
 </div>
