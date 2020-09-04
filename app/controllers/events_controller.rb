@@ -4,7 +4,6 @@ class EventsController < ApplicationController
   before_action :ensure_correct_post, only: [:edit, :update, :destroy]
 
   def index
-    # binding.pry
     if params[:genre_id]
       @genre = Genre.find(params[:genre_id])
       @q = @genre.genre_tag_events.where(event_status: "pending").order(created_at: :desc).ransack(params[:q])
@@ -28,7 +27,7 @@ class EventsController < ApplicationController
   def new
     if params[:genre_id]
       @genre = Genre.find(params[:genre_id])
-    else params[:area_name]
+    elsif params[:area_name]
       @area = Area.find(params[:area_id])
     end
 

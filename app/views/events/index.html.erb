@@ -1,33 +1,62 @@
-<div class="container">
-<div class="search">
-  <h1 class="text-center">イベント一覧</h1>
-  <%= search_form_for @q do |f| %>
-  <div class="search title">
-    <%= f.search_field :title_cont, placeholder: "タイトル検索" %>
-  </div>
-  <ul class="search pulldown">
-    <li><%= f.select :food_category_eq, [['イタリアン', 0], ['和食', 1], ['洋食', 2], ['中華', 3], ['その他', 4]], include_blank: '料理ジャンル' %></li>
-    <li><%= f.select :area_id_eq, options_from_collection_for_select(Area.all, :id, :name), include_blank: 'エリア'%></li>
-    <%#= f.select :user_profile_gender_eq, options_from_collection_for_select(Profile.all, :id, :gender ) %>
-    <%#= f.select :user_profile_birthday_eq, options_from_collection_for_select(Profile.all, :id, :birthday ) %>
-  </ul>
-  <div class="search submit">
-    <%= f.submit "検索" %>
-  </div>
-  <% end %>
-</div>
-<div class="new_post">
+<div class="top_container">
   <% if @genre.present? %>
-    <%= link_to 'イベントを登録する', new_event_path(genre_id: @genre.id), class:"btn btn-default btn-block" %>
+    <h1 class="text-center"><%= @genre.name %></h1>
   <% elsif @area.present? %>
-    <%= link_to 'イベントを登録する', new_event_path(area_id: @area.id), class:"btn btn-default btn-block" %>
+    <h1 class="text-center"><%= @area.name %></h1>
   <% else %>
-    <%= link_to 'イベントを登録する', new_event_path, class:"btn btn-default btn-block" %>
+    <h1 class="text-center">イベント一覧</h1>
   <% end %>
 </div>
+<div class="container">
+  <div class="search_top">
+    <!-- モーダル表示用のボタン -->
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">詳細検索</button>
+    <!-- モーダル -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">詳細検索</h4>
+          </div>
+          <div class="modal-body">
+            <%= search_form_for @q do |f| %>
+            <div class="search_container panel panel-default">
+              <div class="panel-heading"><%= f.label 'タイトル検索' %></div>
+                <div class="panel-body"><%= f.search_field :title_cont %></div>
+            </div>
+            <div class="search_container panel panel-default">
+              <div class="panel-heading"><%= f.label '料理ジャンル' %></div>
+                <div class="panel-body"><%= f.select :food_category_eq, [['イタリアン', 0], ['和食', 1], ['洋食', 2], ['中華', 3], ['その他', 4]], include_blank: '以下から選んでください' %></div>
+            </div>
+            <div class="search_container panel panel-default">
+              <div class="panel-heading"><%= f.label "エリア" %></div>
+                <div class="panel-body"><%= f.select :area_id_eq, options_from_collection_for_select(Area.all, :id, :name), include_blank: '以下から選んでください'%></div>
+            </div>
+                <%#= f.select :user_profile_gender_eq, options_from_collection_for_select(Profile.all, :id, :gender ) %>
+                <%#= f.select :user_profile_birthday_eq, options_from_collection_for_select(Profile.all, :id, :birthday ) %>
+            <div class="panel-body"><%= f.submit "検索" %></div>
+              <% end %>
+          </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="new_post">
+        <% if @genre.present? %>
+          <div<%= link_to 'イベントを登録する', new_event_path(genre_id: @genre.id), class:"btn-gradation" %></div>
+        <% elsif @area.present? %>
+          <div><%= link_to 'イベントを登録する', new_event_path(area_id: @area.id), class:"btn-gradation" %></div>
+        <% else %>
+          <div><%= link_to 'イベントを登録する', new_event_path, class:"btn-gradation" %></div>
+        <% end %>
+    </div>
 <% @events.each do |event| %>
   <div class="list-group">
-
     <div class="list-group-item">
       <div class="media">
         <div class="media-left col-xs-2">
@@ -40,17 +69,18 @@
         </div>
         <div class="media-body">
           <ul class="top-contents">
-            <li class="genre_tags">
+            <li class="top-contents_item">
               <% event.genre_tags.each do |genre| %>
                 <span class="label label-default"><%=genre.genre.name %></span>
               <% end %>
             </li>
-            <li class="pull-right schedule">
+            <li class="top-contents_item">
               <div class="schedule_time">
                 <h3><%= simple_time_start_at(event.start_at) %>~<%= simple_time_end_at(event.end_at) %><h3>
               </div>
               <div class="required_time">
                 <p>所要時間：<%= event.required_time %>時間</p>
+              </div>
               <div class="check_in_time">
                 <p>受付終了時間：<%= event.check_in_time_i18n %></p>
               </div>

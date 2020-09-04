@@ -23,7 +23,7 @@ module ApplicationHelper
       when 3
         "その他"
       else
-        puts "非表示"
+        "非表示"
     end
   end
   def simple_time_start_at(time)

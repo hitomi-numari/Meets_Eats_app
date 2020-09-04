@@ -1,17 +1,33 @@
-<h2>ジャンル別から探す</h2>
-<div class="genre">
-<% @genres.each do |genre| %>
-<%= link_to genre.name,
-  {controller: "events", action: "index", genre_id: genre.id},
-  class: "color_gray no-underline"%>
-<% end %>
+<div class="top-image">
+  <div><img src="/assets/girls.jpg/" ></div>
+  <div><img src="/assets/food.jpg/" ></div>
 </div>
-
-<h2>エリア別から探す</h2>
-<div class="area">
-<% @areas.each do |area| %>
-<%= link_to area.name,
-  {controller: "events", action: "index", area_id: area.id},
-  class: "color_gray no-underline"%>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="title">
+      <h2>ジャンルから探す</h2>
+    </div>
+    <div class="card-deck">
+      <% @genres.each do |genre| %>
+        <div class="card" style="width: 20rem;">
+          <img class="card-img-top" src= <%= genre_image(genre.id) %> >
+          <div class="card-body">
+            <h4 class="card-title">
+              <%= link_to genre.name, {controller: "events", action: "index", genre_id: genre.id} %>
+            </h4>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="title">
+      <h2>エリアから探す</h2>
+    </div>
+    <div class="area-contents">
+      <% @areas.each do |area| %>
+        <%= link_to area.name , {controller: "events", action: "index", area_id: area.id}, {class: "border-left border-dark"}%>
+      <% end %>
+    </div>
+  </div>
 </div>

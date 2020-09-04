@@ -4,5 +4,5 @@
 <% elsif @area.present? %>
   <%= render 'form', area_id: @area.id %>
 <% else %>
-  <%= render 'form' %>
+  <%= render 'form', @event %>
 <% end %>

@@ -55,7 +55,7 @@
   <div class="form-group">
     <%= form.label t('view.area.name') %>
     <% if @area.present? %>
-      <% @area.name %>
+      <%= @area.name %>
     <% else %>
       <%= form.collection_select :area_id, Area.all, :id, :name, {prompt: '選択してください'} %>
     <% end %>
