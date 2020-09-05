@@ -15,10 +15,14 @@
 *= require_self
 */
 
+dl, ol, ul {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
 
-/* .mypage{
-  padding-top: 50px
-} */
+.alert {
+  margin-bottom: 0px;
+}
 
 * {
   box-sizing: border-box;
@@ -28,7 +32,9 @@ body {
   padding: 0;
   font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", メイリオ, Meiryo, "ＭＳ Ｐゴシック", "Helvetica Neue", Helvetica, Arial, sans-serif;
   letter-spacing : 0.2em;
-  background: linear-gradient(0deg, rgb(255, 255, 255), rgb(0, 0, 0));;
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
 }
 
 header {
@@ -36,9 +42,10 @@ header {
    /* position: fixed; */
   top: 0;
   width: 100%;
-  background-color: transparent;
+  background-color: black;
   display: flex;
   align-items: center;
+  height: 100px;
 }
 
 header a {
@@ -61,18 +68,16 @@ header li {
 
 header p {
   margin: 0;
-   /* font-size: 30px; */
   font-weight: normal;
   color: #fff;
 }
 
 footer {
   padding: 30px 4% 10px;
-   /* position: fixed; */
-  top: 0;
+  margin-top: auto;
   width: 100%;
   background-color: black;
-  align-items: center;
+  text-align: center;
 }
 
 footer a {
@@ -93,13 +98,15 @@ footer li {
   font-size: 14px;
 }
 
-h5 {
+footer p {
   margin: 0;
-   /* font-size: 30px; */
+  font-size: 14px;
   font-weight: normal;
   color: #fff;
 }
 
-.footer-title {
-text-align: center;
+.footer-list {
+  padding: 20px 0px;
+  display: flex;
+  justify-content: center;
 }

@@ -17,40 +17,41 @@
       <h1>
         <a href="/">Meets Eats</a>
       </h1>
-    <nav class="pc-nav">
-      <!-- <div class="container-fluid"> -->
-      <ul>
-      <% unless user_signed_in? %>
-        <li><%= link_to 'ログイン', new_user_session_path %></li>
-        <li><%= link_to 'サインアップ', new_user_registration_path %></li>
-      <% else %>
-        <% if current_user.profile.nil? %>
-          <li><p>こんにちは、ゲストさん<p></li>
+      <nav class="pc-nav">
+        <ul>
+        <% unless user_signed_in? %>
+          <li><%= link_to 'ログイン', new_user_session_path %></li>
+          <li><%= link_to 'サインアップ', new_user_registration_path %></li>
         <% else %>
-          <li><p>こんにちは、<%= current_user.profile.nickname %>さん</p></li>
-          <li><%= link_to 'イベント一覧', search_top_events_path %></li>
-          <li><%= link_to "マイページ", my_events_user_path(current_user.id) %></li>
+          <% if current_user.profile.nil? %>
+            <li><p>こんにちは、ゲストさん<p></li>
+          <% else %>
+            <li><p>こんにちは、<%= current_user.profile.nickname %>さん</p></li>
+            <li><%= link_to 'イベント一覧', search_top_events_path %></li>
+            <li><%= link_to "マイページ", my_events_user_path(current_user.id) %></li>
+          <% end %>
+          <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
         <% end %>
-        <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
-      <% end %>
-      </ul>
-    </nav>
-  </header>
-    <% flash.each do |key, value| %>
-      <div class="alert <%= bootstrap_class_for(key) %>" ><%= value %></div>
-      <% end %>
-    <%= yield %>
+        </ul>
+      </nav>
+    </header>
+    <div class="main">
+      <% flash.each do |key, value| %>
+        <div class="alert <%= bootstrap_class_for(key) %>" ><%= value %></div>
+        <% end %>
+      <%= yield %>
+    </div>
+    <footer>
+      <p>MeetsEats</p>
+        <nav>
+          <ul class="footer-list">
+            <li><a href="#">サイトマップ</a></li>
+            <li><a href="#">プライバシーポリシー</a></li>
+            <li><a href="#">サイト利用規約</a></li>
+            <li><a href="#">お問い合わせ</a></li>
+          </ul>
+        </nav>
+      <p>Copyright ©︎MeetsEats, Inc.<p/>
+    </footer>
   </body>
-  <footer>
-    <div class="footer-title"><h5>MeetsEats</h5></div>
-    <nav class="footer-list">
-      <ul>
-        <li><a href="#">サイトマップ</a></li>
-        <li><a href="#">プライバシーポリシー</a></li>
-        <li><a href="#">サイト利用規約</a></li>
-        <li><a href="#">お問い合わせ</a></li>
-      </ul>
-    </nav>
-    <div class="footer-title"><h5>Copyright MeetsEats, Inc.</h5>
-  </footer>
 </html>

@@ -16,4 +16,23 @@ module EventsHelper
       else
     end
   end
+
+  def genre_tags(genre_id)
+    case genre_id
+      when 1
+        "badge-danger"
+      when 2
+        "badge-primary"
+      when 3
+        "badge-success"
+      when 4
+        "badge-info"
+      when 5
+        "badge-warning"
+      when 6
+        "badge-secondary"
+      else
+    end
+  end
+
 end

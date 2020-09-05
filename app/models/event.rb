@@ -54,4 +54,8 @@ class Event < ApplicationRecord
     errors.add(:end_at, "は開始時間以降のものを選択してください") if end_at.nil? || end_at < start_at
   end
 
+  def short_description
+    description[0, 9] + '...'
+  end
+
 end

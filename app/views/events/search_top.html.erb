@@ -1,6 +1,6 @@
 <div class="top-image">
-  <div><img src="/assets/girls.jpg/" ></div>
-  <div><img src="/assets/food.jpg/" ></div>
+  <img class="top-a" src="/assets/girls.jpg/" >
+  <img class="top-a" src="/assets/food.jpg/" >
 </div>
 <div class="container">
   <div class="row">
@@ -13,7 +13,7 @@
           <img class="card-img-top" src= <%= genre_image(genre.id) %> >
           <div class="card-body">
             <h4 class="card-title">
-              <%= link_to genre.name, {controller: "events", action: "index", genre_id: genre.id} %>
+              <%= link_to genre.name, {controller: "events", action: "index", genre_id: genre.id}, {class: "genre-name"} %>
             </h4>
           </div>
         </div>
