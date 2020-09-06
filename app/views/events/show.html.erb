@@ -1,61 +1,60 @@
+<div class="container">
 <h1>イベント詳細</h1>
-
-<p>
-  <strong>タイトル</strong>
-  <%= @event.title %>
-</p>
-
-<p>
-  <strong>詳細</strong>
-  <%= @event.content %>
-</p>
-
-<p>
-  <strong>年齢</strong>
-  <%= @event.user.profile.calc_age %>
-</p>
-
-<p>
-  <strong>性別</strong>
-  <%= gender_view(@event.user.profile.gender) %>
-</p>
-
-<p>
-  <strong>料理</strong>
-  <%= @event.food_category %>
-</p>
-
-<p>
-  <strong>料理</strong>
-  <% @event.genres.each do |genre| %>
-    <span><%= genre.name %></span>
-  <% end %>
-</p>
-
-<p>
-  <strong>レストランURL</strong>
-  <%=link_to @event.restaurant_url %>
-</p>
-
-<p>
-  <strong>予算</strong>
-  <%= @event.budget_i18n %>
-</p>
-
-<p>
-  <strong>エリア</strong>
-  <%= @event.area.name %>
-</p>
-
-<p>
-  <strong>時間</strong>
-  <%= simple_time_start_at(@event.start_at) %>~<%= simple_time_end_at(@event.end_at) %>
-</p>
-
-<p>
-  <strong>受付終了時間</strong>
-  <%= @event.check_in_time_i18n %>
-</p>
+<div class="show">
+<table class="table table-borderless">
+  <tr>
+    <th><%= image_tag(@event.user.profile.icon_url) %></th>
+      <td class="first-td"><%=link_to @event.user.profile.nickname, profile_path(@event.user.profile.id) %></td>
+  </tr>
+  <tr>
+    <th>タイトル</th>
+      <td><%= @event.title %></td>
+  </tr>
+  <tr>
+    <th>詳細</th>
+      <td><%= @event.content %></td>
+  </tr>
+  <tr>
+    <th>年齢</th>
+      <td><%= @event.user.profile.calc_age %>歳</td>
+  </tr>
+  <tr>
+    <th>性別</th>
+      <td><%= gender_view(@event.user.profile.gender) %></td>
+  </tr>
+  <tr>
+    <th>料理</th>
+      <td><%= @event.food_category %></td>
+  </tr>
+  <tr>
+    <th>話したいテーマ</th>
+      <td>
+      <% @event.genres.each do |genre| %>
+        <%= genre.name %>
+      <% end %>
+      </td>
+  </tr>
+  <tr>
+    <th>レストランURL</th>
+      <td><%=link_to @event.restaurant_url %></td>
+  </tr>
+  <tr>
+    <th>予算</th>
+      <td><%= @event.budget_i18n %></td>
+  </tr>
+  <tr>
+    <th>エリア</th>
+      <td><%= @event.area.name %></td>
+  </tr>
+  <tr>
+    <th>時間</th>
+      <td><%= simple_time_start_at(@event.start_at) %>~<%= simple_time_end_at(@event.end_at) %></td>
+  </tr>
+  <tr>
+    <th>受付終了時間</th>
+      <td><%= @event.check_in_time_i18n %></td>
+  </tr>
+</table>
 
 <% unless @event.user_id == current_user.id %>
   <% if @apply.present? %>
@@ -64,6 +63,16 @@
     <%= link_to '参加する', apply_for_events_path(event_id: @event.id), method: :post, class: 'btn btn-primary' %>
   <% end %>
 <% end %>
-
-<%= link_to "編集", action: "edit" %>
-<%= link_to "戻る", action: "index" %>
+<div class="show-button"
+  <div class="float-right">
+    <%= link_to "編集", action: "edit"%> |
+    <% if @genre.present? %>
+      <%= link_to "戻る", events_path(genre_id)%>
+    <% elsif @area.present? %>
+      <%= link_to "戻る", events_path(area_id)%>
+    <% else %>
+    <%= link_to "戻る", events_path%>
+    <% end %>
+  </div>
+</div>
+</div>

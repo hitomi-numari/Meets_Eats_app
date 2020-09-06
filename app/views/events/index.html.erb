@@ -125,9 +125,19 @@
               <p>受付終了時間：<%= event.check_in_time_i18n %></p>
             </div>
               <ul class="link-list d-flex align-items-end">
-              <li><%= link_to event_path(event.id), method: :get do %></li>
-                <i class="fa fa-info-circle"></i>
-              <% end %>
+                <% if @genre.present? %>
+                <li><%= link_to event_path(event.id, genre_id: @genre.id), method: :get do %></li>
+                  <i class="fa fa-info-circle"></i>
+                  <% end %>
+                <% elsif @area.present? %>
+                <li><%= link_to event_path(event.id, area_id: @area.id), method: :get do %></li>
+                  <i class="fa fa-info-circle"></i>
+                  <% end %>
+                <% else %>
+                <li><%= link_to event_path(event.id), method: :get do %></li>
+                  <i class="fa fa-info-circle"></i>
+                  <% end %>
+                <% end %>
               <% if event.user == current_user %>
                 <li><%= link_to edit_event_path(event.id), method: :get do %></li>
                     <i class="fa fa-edit"></i>

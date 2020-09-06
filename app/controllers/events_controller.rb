@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy, :apply_members, :prohibit_selected]
+  before_action :genre_or_area, only: [:show, :edit, :update, :destroy, :new]
   before_action :prohibit_selected, only: [:apply_members]
   before_action :ensure_correct_post, only: [:edit, :update, :destroy]
 
@@ -21,21 +22,22 @@ class EventsController < ApplicationController
   end
 
   def show
+    # binding.pry
     @apply = current_user.apply_for_events.find_by(event_id: @event.id)
   end
 
   def new
-    if params[:genre_id]
-      @genre = Genre.find(params[:genre_id])
-    elsif params[:area_name]
-      @area = Area.find(params[:area_id])
-    end
-
-    if params[:back]
-      @event = Event.new(event_params)
-    else
-      @event = Event.new
-    end
+    # if params[:genre_id]
+    #   @genre = Genre.find(params[:genre_id])
+    # elsif params[:area_name]
+    #   @area = Area.find(params[:area_id])
+    # else
+    #   if params[:back]
+    #     @event = Event.new(event_params)
+    #   else
+    #     @event = Event.new
+    #   end
+    # end
   end
 
   def edit
@@ -98,6 +100,20 @@ class EventsController < ApplicationController
     if current_user.id != @event.user_id
       flash[:danger] = "権限がありません"
       redirect_to action: "index"
+    end
+  end
+
+  def genre_or_area
+    if params[:genre_id]
+      @genre = Genre.find(params[:genre_id])
+    elsif params[:area_name]
+      @area = Area.find(params[:area_id])
+    else
+      if params[:back]
+        @event = Event.new(event_params)
+      else
+        @event = Event.new
+      end
     end
   end
 
