@@ -59,13 +59,19 @@
     </div>
     <div class="new_post">
         <% if @genre.present? %>
-          <div><%= link_to 'イベントを登録する', new_event_path(genre_id: @genre.id), class:"btn-gradation" %></div>
+          <%= link_to new_event_path(genre_id: @genre.id), class:"new-event" do %>
+            <i class="fas fa-plus-square"></i><span>イベント作成</span>
+          <% end %>
         <% elsif @area.present? %>
-          <div><%= link_to 'イベントを登録する', new_event_path(area_id: @area.id), class:"btn-gradation" %></div>
+          <%= link_to new_event_path(area_id: @area.id), class:"new-event" do %>
+            <i class="fas fa-plus-square"></i><span>イベント作成</span>
+          <% end %>
         <% else %>
-          <div><%= link_to 'イベントを登録する', new_event_path, class:"btn-gradation" %></div>
+          <%= link_to new_event_path, class:"new-event" do %>
+            <i class="fas fa-plus-square"></i><span>イベント作成</span>
+          <% end %>
         <% end %>
-  </div>
+    </div>
 <% @events.each do |event| %>
   <div class="list-group">
     <div class="list-group-item">
@@ -88,7 +94,8 @@
                 <h3><%=event.title %></h3>
               </div>
               <div class="middle-contents-item content">
-                <%= truncate(event.content) do %>
+                <%= truncate(event.content, length: 50) do %>
+                <p　class="float-right"><%= link_to '詳細', event_path(event.id) %></p>
                 <% end %>
               </div>
               <div class="middle-contents-item restaurant_url">
@@ -128,16 +135,16 @@
               <ul class="link-list d-flex align-items-end">
                 <% if @genre.present? %>
                 <li><%= link_to event_path(event.id, genre_id: @genre.id), method: :get do %></li>
-                  <i class="fa fa-info-circle"></i>
-                  <% end %>
+                      <i class="fa fa-info-circle"></i>
+                    <% end %>
                 <% elsif @area.present? %>
                 <li><%= link_to event_path(event.id, area_id: @area.id), method: :get do %></li>
-                  <i class="fa fa-info-circle"></i>
-                  <% end %>
+                      <i class="fa fa-info-circle"></i>
+                    <% end %>
                 <% else %>
                 <li><%= link_to event_path(event.id), method: :get do %></li>
-                  <i class="fa fa-info-circle"></i>
-                  <% end %>
+                      <i class="fa fa-info-circle"></i>
+                    <% end %>
                 <% end %>
               <% if event.user == current_user %>
                 <li><%= link_to edit_event_path(event.id), method: :get do %></li>
