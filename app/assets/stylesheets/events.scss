@@ -77,10 +77,6 @@ ul {
   padding-left: 0;
 }
 
-.col-form-label {
-  font-size: 15px;
-}
-
 .profile {
   text-align: center;
   margin-top: 20px;
@@ -165,7 +161,7 @@ ul {
   vertical-align: middle;
 }
 
-.show, .list-group-item {
+.box, .list-group-item {
   background-color: #fff;	/* 背景色 */
 	border: 1px solid #ccc; /* 線の太さ・種類・色 */
 	box-shadow:1px 1px 6px 0px #ccc;
@@ -204,4 +200,17 @@ ul {
   background-color: #e6ecf0;
   background-image: linear-gradient(#fff,#e6ecf0);
   border-color: #e6ecf0;
+}
+
+.form-check {
+  position: relative;
+  display: block;
+  padding-left: 0;
+}
+
+.box-margin {
+  padding-top: 50px;
+  padding-bottom: 100px;
+  padding-left: 50px;
+  padding-right:50px;
 }
