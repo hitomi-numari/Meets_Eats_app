@@ -13,7 +13,7 @@
     <!-- モーダル表示用のボタン -->
     <button type="button" class="btn btn btn-outline-dark btn-lg" data-toggle="modal" data-target="#myModal">詳細検索</button>
     <!-- モーダル -->
-    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -50,21 +50,22 @@
               </div>
             </form>
             <% end %>
+          </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
           </div>
-        </div>
       </div>
+    </div>
     <div class="new_post">
         <% if @genre.present? %>
-          <div<%= link_to 'イベントを登録する', new_event_path(genre_id: @genre.id), class:"btn-gradation" %></div>
+          <div><%= link_to 'イベントを登録する', new_event_path(genre_id: @genre.id), class:"btn-gradation" %></div>
         <% elsif @area.present? %>
           <div><%= link_to 'イベントを登録する', new_event_path(area_id: @area.id), class:"btn-gradation" %></div>
         <% else %>
           <div><%= link_to 'イベントを登録する', new_event_path, class:"btn-gradation" %></div>
         <% end %>
-    </div>
+  </div>
 <% @events.each do |event| %>
   <div class="list-group">
     <div class="list-group-item">

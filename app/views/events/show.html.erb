@@ -63,13 +63,13 @@
     <%= link_to '参加する', apply_for_events_path(event_id: @event.id), method: :post, class: 'btn btn-primary' %>
   <% end %>
 <% end %>
-<div class="show-button"
+<div class="show-button">
   <div class="float-right">
     <%= link_to "編集", action: "edit"%> |
     <% if @genre.present? %>
-      <%= link_to "戻る", events_path(genre_id)%>
+      <%= link_to "戻る", events_path(genre_id: @genre.id)%>
     <% elsif @area.present? %>
-      <%= link_to "戻る", events_path(area_id)%>
+      <%= link_to "戻る", events_path(area_id: @area.id)%>
     <% else %>
     <%= link_to "戻る", events_path%>
     <% end %>
