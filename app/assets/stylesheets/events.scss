@@ -161,19 +161,6 @@ ul {
   vertical-align: middle;
 }
 
-.box, .list-group-item {
-  background-color: #fff;	/* 背景色 */
-	border: 1px solid #ccc; /* 線の太さ・種類・色 */
-	box-shadow:1px 1px 6px 0px #ccc;
-	-moz-box-shadow:1px 1px 6px 0px #ccc;
-	-webkit-box-shadow:1px 1px 6px 0px #ccc;
-	-o-box-shadow:1px 1px 6px 0px #ccc;
-	margin: 20px 5px; /* 外側の余白 上下・左右 */
-	padding: 30px 20px 20px 20px; /* 内側の余白 上・右・下・左 */
-	position: relative;
-	z-index: 0;
-}
-
 .show-button {
   padding: 50px;
 }
@@ -213,4 +200,9 @@ ul {
   padding-bottom: 100px;
   padding-left: 50px;
   padding-right:50px;
+}
+
+.form-group　row:last-child {
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
