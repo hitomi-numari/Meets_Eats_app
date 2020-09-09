@@ -1,4 +1,5 @@
 class ApplyForEventsController < ApplicationController
+  before_action :prohibit_selected, only:[:toggle_status]
 
   def create
     apply = current_user.apply_for_events.create(event_id: params[:event_id])
@@ -21,7 +22,16 @@ class ApplyForEventsController < ApplicationController
     @unmatching_info.each do |unmatching_info|
       UnmatchingMailer.unmatching_mail(unmatching_info).deliver
     end
-    redirect_to complete_events_path
+    redirect_to complete_event_path(id: apply.id)
   end
 
+  private
+
+  def prohibit_selected
+    # binding.pry
+    apply = ApplyForEvent.find(params[:apply_for_event_id])
+    if apply.status == 'selected'
+      redirect_to my_events_user_path(current_user.id)
+    end
+  end
 end

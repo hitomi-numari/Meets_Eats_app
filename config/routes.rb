@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :profiles
   resources :events do
     get 'apply_members', :on => :member
-    get 'complete', :on => :collection
+    get 'complete', :on => :member
     get 'search_top', :on => :collection
   end
   resources :users, only: [:show, :my_events] do

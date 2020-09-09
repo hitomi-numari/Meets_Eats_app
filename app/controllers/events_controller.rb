@@ -1,6 +1,5 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy, :apply_members, :prohibit_selected]
-  before_action :prohibit_selected, only: [:apply_members]
   before_action :ensure_correct_post, only: [:edit, :update, :destroy]
 
   def index
@@ -12,10 +11,10 @@ class EventsController < ApplicationController
     elsif params[:area_id]
       @area = Area.find(params[:area_id])
       @q = @area.events.where(event_status: "pending").order(created_at: :desc).ransack(params[:q])
-      @events = @q.result(distinct: true).page(params[:page]).per(20)
+      @events = @q.result(distinct: true).includes(:genre_tags, :genres).page(params[:page]).per(20)
     else
       @q = Event.where(event_status: "pending").order(created_at: :desc).ransack(params[:q])
-      @events = @q.result(distinct: true).page(params[:page]).per(20)
+      @events = @q.result(distinct: true).includes(:genre_tags, :genres).page(params[:page]).per(20)
     end
     #@eventsに対して年齢指定があれば、該当しない結果を取り除く。
   end
@@ -31,19 +30,14 @@ class EventsController < ApplicationController
   end
 
   def new
+    # binding.pry
     if params[:genre_id]
       @genre = Genre.find(params[:genre_id])
-    elsif params[:area_name]
+    elsif params[:area_id]
       @area = Area.find(params[:area_id])
-    else
-      @event = Event.new(event_params)
     end
 
-    if params[:back]
-      @event = Event.new(event_params)
-    else
-      @event = Event.new
-    end
+    @event = Event.new
   end
 
   def edit
@@ -93,12 +87,6 @@ class EventsController < ApplicationController
   def event_params
     params.require(:event).permit(:title, :content, :restaurant_url, :budget, :start_at, :end_at,
                                   :check_in_time, :food_category, :area_id, { genre_ids: [] })
-  end
-
-  def prohibit_selected
-    if @event.apply_for_events.exists?(status: 'selected')
-      redirect_to my_events_user_path(current_user.id)
-    end
   end
 
   def ensure_correct_post

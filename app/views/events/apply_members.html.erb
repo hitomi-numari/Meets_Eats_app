@@ -1,14 +1,15 @@
 <div class="container">
 <h2>応募者一覧</h2>
 <% @event.apply_for_events.each do |apply| %>
-  <div class="media col-md-8 row row-eq-height">
-    <div class="mr-3 col-md-2">
+  <div class="row col-md-12">
+    <div class="col-md-2">
       <%= image_tag(apply.user.profile.icon_url) %>
     </div>
-    <div class="media-body col-md-10">
+    <div class="col-md-6 d-flex align-items-center">
       <h5><%= apply.user.profile.nickname %></h5>
     </div>
-</div>
-    <%= link_to apply.status, apply_for_event_toggle_status_path(apply), method: :patch %>
+    <div class="col-md-2 d-flex align-items-center">
+      <%= link_to apply.status_i18n, apply_for_event_toggle_status_path(apply), class:"btn btn-outline-dark", method: :patch %>
+    </div>
+  </div>
 <% end %>
-</div>

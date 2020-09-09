@@ -1,5 +1,10 @@
-<h1>イベント編集</h1>
-
-<%= render 'form' %>
-
-<%= link_to "戻る", action: "index" %>
+<div class="container">
+  <h1>イベント編集</h1>
+  <% if @genre.present? %>
+    <%= render 'form', genre_id: @genre.id %>
+  <% elsif @area.present? %>
+    <%= render 'form', area_id: @area.id %>
+  <% else %>
+    <%= render 'form', @event %>
+  <% end %>
+</div>

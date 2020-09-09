@@ -31,6 +31,17 @@
                   <%= f.search_field :title_cont, class:"form-control" %>
                 </div>
               </div>
+              <% unless @genre.present? %>
+              <div class="form-group row">
+                <%= f.label 'ジャンル検索', {class:"col-sm-4 col-form-label"} %>
+                <div class="col-sm-8">
+                  <% Genre.all.each do |genre| %>
+                    <%= f.check_box :genres_id_eq_any, { multiple: true, checked: genre[:checked], disabled: genre[:disabled], include_hidden: false }, genre[:id]%>
+                  　<label><%= genre.name %></label>
+                  <% end %>
+                </div>
+              </div>
+              <% end %>
               <div class="form-group row">
                 <%= f.label '料理ジャンル', {class:"col-sm-4 col-form-label"} %>
                 <div class="col-sm-8">
