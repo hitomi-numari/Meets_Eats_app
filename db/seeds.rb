@@ -122,29 +122,28 @@ User.all.each do |user|
   )
 end
 
-User.all.each do |user|
-  Area.all.each do |area|
-    title = Faker::Food.dish
-    content = Faker::Restaurant.description
-    restaurant_url = Faker::Internet.url
-    budget = Faker::Number.between(from: 0, to: 6)
-    start_at = Faker::Time.between(from: DateTime.now - 1, to: DateTime.now, format: :default)
-    end_at = Faker::Time.between(from: DateTime.now - 1, to: DateTime.now, format: :default)
-    check_in_time = Faker::Number.between(from: 0, to: 5)
-    food_category = Faker::Number.between(from: 0, to: 4)
-    event_status = Faker::Number.between(from: 0, to: 1)
-    Event.create!(
-      title: title,
-      content: content,
-      restaurant_url: restaurant_url,
-      budget: budget,
-      start_at: start_at,
-      end_at: end_at,
-      check_in_time: check_in_time,
-      food_category: food_category,
-      user_id: user.id,
-      event_status: event_status,
-      area_id: area.id
-    )
-  end
+20.times do |n|
+  title = Faker::Food.dish
+  content = Faker::Restaurant.description
+  restaurant_url = Faker::Internet.url
+  budget = Faker::Number.between(from: 0, to: 6)
+  start_at = Faker::Time.between(from: DateTime.now - 1, to: DateTime.now)
+  end_at = Faker::Time.between(from: DateTime.now - 1, to: DateTime.now)
+  check_in_time = Faker::Number.between(from: 0, to: 5)
+  food_category = Faker::Number.between(from: 0, to: 4)
+  user_id = Faker::Number.between(from: 1, to: 20)
+  area_id = Faker::Number.between(from: 1, to: 23)
+  Event.create!(
+    title: title,
+    content: content,
+    restaurant_url: restaurant_url,
+    budget: budget,
+    start_at: start_at,
+    end_at: end_at,
+    check_in_time: check_in_time,
+    food_category: food_category,
+    user_id: user_id,
+    event_status: 0,
+    area_id: area_id
+  )
 end
