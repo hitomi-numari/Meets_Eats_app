@@ -78,6 +78,10 @@ class EventsController < ApplicationController
     @areas = Area.all
   end
 
+  def complete
+    @apply = ApplyForEvent.find(params[:apply_for_event_id])
+  end
+
   private
 
   def set_event

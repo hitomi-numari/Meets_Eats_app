@@ -94,3 +94,30 @@ Genre.create!(
 Genre.create!(
   name:'その他'
 )
+
+20.times do |n|
+  email = Faker::Internet.email
+  password = "password"
+  User.create!(email: email,
+               password: password,
+               password_confirmation: password,
+               )
+end
+
+User.all.each do |user|
+  nickname = Faker::Name.name
+  bitrhday = Faker::Date.birthday(min_age: 18, max_age: 65)
+  gender = Faker::Number.between(from: 0, to: 2)
+  url = Faker::Internet.url(host: 'example.com')
+  details = Faker::Lorem.sentence
+  Profile.create!(
+    nickname: nickname,
+    icon: File.open('./public/uploads/profile/icon/default.png'),
+    birthday: bitrhday,
+    gender: gender,
+    instagram_url: url,
+    facebook_url: url,
+    details: details,
+    user_id: user.id
+  )
+end

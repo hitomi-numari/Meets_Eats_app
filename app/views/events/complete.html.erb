@@ -1,15 +1,12 @@
 <div class="container">
   <div class="matching_notice">
-    <%#= image_tag(event.user.profile.icon_url, class: "d-block mx-auto" ) %>
+    <%= image_tag(@apply.user.profile.icon_url, class: "d-block mx-auto" ) %>
       <div class="profile">
-        <h5><%#=event.user.profile.nickname %></h5>
+        <h5><%=@apply.user.profile.nickname %></h5>
       </div>
   </div>
   <div class="complete_container">
     <%= link_to "食事相手を評価する", class:'d-flex align-items-center' %>
     <%= link_to "戻る", events_path, class:'d-flex align-items-center'%>
   </div>
-
-マッチング成立しました
-
 </div>
