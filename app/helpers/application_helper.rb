@@ -1,7 +1,7 @@
 module ApplicationHelper
   def bootstrap_class_for(flash_type)
     case flash_type
-    when "success"
+      when "success"
         "alert-success"
       when "danger"
         "alert-danger"
@@ -16,16 +16,15 @@ module ApplicationHelper
 
   def gender_view(type)
     case type
-    when 1
+      when 1
         "男"
       when 2
         "女"
-      when 3
-        "その他"
       else
-        "非表示"
+        "その他"
     end
   end
+
   def simple_time_start_at(time)
     time.strftime("%m/%d %H:%M")
   end

@@ -126,10 +126,10 @@ end
   title = Faker::Food.dish
   content = Faker::Restaurant.description
   restaurant_url = Faker::Internet.url
-  budget = Faker::Number.between(from: 0, to: 6)
-  start_at = Faker::Time.between(from: DateTime.now - 1, to: DateTime.now)
-  end_at = Faker::Time.between(from: DateTime.now - 1, to: DateTime.now)
-  check_in_time = Faker::Number.between(from: 0, to: 5)
+  budget = Faker::Number.between(from: 1, to: 6)
+  start_at = Faker::Time.forward(days: 30)
+  end_at = Faker::Time.between(from: start_at, to: start_at + 180 * 60)
+  check_in_time = Faker::Number.between(from: 1, to: 5)
   food_category = Faker::Number.between(from: 0, to: 4)
   user_id = Faker::Number.between(from: 1, to: 20)
   area_id = Faker::Number.between(from: 1, to: 23)
@@ -145,5 +145,22 @@ end
     user_id: user_id,
     event_status: 0,
     area_id: area_id
+  )
+end
+
+Event.all.each do |event|
+  genre_id = Faker::Number.between(from: 1, to: 6)
+  GenreTag.create!(
+    genre_id: genre_id,
+    event_id: event.id,
+  )
+end
+
+20.times do |n|
+  user_id = Faker::Number.between(from: 1, to: 20)
+  event_id = Faker::Number.between(from: 1, to: 20)
+  ApplyForEvent.create!(
+    user_id: user_id,
+    event_id: event_id,
   )
 end

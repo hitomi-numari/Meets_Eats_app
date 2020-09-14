@@ -96,8 +96,8 @@
                 form.datetime_select(
                       :start_at,
                        use_month_numbers: true,
-                      :start_year => Time.now.year,
-                      :end_year => Time.now.year + 1,
+                      :start_year => DateTime.now.year,
+                      :end_year => DateTime.now.year + 1,
                       :minute_step => 10,
                       default: {},
                       date_separator: '%s',
@@ -114,8 +114,8 @@
                 form.datetime_select(
                       :end_at,
                        use_month_numbers: true,
-                      :start_year => Time.now.year,
-                      :end_year => Time.now.year + 1,
+                      :start_year => DateTime.now.year,
+                      :end_year => DateTime.now.year + 1,
                       :minute_step => 10,
                       default: {},
                       date_separator: '%s',

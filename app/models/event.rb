@@ -47,7 +47,11 @@ class Event < ApplicationRecord
   }
 
   def required_time
-    required_time = (end_at.strftime("%H:%M").to_i - start_at.strftime("%H:%M").to_i)
+    if end_at.strftime("%H:%M") < start_at.strftime("%H:%M")
+      required_time = ((end_at.strftime("%H:%M").to_i + 24) - start_at.strftime("%H:%M").to_i)
+    else
+      required_time = (end_at.strftime("%H:%M").to_i - start_at.strftime("%H:%M").to_i)
+    end
   end
 
   def datetime_not_before_start_at
@@ -57,5 +61,24 @@ class Event < ApplicationRecord
   def short_description
     description[0, 9] + '...'
   end
+
+  def expired_time(check_in_time)
+    case check_in_time
+      when 1
+        expired_time = start_at - 60 * 60
+      when 2
+        expired_time = start_at - 120 * 60
+      when 3
+        expired_time = start_at - 180 * 60
+      when 4
+        expired_time = start_at - 24 * 60 * 60
+      when 5
+        expired_time = start_at - 48 * 60 * 60
+    end
+  end
+  scope :passed, -> { where("start_at >= ?", DateTime.now) }
+  scope :pending, -> { where(event_status: "pending") }
+  scope :sort_created, -> { order(created_at: :desc) }
+  # scope :sort_expired, -> { where(check_in_time.expired_time(check_in_time) <= ?, DateTime.now) }
 
 end

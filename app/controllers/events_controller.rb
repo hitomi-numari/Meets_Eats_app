@@ -5,16 +5,24 @@ class EventsController < ApplicationController
   def index
     if params[:genre_id]
       @genre = Genre.find(params[:genre_id])
-      @q = @genre.genre_tag_events.where(event_status: "pending").order(created_at: :desc).ransack(params[:q])
+      @q = @genre.genre_tag_events.pending.sort_created.ransack(params[:q])
       #性別・年代の絞り込み　さらに＠qで絞り込む
       @events = @q.result(distinct: true).page(params[:page]).per(20)
     elsif params[:area_id]
       @area = Area.find(params[:area_id])
-      @q = @area.events.where(event_status: "pending").order(created_at: :desc).ransack(params[:q])
+      @q = @area.events.pending.sort_created.ransack(params[:q])
       @events = @q.result(distinct: true).includes(:genre_tags, :genres).page(params[:page]).per(20)
     else
-      @q = Event.where(event_status: "pending").order(created_at: :desc).ransack(params[:q])
-      @events = @q.result(distinct: true).includes(:genre_tags, :genres).page(params[:page]).per(20)
+      if params[:sort_created]
+        @q = Event.passed.pending.sort_created.ransack(params[:q])
+        @events = @q.result(distinct: true).includes(:genre_tags, :genres).page(params[:page]).per(20)
+      elsif params[:sort_expired]
+        @q = Event.passed.pending.sort_expired.ransack(params[:q])
+        @events = @q.result(distinct: true).includes(:genre_tags, :genres).page(params[:page]).per(20)
+      else
+        @q = Event.passed.pending.sort_created.ransack(params[:q])
+        @events = @q.result(distinct: true).includes(:genre_tags, :genres).page(params[:page]).per(20)
+      end
     end
     #@eventsに対して年齢指定があれば、該当しない結果を取り除く。
   end

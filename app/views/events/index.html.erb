@@ -83,6 +83,12 @@
           <% end %>
         <% end %>
     </div>
+
+<div class="sort">
+  <%= link_to '新着順', events_path(sort_created: "true"), class:"btn btn-default" %>
+  <%= link_to '終了期限順', events_path(sort_expired: "true"), class:"btn btn-default" %>
+</div>
+
 <% @events.each do |event| %>
   <div class="list-group">
     <div class="list-group-item">
