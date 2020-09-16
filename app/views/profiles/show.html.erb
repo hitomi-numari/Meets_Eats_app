@@ -1,29 +1,41 @@
-<% flash.each do |key, value| %>
-  <div class="alert <%= bootstrap_class_for(key) %>" ><%= value %></div>
-<% end %>
+  <h2>プロフィール詳細</h2>
+    <div class="box">
 
-  <div style="margin: 0 20px">
-    <% if @profile.icon.present? %>
-      <p><%= image_tag(@profile.icon.url, size: "50x50") %></p>
-    <% else %>
-      <p><%= image_tag("default.png", size: "50x50") %></p>
+    <% flash.each do |key, value| %>
+      <div class="alert <%= bootstrap_class_for(key) %>" ><%= value %></div>
     <% end %>
-  </div>
 
-    <div><%= @profile.nickname %></div>
+    <div class="profile_center">
+      <div class="profile_figure d-block mx-auto">
+        <%= image_tag(@profile.icon_url) %>
+      </div>
+      <div class="profile_name">
+        <%= @profile.nickname %>
+      </div>
+      <div class="profile">
+        <%= truncate(@profile.details, length: 50) do %>
+        <p　class="float-right"><%= link_to '詳細', profile_path(@profile.id) %></p>
+        <% end %>
+      </div>
+      <div class="profile"><%= @profile.calc_age %>歳</div>
+      <div class="profile"><%= gender_view(@profile.gender)%></div>
+      <ul class="profile">
+        <% if @profile.instagram_url.present? %>
+        <li><%= link_to @profile.instagram_url do %></li>
+              <i class="fab fa-instagram-square"></i>
+            <% end %>
+        <% end %>
+        <% if @profile.facebook_url.present? %>
+        <li><%= link_to @profile.facebook_url do %></li>
+              <i class="fab fa-facebook-square"></i>
+            <% end %>
+        <% end %>
+      </ul>
+    </div>
 
-    <div><%= @profile.calc_age %></div>
-
-    <div><%= gender_view(@profile.gender) %></div>
-
-    <div><%= @profile.details %></div>
-
-    <div><%= @profile.instagram_url %></div>
-
-    <div><%= @profile.facebook_url %></div>
-
-  <div style="margin: 0 20px">
-    <% if @profile.user == current_user %>
-      <%= link_to '編集', edit_profile_path(@profile.id), class: 'btn btn-default btn-sm' %>
-    <% end %>
+    <div class="text-right m-5">
+      <% if @profile.user == current_user %>
+        <%= link_to '編集', edit_profile_path(@profile.id) %>
+      <% end %>
+    </div>
   </div>

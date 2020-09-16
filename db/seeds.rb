@@ -156,11 +156,42 @@ Event.all.each do |event|
   )
 end
 
-20.times do |n|
+3.times do |n|
   user_id = Faker::Number.between(from: 1, to: 20)
-  event_id = Faker::Number.between(from: 1, to: 20)
   ApplyForEvent.create!(
     user_id: user_id,
-    event_id: event_id,
+    event_id: Event.find(1).id,
+  )
+end
+
+3.times do |n|
+  user_id = Faker::Number.between(from: 1, to: 20)
+  ApplyForEvent.create!(
+    user_id: user_id,
+    event_id: Event.find(2).id,
+  )
+end
+
+3.times do |n|
+  user_id = Faker::Number.between(from: 1, to: 20)
+  ApplyForEvent.create!(
+    user_id: user_id,
+    event_id: Event.find(3).id,
+  )
+end
+
+3.times do |n|
+  user_id = Faker::Number.between(from: 1, to: 20)
+  ApplyForEvent.create!(
+    user_id: user_id,
+    event_id: Event.find(4).id,
+  )
+end
+
+3.times do |n|
+  user_id = Faker::Number.between(from: 1, to: 20)
+  ApplyForEvent.create!(
+    user_id: user_id,
+    event_id: Event.find(5).id,
   )
 end

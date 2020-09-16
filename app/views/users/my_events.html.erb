@@ -16,6 +16,7 @@
           <p><%= simple_time_start_at(event.start_at) %>~<%= simple_time_end_at(event.end_at) %><p>
         </div>
         <div class="applies-lists text-center">
+          #時間が過ぎたものは「もう一度イベント作成してください」に表示し直す
           <% if user_signed_in? %>
             <%= link_to "応募者一覧", apply_members_event_path(event.id), class:"btn btn-secondary" %>
           <% end %>
@@ -24,4 +25,4 @@
     </div>
   </div>
 </div>
-    <% end %>
+<% end %>

@@ -1,15 +1,29 @@
 <h2>イベント履歴</h2>
-<table>
-  <tr>
-    <th>タイトル</th>
-    <th>内容</th>
-  </tr>
+<%= link_to "評価待ち" %>
+<%= link_to "評価済み" %>
 <% @events.each do |event| %>
-  <tr>
-    <td><%= event.title %></td>
-    <td><%= event.content %></td>
-    <td>
-    </td>
-  </tr>
-    <% end %>
-</table>
+<div class="wanted-group row">
+  <div class="col-md-12 wanted-group-item">
+    <div class="wanted-body">
+      <div class="col-md-8 float-left">
+        <% event.genre_tags.each do |genre| %>
+          <span class= 'badge <%=genre_tags(genre.genre.id)%>' ><%=genre.genre.name %></span>
+        <% end %>
+        <div class="middle-contents-item title">
+          <h5><%=event.title %></h5>
+        </div>
+      </div>
+      <div class="col-md-4 float-right">
+        <div class="schedule_time">
+          <p><%= simple_time_start_at(event.start_at) %>~<%= simple_time_end_at(event.end_at) %><p>
+        </div>
+        <div class="applies-lists text-center">
+          <% if user_signed_in? %>
+            <%= link_to "評価する", class:"btn btn-secondary" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

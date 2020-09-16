@@ -14,13 +14,13 @@ class EventsController < ApplicationController
       @events = @q.result(distinct: true).includes(:genre_tags, :genres).page(params[:page]).per(20)
     else
       if params[:sort_created]
-        @q = Event.passed.pending.sort_created.ransack(params[:q])
+        @q = Event.expired.pending.sort_created.ransack(params[:q])
         @events = @q.result(distinct: true).includes(:genre_tags, :genres).page(params[:page]).per(20)
       elsif params[:sort_expired]
-        @q = Event.passed.pending.sort_expired.ransack(params[:q])
+        @q = Event.expired.pending.sort_expired.ransack(params[:q])
         @events = @q.result(distinct: true).includes(:genre_tags, :genres).page(params[:page]).per(20)
       else
-        @q = Event.passed.pending.sort_created.ransack(params[:q])
+        @q = Event.expired.pending.sort_created.ransack(params[:q])
         @events = @q.result(distinct: true).includes(:genre_tags, :genres).page(params[:page]).per(20)
       end
     end
@@ -87,7 +87,7 @@ class EventsController < ApplicationController
   end
 
   def complete
-    @apply = ApplyForEvent.find(params[:apply_for_event_id])
+    @apply = ApplyForEvent.find(params[:id])
   end
 
   private

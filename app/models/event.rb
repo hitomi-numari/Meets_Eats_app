@@ -15,23 +15,23 @@ class Event < ApplicationRecord
   validates :end_at, presence: true
   validates :check_in_time, presence: true
   enum budget: {
-      default: 0,
-      till_1000: 1,
-      till_2000: 2,
-      till_3000: 3,
-      till_4000: 4,
-      till_5000: 5,
-      over_5000: 6,
-    },  _prefix: true
+    default: 0,
+    till_1000: 1,
+    till_2000: 2,
+    till_3000: 3,
+    till_4000: 4,
+    till_5000: 5,
+    over_5000: 6,
+  },  _prefix: true
 
   enum check_in_time: {
-      default: 0,
-      before_1hour: 1,
-      before_2hours: 2,
-      before_3hours: 3,
-      before_24hours: 4,
-      before_48hours: 5,
-    },  _prefix: true
+    default: 0,
+    before_1hour: 1,
+    before_2hours: 2,
+    before_3hours: 3,
+    before_24hours: 4,
+    before_48hours: 5,
+  },  _prefix: true
 
   enum food_category: {
     イタリアン: 0,
@@ -62,23 +62,27 @@ class Event < ApplicationRecord
     description[0, 9] + '...'
   end
 
-  def expired_time(check_in_time)
-    case check_in_time
+  def self.expired_time
+    binding.pry
+    case check_in_times
       when 1
-        expired_time = start_at - 60 * 60
+        Time.now + 60 * 60
       when 2
-        expired_time = start_at - 120 * 60
+        Time.now + 120 * 60
       when 3
-        expired_time = start_at - 180 * 60
+        Time.now + 180 * 60
       when 4
-        expired_time = start_at - 24 * 60 * 60
+        Time.now + 24 * 60 * 60
       when 5
-        expired_time = start_at - 48 * 60 * 60
+        Time.now + 48 * 60 * 60
+      else
+        Time.now
     end
   end
-  scope :passed, -> { where("start_at >= ?", DateTime.now) }
+
+  scope :expired, -> { where("start_at >= ?", self.expired_time)}
   scope :pending, -> { where(event_status: "pending") }
   scope :sort_created, -> { order(created_at: :desc) }
-  # scope :sort_expired, -> { where(check_in_time.expired_time(check_in_time) <= ?, DateTime.now) }
+  # scope :sort_expired, -> { where("") }
 
 end

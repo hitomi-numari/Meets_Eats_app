@@ -1,64 +1,84 @@
-<% if @profile.errors.any? %>
-<div id="error_explanation">
-<div class="alert alert-danger">
-  <h2><%= pluralize(@profile.errors.count, "件") %>のエラーがあります。<%= @profile.nickname %></h2>
-  <ul>
-    <% @profile.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
+<div class="container">
+<div class="box">
+  <div class="box-margin">
+    <% if @profile.errors.any? %>
+    <div id="error_explanation">
+    <div class="alert alert-danger">
+      <h2><%= pluralize(@profile.errors.count, "件") %>のエラーがあります</h2>
+      <ul>
+        <% @profile.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <% end %>
+    <%= form_with(model: @profile, local: true) do |f| %>
+    <div class="form-group row">
+      <% if @profile.icon.present? %>
+      <div class="col-sm-2 col-form-label"><%= image_tag(@profile.icon.url, size: "100x100")%></div>
+      <% else %>
+      <div class="col-sm-2 col-form-label"><%= image_tag("default.png", size: "100x100") %></div>
       <% end %>
-    </ul>
+      <div class="col-sm-10">
+        <%= f.file_field :icon%>
+        <%= f.hidden_field :image_cache %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= f.label t('view.profile.nickname'), class: "col-sm-2 col-form-label" %>
+      <div class="col-sm-10">
+        <%= f.text_field :nickname, class:"form-control" %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= f.label t('view.profile.birthday'), class: "col-sm-2 col-form-label" %>
+      <div class="col-sm-10">
+      <%= raw sprintf(
+                f.date_select(
+                  :birthday,
+                  use_month_numbers: true,
+                  start_year: (Time.now.year - 65),
+                  end_year: (Time.now.year - 20),
+                  default: Date.new(1989, 1, 1),
+                  date_separator: '%s'),
+                  '年 ', '月 ') + '日' %>
+      </div>
+    </div>
+    <div class= "form_group row">
+      <%= f.label t('view.profile.gender'), class:'col-sm-2 col-form-label' %><br>
+      <div class="col-sm-10">
+        <span><%= f.radio_button :gender, 1 %></span>
+        <span><%= f.label :gender, "男" %></span>
+        <span><%= f.radio_button :gender, 2 %></span>
+        <span><%= f.label :gender, "女" %></span>
+        <span><%= f.radio_button :gender, 3 %></span>
+        <span><%= f.label :gender, "その他" %></span>
+      </div>
+    </div>
+    <div class= "form_group row">
+      <%= f.label t('view.profile.details'), class:'col-sm-2 col-form-label' %>
+      <div class="col-sm-10">
+        <%= f.text_area :details, placeholder: "自己PRしましょう！", class:"form-control" %>
+      </div>
+    </div>
+    <div class= "form_group row">
+      <%= f.label t('view.profile.instagram_url'), class:'col-sm-2 col-form-label' %>
+      <div class="col-sm-10">
+        <%= f.text_field :instagram_url, class:"form-control" %>
+      </div>
+    </div>
+    <div class= "form_group row">
+      <%= f.label t('view.profile.facebook_url'), class:'col-sm-2 col-form-label' %>
+      <div class="col-sm-10">
+        <%= f.text_field :facebook_url, class:"form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group　row">
+      <%= f.submit "プロフィール登録", class: "float-right btn btn-secondary" %>
+    </div>
+    <% end %>
   </div>
 </div>
-<% end %>
-<%= form_with(model: @profile, local: true) do |f| %>
-<div class="input-group">
-  <% if @profile.icon.present? %>
-  <p><%= image_tag(@profile.icon.url, size: "50x50") %></p>
-  <% else %>
-  <p><%= image_tag("default.png", size: "50x50") %></p>
-  <% end %>
-  <%= f.file_field :icon, class:"icon_upload" %>
-  <%= f.hidden_field :image_cache %>
 </div>
-<div class="form-group">
-  <%= f.label :nickname %>
-  <%= f.text_field :nickname %>
-</div>
-<div class="form-group">
-  <%= f.label :birthday %>
-  <%= raw sprintf(
-            f.date_select(
-              :birthday,
-              use_month_numbers: true,
-              start_year: (Time.now.year - 65),
-              end_year: (Time.now.year - 20),
-              default: Date.new(1989, 1, 1),
-              date_separator: '%s'),
-              '年 ', '月 ') + '日' %>
-</div>
-<div class= "form_group">
-  <%= f.label :gender, "性別", class:'gender_select', class: "control-label" %><br>
-  <span><%= f.radio_button :gender, 1 %></span>
-  <span><%= f.label :gender, "男" %></span>
-  <span><%= f.radio_button :gender, 2 %></span>
-  <span><%= f.label :gender, "女" %></span>
-  <span><%= f.radio_button :gender, 3 %></span>
-  <span><%= f.label :gender, "その他" %></span>
-</div>
-<div class= "form_group">
-  <%= f.label :details %>
-  <%= f.text_area :details, placeholder: "紹介文" %>
-</div>
-<div class= "form_group">
-  <%= f.label :instagram_url %>
-  <%= f.text_field :instagram_url %>
-</div>
-<div class= "form_group">
-  <%= f.label :facebook_url %>
-  <%= f.text_field :facebook_url %>
-</div>
-
-<div class="pull-left">
-  <%= f.submit "プロフィール登録", class: 'btn btn-primary' %>
-</div>
-<% end %>

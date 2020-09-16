@@ -5,8 +5,9 @@
         <h5><%=@apply.user.profile.nickname %></h5>
       </div>
   </div>
-  <div class="complete_container">
-    <%= link_to "食事相手を評価する", class:'d-flex align-items-center' %>
-    <%= link_to "戻る", events_path, class:'d-flex align-items-center'%>
+  <div class="complete_container col text-center d-flex flex-column">
+    <h3 class="mt-5 mb-3"><%=@apply.user.profile.nickname %>さんとイベントが成立しました！</h3>
+    <p class="mt-3 mb-3">マイページのイベント履歴から食事相手を評価してください</p>
+    <%= link_to "戻る", events_path, class:"mb-5 mt-3" %>
   </div>
 </div>

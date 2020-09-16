@@ -1,5 +1,5 @@
 <div class="container">
-<h1>イベント詳細</h1>
+<h1 class="text-center">イベント詳細</h1>
 <div class="box">
 <table class="table table-borderless">
   <tr>
@@ -62,6 +62,7 @@
       <% if @apply.present? %>
         <%= link_to 'キャンセルする', apply_for_event_path(id: @apply.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
       <% else %>
+        <%= link_to 'チャットする', class: 'btn btn-secondary' %>
         <%= link_to '参加する', apply_for_events_path(event_id: @event.id), method: :post, class: 'btn btn-primary' %>
       <% end %>
     <% end %>

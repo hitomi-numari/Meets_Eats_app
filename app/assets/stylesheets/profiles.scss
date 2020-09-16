@@ -1,3 +1,24 @@
 // Place all the styles related to the profiles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+/*内容*/
+.profile_center{
+  text-align: center;
+  margin: 10px 15px 0 0;
+}
+/*プロフィール画像*/
+.profile_figure {
+  width:150px;
+  }
+/*名前*/
+.profile_name {
+  padding: 15px 20px;
+  font-weight:bold;
+  font-size:16px;
+}
+
+.profile {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}

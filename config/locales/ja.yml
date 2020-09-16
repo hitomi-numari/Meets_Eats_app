@@ -59,11 +59,10 @@ ja:
       nickname: ユーザー名
       icon: 画像
       birthday: 誕生日
-      age: 年齢
-      gender: 性別
-      instagram_url: instagram URL
-      facebook_url: facebook URL
       details: 自己紹介
+      gender: 性別
+      instagram_url: instagram
+      facebook_url: facebook
     area:
       name: 場所
     genre:
