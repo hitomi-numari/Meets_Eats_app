@@ -62,27 +62,23 @@ class Event < ApplicationRecord
     description[0, 9] + '...'
   end
 
-  def expired_time
-    # binding.pry
+  def calc_expired_time(check_in_time, start_at)
     case check_in_time
-      when 1
-        Time.now + 60 * 60
-      when 2
-        Time.now + 120 * 60
-      when 3
-        Time.now + 180 * 60
-      when 4
-        Time.now + 24 * 60 * 60
-      when 5
-        Time.now + 48 * 60 * 60
-      else
-        Time.now
+      when "before_1hour"
+        start_at - 60 * 60
+      when "before_2hours"
+        start_at - 120 * 60
+      when "before_3hours"
+        start_at - 180 * 60
+      when "before_24hours"
+        start_at - 24 * 60 * 60
+      when "before_48hours"
+        start_at - 48 * 60 * 60
     end
   end
 
-  scope :expired, -> { where("start_at >= ?", expired_time)}
+  scope :expired, -> { where("expired_time >= ?", Time.now)}
   scope :pending, -> { where(event_status: "pending") }
   scope :sort_created, -> { order(created_at: :desc) }
-  # scope :sort_expired, -> { where("") }
 
 end

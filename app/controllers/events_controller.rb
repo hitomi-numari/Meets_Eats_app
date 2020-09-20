@@ -6,7 +6,6 @@ class EventsController < ApplicationController
     if params[:genre_id]
       @genre = Genre.find(params[:genre_id])
       @q = @genre.genre_tag_events.pending.sort_created.ransack(params[:q])
-      #性別・年代の絞り込み　さらに＠qで絞り込む
       @events = @q.result(distinct: true).page(params[:page]).per(20)
     elsif params[:area_id]
       @area = Area.find(params[:area_id])
@@ -24,11 +23,9 @@ class EventsController < ApplicationController
         @events = @q.result(distinct: true).includes(:genre_tags, :genres).page(params[:page]).per(20)
       end
     end
-    #@eventsに対して年齢指定があれば、該当しない結果を取り除く。
   end
 
   def show
-    # binding.pry
     if params[:genre_id]
       @genre = Genre.find(params[:genre_id])
     elsif params[:area_name]
@@ -54,6 +51,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     @event.user_id = current_user.id
+    @event.expired_time = @event.calc_expired_time(@event.check_in_time, @event.start_at)
     if params[:back]
       render :new
     else
@@ -67,6 +65,7 @@ class EventsController < ApplicationController
 
   def update
     if @event.update(event_params)
+      @event.expired_time = @event.calc_expired_time(@event.check_in_time, @event.start_at)
       redirect_to events_path
     else
       render :edit
@@ -102,7 +101,6 @@ class EventsController < ApplicationController
   end
 
   def ensure_correct_post
-    # @picture = Picture.find_by(id: params[:id])
     if current_user.id != @event.user_id
       flash[:danger] = "権限がありません"
       redirect_to action: "index"

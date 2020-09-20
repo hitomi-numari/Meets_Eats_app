@@ -133,6 +133,19 @@ end
   food_category = Faker::Number.between(from: 0, to: 4)
   user_id = Faker::Number.between(from: 1, to: 20)
   area_id = Faker::Number.between(from: 1, to: 23)
+
+  if check_in_time == 1
+    expired_time = start_at - 60 * 60
+  elsif check_in_time == 2
+    expired_time = start_at - 120 * 60
+  elsif check_in_time == 3
+    expired_time = start_at - 180 * 60
+  elsif check_in_time == 4
+    expired_time = start_at - 24 * 60 * 60
+  elsif check_in_time == 5
+    expired_time = start_at - 48 * 60 * 60
+  end
+
   Event.create!(
     title: title,
     content: content,
@@ -144,7 +157,8 @@ end
     food_category: food_category,
     user_id: user_id,
     event_status: 0,
-    area_id: area_id
+    area_id: area_id,
+    expired_time: expired_time
   )
 end
 
