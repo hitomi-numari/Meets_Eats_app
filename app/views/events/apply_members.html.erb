@@ -1,7 +1,7 @@
 <div class="container">
 <h2 class="text-center">応募者一覧</h2>
 <% @event.apply_for_events.each do |apply| %>
-  <div class="row col-md-12">
+  <div class="apply_member row col-md-12">
     <div class="col-md-2">
       <%= image_tag(apply.user.profile.icon_url) %>
     </div>

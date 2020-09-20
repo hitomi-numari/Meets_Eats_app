@@ -62,9 +62,9 @@ class Event < ApplicationRecord
     description[0, 9] + '...'
   end
 
-  def self.expired_time
-    binding.pry
-    case check_in_times
+  def expired_time
+    # binding.pry
+    case check_in_time
       when 1
         Time.now + 60 * 60
       when 2
@@ -80,7 +80,7 @@ class Event < ApplicationRecord
     end
   end
 
-  scope :expired, -> { where("start_at >= ?", self.expired_time)}
+  scope :expired, -> { where("start_at >= ?", expired_time)}
   scope :pending, -> { where(event_status: "pending") }
   scope :sort_created, -> { order(created_at: :desc) }
   # scope :sort_expired, -> { where("") }
