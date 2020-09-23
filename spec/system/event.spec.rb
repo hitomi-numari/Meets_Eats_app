@@ -5,6 +5,10 @@ RSpec.describe 'イベント機能', type: :system do
     @user02 = create(:second_user)
     @user03 = create(:third_user)
 
+    @user_profile01 = create(:profile, user: @user01)
+    @user_profile02 = create(:second_profile, user: @user02)
+    @user_profile03 = create(:third_profile, user: @user03)
+
     @area01 = create(:area13)
     @area02 = create(:area6)
     @area03 = create(:area13)
@@ -15,21 +19,26 @@ RSpec.describe 'イベント機能', type: :system do
 
     @genre01 = create(:genre)
     @genre02 = create(:genre3)
-    @genre01 = create(:genre5)
+    @genre03 = create(:genre5)
 
     create(:genre_tag, event: @event01, genre: @genre01)
     create(:genre_tag2, event: @event02, genre: @genre02)
     create(:genre_tag3, event: @event03, genre: @genre03)
 
-    def login_as_user01
-      visit root_path
-      fill_in 'user[email]', with: '@user01.email'
-      fill_in "user[password]", with: 'password'
-      find('Log in').click
-    end
+    sign_in @user01
+
   end
 
   describe 'イベント一覧画面' do
+    context 'カテゴリー別に一覧画面を選択する場合'
+      it 'カテゴリーが表示される' do
+        visit search_top_events_path
+        expect(page).to have_content 'ジャンルから探す'
+        expect(page).to have_content 'エリアから探す'
+        expect(page).to have_content '全てのイベントから探す'
+      end
+    end
+
     context 'イベントを作成した場合' do
       it '作成済みのイベントが表示される' do
         visit events_path
@@ -143,5 +152,3 @@ RSpec.describe 'イベント機能', type: :system do
        end
      end
   end
-
-end
