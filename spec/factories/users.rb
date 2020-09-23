@@ -1,9 +1,21 @@
 FactoryBot.define do
   factory :user do
-    password = Faker::Internet.password(min_length:6)
-    email { Faker::Internet.email }
-    password { password }
-    password_confirmation { password }
+    email { "nobita@doraemon.com" }
+    password { "password" }
+    password_confirmation { "password" }
   end
+
+  factory :second_user, class: User do
+    email { "shizuka@doraemon.com" }
+    password { "password" }
+    password_confirmation { "password" }
+  end
+
+  factory :third_user, class: User do
+    email { "suneo@doraemon.com" }
+    password { "password" }
+    password_confirmation { "password" }
+  end
+
 
 end

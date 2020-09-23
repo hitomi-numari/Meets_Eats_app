@@ -1,28 +1,44 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy, :apply_members, :prohibit_selected]
   before_action :ensure_correct_post, only: [:edit, :update, :destroy]
-
   def index
     if params[:genre_id]
       @genre = Genre.find(params[:genre_id])
-      @q = @genre.genre_tag_events.pending.sort_created.ransack(params[:q])
-      @events = @q.result(distinct: true).page(params[:page]).per(20)
+      if params[:sort_created]
+        @q = @genre.genre_tag_events.expired.pending.sort_created.ransack(params[:q])
+        @events = @q.result(distinct: true)
+      elsif params[:sort_expired]
+        @q = @genre.genre_tag_events.expired.pending.sort_created.ransack(params[:q])
+        @events = @q.result(distinct: true)
+      else
+        @q = @genre.genre_tag_events.expired.pending.sort_created.ransack(params[:q])
+        @events = @q.result(distinct: true)
+      end
     elsif params[:area_id]
       @area = Area.find(params[:area_id])
-      @q = @area.events.pending.sort_created.ransack(params[:q])
-      @events = @q.result(distinct: true).includes(:genre_tags, :genres).page(params[:page]).per(20)
+      if params[:sort_created]
+        @q = @area.events.expired.pending.sort_created.ransack(params[:q])
+        @events = @q.result(distinct: true).includes(:genre_tags, :genres)
+      elsif params[:sort_expired]
+        @q = @area.events.expired.pending.sort_created.ransack(params[:q])
+        @events = @q.result(distinct: true).includes(:genre_tags, :genres)
+      else
+        @q = @area.events.expired.pending.sort_created.ransack(params[:q])
+        @events = @q.result(distinct: true).includes(:genre_tags, :genres)
+      end
     else
       if params[:sort_created]
         @q = Event.expired.pending.sort_created.ransack(params[:q])
-        @events = @q.result(distinct: true).includes(:genre_tags, :genres).page(params[:page]).per(20)
+        @events = @q.result(distinct: true).includes(:genre_tags, :genres)
       elsif params[:sort_expired]
         @q = Event.expired.pending.sort_expired.ransack(params[:q])
-        @events = @q.result(distinct: true).includes(:genre_tags, :genres).page(params[:page]).per(20)
+        @events = @q.result(distinct: true).includes(:genre_tags, :genres)
       else
         @q = Event.expired.pending.sort_created.ransack(params[:q])
-        @events = @q.result(distinct: true).includes(:genre_tags, :genres).page(params[:page]).per(20)
+        @events = @q.result(distinct: true).includes(:genre_tags, :genres)
       end
     end
+    @events = @events.page(params[:page])
   end
 
   def show

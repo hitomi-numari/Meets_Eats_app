@@ -80,5 +80,7 @@ class Event < ApplicationRecord
   scope :expired, -> { where("expired_time >= ?", Time.now)}
   scope :pending, -> { where(event_status: "pending") }
   scope :sort_created, -> { order(created_at: :desc) }
+  scope :sort_expired, -> { order(expired_time: :asc) }
 
+  paginates_per 15
 end

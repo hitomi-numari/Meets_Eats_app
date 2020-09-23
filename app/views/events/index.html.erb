@@ -84,10 +84,10 @@
         <% end %>
     </div>
 
-<div class="sort">
-  <%= link_to '新着順', events_path(sort_created: "true"), class:"btn btn-default" %>
-  <%= link_to '終了期限順', events_path(sort_expired: "true"), class:"btn btn-default" %>
-</div>
+    <div class="sort my-4">
+      <%= link_to '新着順', events_path(sort_created: "true"), class:"btn btn-light mr-5" %>
+      <%= link_to '終了期限順', events_path(sort_expired: "true"), class:"btn btn-light mr-5" %>
+    </div>
 
 <% @events.each do |event| %>
   <div class="list-group">
@@ -178,4 +178,5 @@
     </div>
   </div>
 <% end %>
+<%= paginate @events %>
 </div>
