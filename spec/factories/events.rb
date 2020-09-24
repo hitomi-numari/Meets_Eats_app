@@ -8,6 +8,7 @@ FactoryBot.define do
     end_at { '2020-10-01 14:00:00 +0900' }
     check_in_time { 'before_24hours' }
     food_category { 'その他' }
+    expired_time {'2020-09-30 12:00:00 +0900'}
     user
     area
   end
@@ -21,6 +22,7 @@ FactoryBot.define do
     end_at { '2020-10-02 19:00:00 +0900' }
     check_in_time { 'before_2hours' }
     food_category { '和食' }
+    expired_time {'2020-10-02 16:00:00 +0900'}
     user
     area
   end
@@ -34,6 +36,7 @@ FactoryBot.define do
     end_at { '2020-10-03 21:00:00 +0900' }
     check_in_time { 'before_48hours' }
     food_category { 'その他' }
+    expired_time {'2020-10-01 16:00:00 +0900'}
     user
     area
   end

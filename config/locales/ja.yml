@@ -8,7 +8,7 @@ ja:
       next: "次 &rsaquo;"
       truncate: "..."
     event:
-      title: 名前
+      title: タイトル
       content: 詳細
       ages: 年代
       age: 年齢
