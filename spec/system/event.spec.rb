@@ -24,7 +24,6 @@ RSpec.describe 'イベント機能', type: :system do
     create(:genre_tag, event: @event01, genre: @genre01)
     create(:genre_tag2, event: @event02, genre: @genre02)
     create(:genre_tag3, event: @event03, genre: @genre03)
-
     sign_in @user01
 
   end
@@ -116,6 +115,9 @@ RSpec.describe 'イベント機能', type: :system do
         select '00', from: 'event_end_at_5i'
         select "1日前", from: 'event[check_in_time]'
         click_on "投稿する"
+        expect(page).to have_content 'のび太'
+        expect(page).to have_content '30歳'
+        expect(page).to have_content '男'
         expect(page).to have_content 'Aの会'
         expect(page).to have_content '渋谷でパスタを食べながら恋話をしたい'
         expect(page).to have_content "恋愛"
