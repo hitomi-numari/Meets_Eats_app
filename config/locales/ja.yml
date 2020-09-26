@@ -14,7 +14,7 @@ ja:
       age: 年齢
       gender: 性別
       food_category: 料理ジャンル
-      restaurant_url: 飲食店名
+      restaurant_url: 飲食店URL
       budget: 予算
       start_at: 開始時間
       end_at: 終了時間
@@ -83,7 +83,7 @@ ja:
   enums:
     event:
       budget:
-        default: --
+        default: 選択してください
         till_1000: ~¥999
         till_2000: ¥1,000~¥1,999
         till_3000: ¥2,000~¥2,999
@@ -91,7 +91,7 @@ ja:
         till_5000: ¥4,000~¥4,999
         over_5000: ¥5,000~
       check_in_time:
-        default: --
+        default: 選択してください
         before_1hour: 1時間前
         before_2hours: 2時間前
         before_3hours: 3時間前

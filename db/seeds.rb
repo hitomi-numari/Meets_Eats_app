@@ -126,23 +126,23 @@ end
   title = Faker::Food.dish
   content = Faker::Restaurant.description
   restaurant_url = Faker::Internet.url
-  budget = Faker::Number.between(from: 1, to: 6)
+  budget = Faker::Number.between(from: 0, to: 5)
   start_at = Faker::Time.forward(days: 30)
   end_at = Faker::Time.between(from: start_at, to: start_at + 180 * 60)
-  check_in_time = Faker::Number.between(from: 1, to: 5)
+  check_in_time = Faker::Number.between(from: 0, to: 4)
   food_category = Faker::Number.between(from: 0, to: 4)
   user_id = Faker::Number.between(from: 1, to: 20)
   area_id = Faker::Number.between(from: 1, to: 23)
 
-  if check_in_time == 1
+  if check_in_time == 0
     expired_time = start_at - 60 * 60
-  elsif check_in_time == 2
+  elsif check_in_time == 1
     expired_time = start_at - 120 * 60
-  elsif check_in_time == 3
+  elsif check_in_time == 2
     expired_time = start_at - 180 * 60
-  elsif check_in_time == 4
+  elsif check_in_time == 3
     expired_time = start_at - 24 * 60 * 60
-  elsif check_in_time == 5
+  elsif check_in_time == 4
     expired_time = start_at - 48 * 60 * 60
   end
 

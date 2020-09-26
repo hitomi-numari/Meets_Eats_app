@@ -15,22 +15,20 @@ class Event < ApplicationRecord
   validates :end_at, presence: true
   validates :check_in_time, presence: true
   enum budget: {
-    default: 0,
-    till_1000: 1,
-    till_2000: 2,
-    till_3000: 3,
-    till_4000: 4,
-    till_5000: 5,
-    over_5000: 6,
+    till_1000: 0,
+    till_2000: 1,
+    till_3000: 2,
+    till_4000: 3,
+    till_5000: 4,
+    over_5000: 5,
   },  _prefix: true
 
   enum check_in_time: {
-    default: 0,
-    before_1hour: 1,
-    before_2hours: 2,
-    before_3hours: 3,
-    before_24hours: 4,
-    before_48hours: 5,
+    before_1hour: 0,
+    before_2hours: 1,
+    before_3hours: 2,
+    before_24hours: 3,
+    before_48hours: 4,
   },  _prefix: true
 
   enum food_category: {

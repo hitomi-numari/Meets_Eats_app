@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_20_073302) do
+ActiveRecord::Schema.define(version: 2020_09_26_061644) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,10 +35,10 @@ ActiveRecord::Schema.define(version: 2020_09_20_073302) do
     t.string "title", default: "", null: false
     t.text "content", default: "", null: false
     t.string "restaurant_url", default: "", null: false
-    t.integer "budget", default: 0, null: false
+    t.integer "budget"
     t.datetime "start_at"
     t.datetime "end_at"
-    t.integer "check_in_time", default: 0, null: false
+    t.integer "check_in_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "food_category", default: 0, null: false

@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :profile do
     nickname { 'のび太' }
-    icon { File.open('./public/uploads/profile/icon/default.png') }
+    icon { Rack::Test::UploadedFile.new(File.join(Rails.root,'/spec/factories/images/nobita.png')) }
     birthday { '1990-05-20' }
     gender { 1 }
     instagram_url { "http://example.com/harland" }
@@ -12,7 +12,7 @@ FactoryBot.define do
 
   factory :second_profile, class: Profile do
     nickname { '静香' }
-    icon { File.open('./public/uploads/profile/icon/default.png') }
+    icon { Rack::Test::UploadedFile.new(File.join(Rails.root,'/spec/factories/images/shizuka.jpeg'))}
     birthday { '2000-10-03' }
     gender { 1 }
     instagram_url { "http://example.com/harland" }
@@ -23,7 +23,7 @@ FactoryBot.define do
 
   factory :third_profile, class: Profile do
     nickname { 'スネ夫' }
-    icon { File.open('./public/uploads/profile/icon/default.png') }
+    icon { Rack::Test::UploadedFile.new(File.join(Rails.root,'/spec/factories/images/suneo.jpg')) }
     birthday { '1985-03-15' }
     gender { 1 }
     instagram_url { "http://example.com/harland" }

@@ -14,11 +14,12 @@ ja:
         remember_me: 次回から自動的にログイン
       event:
         id: "ID"
-        title: "名前"
+        title: "タイトル"
         content: "詳細"
         budget: "予算"
-        status: "ステータス"
-        priority: "優先順位"
+        restaurant_url: "飲食店URL"
+        check_in_time: "受付終了時間"
+        area: "場所"
         created_at: "作成日時"
         updated_at: "更新日時"
       genre:

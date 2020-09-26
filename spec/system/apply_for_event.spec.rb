@@ -1,5 +1,5 @@
 require 'rails_helper'
-RSpec.describe 'イベント機能', type: :system do
+RSpec.describe 'マッチング機能', type: :system do
   before do
     @user01 = create(:user)
     @user02 = create(:second_user)
