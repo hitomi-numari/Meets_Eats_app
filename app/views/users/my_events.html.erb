@@ -2,6 +2,9 @@
 <% @events.each do |event| %>
 <div class="wanted-group row">
   <div class="col-md-12 wanted-group-item">
+    <% if event.expired_time <= Time.now %>
+      <div class="alert alert-danger mb-4" role="alert"><strong>締め切り時間が過ぎています！</strong>イベントを削除して再投稿してください。</div>
+    <% end %>
     <div class="wanted-body">
       <div class="col-md-8 float-left">
         <% event.genre_tags.each do |genre| %>
@@ -10,13 +13,25 @@
         <div class="middle-contents-item title">
           <h5><%=event.title %></h5>
         </div>
+        <ul class="link-list d-flex align-items-end">
+          <li><%= link_to event_path(event.id), method: :get do %></li>
+                <i class="fa fa-info-circle"></i>
+              <% end %>
+        <% if event.user == current_user %>
+          <li><%= link_to edit_event_path(event.id), method: :get do %></li>
+              <i class="fa fa-edit"></i>
+          <% end %>
+          <li><%= link_to event_path(event.id), method: :delete, data: { confirm: 'Are you sure?' }, method: :delete do %></li>
+              <i class="fa fa-trash"></i>
+          <% end %>
+        <% end %>
+        </ul>
       </div>
       <div class="col-md-4 float-right">
         <div class="schedule_time">
           <p><%= simple_time_start_at(event.start_at) %>~<%= simple_time_end_at(event.end_at) %><p>
         </div>
         <div class="applies-lists text-center">
-          #時間が過ぎたものは「もう一度イベント作成してください」に表示し直す
           <% if user_signed_in? %>
             <%= link_to "応募者一覧", apply_members_event_path(event.id), class:"btn btn-secondary" %>
           <% end %>

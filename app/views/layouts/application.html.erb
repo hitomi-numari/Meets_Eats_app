@@ -27,7 +27,7 @@
             <li><p>こんにちは、ゲストさん<p></li>
           <% else %>
             <li><p>こんにちは、<%= current_user.profile.nickname %>さん</p></li>
-            <li><%= link_to 'イベント一覧', search_top_events_path %></li>
+            <li><%= link_to 'イベントを探す', search_top_events_path %></li>
             <li><%= link_to "マイページ", my_events_user_path(current_user.id) %></li>
           <% end %>
           <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>

@@ -51,7 +51,6 @@ class EventsController < ApplicationController
   end
 
   def new
-    # binding.pry
     if params[:genre_id]
       @genre = Genre.find(params[:genre_id])
     elsif params[:area_id]
