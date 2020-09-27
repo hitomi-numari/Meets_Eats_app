@@ -14,7 +14,7 @@
     <button type="button" class="btn btn btn-outline-dark btn-lg" data-toggle="modal" data-target="#myModal">詳細検索</button>
     <!-- モーダル -->
     <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel">
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="myModalLabel">詳細検索</h5>
@@ -26,15 +26,15 @@
             <%= search_form_for @q do |f| %>
             <form>
               <div class="form-group row">
-                <%= f.label 'タイトル検索', {class:"col-sm-4 col-form-label"} %>
-                <div class="col-sm-8">
+                <%= f.label 'タイトル検索', {class:"col-sm-3 col-form-label"} %>
+                <div class="col-sm-9">
                   <%= f.search_field :title_cont, class:"form-control" %>
                 </div>
               </div>
               <% unless @genre.present? %>
               <div class="form-group row">
-                <%= f.label 'ジャンル検索', {class:"col-sm-4 col-form-label"} %>
-                <div class="col-sm-8">
+                <%= f.label 'ジャンル検索', {class:"col-sm-3 col-form-label"} %>
+                <div class="col-sm-9">
                   <% Genre.all.each do |genre| %>
                     <%= f.check_box :genres_id_eq_any, { multiple: true, checked: genre[:checked], disabled: genre[:disabled], include_hidden: false }, genre[:id]%>
                   　<label><%= genre.name %></label>
@@ -43,19 +43,19 @@
               </div>
               <% end %>
               <div class="form-group row">
-                <%= f.label '料理ジャンル', {class:"col-sm-4 col-form-label"} %>
-                <div class="col-sm-8">
+                <%= f.label '料理ジャンル', {class:"col-sm-3 col-form-label"} %>
+                <div class="col-sm-9">
                   <%= f.select :food_category_eq, [['イタリアン', 0], ['和食', 1], ['洋食', 2], ['中華', 3], ['その他', 4]], include_blank: '以下から選んでください', class:"form-control" %>
                 </div>
               </div>
               <div class="form-group row">
-                <%= f.label 'エリア', {class:"col-sm-4 col-form-label"} %>
-                <div class="col-sm-8">
+                <%= f.label 'エリア', {class:"col-sm-3 col-form-label"} %>
+                <div class="col-sm-9">
                   <%= f.select :area_id_eq, options_from_collection_for_select(Area.all, :id, :name), include_blank: '以下から選んでください', class:"form-control" %>
                 </div>
               </div>
               <div class="form-group row">
-                <div class="offset-sm-10 col-sm-2">
+                <div class="offset-sm-5 col-sm-5">
                 <%= f.submit "検索", class: "btn btn-primary" %>
                 </div>
               </div>
