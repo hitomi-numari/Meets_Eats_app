@@ -3,21 +3,16 @@
     <title>MeetsEats</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <script src="https://kit.fontawesome.com/11c5374270.js" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <%= javascript_pack_tag 'application' %>
+    <%= stylesheet_pack_tag 'application' %>
   </head>
   <body>
     <header>
-      <h1>
-        <a href="/">Meets Eats</a>
-      </h1>
-      <nav class="pc-nav">
-        <ul>
+      <nav class="col-12 clearfix">
+        <h1 class="float-left">
+          <a href="/">Meets Eats</a>
+        </h1>
+        <ul class="float-right">
         <% unless user_signed_in? %>
           <li><%= link_to 'ログイン', new_user_session_path %></li>
           <li><%= link_to 'サインアップ', new_user_registration_path %></li>
@@ -44,7 +39,7 @@
               <div class= "menu box">
                 <p>Menu</p>
                   <p><%= link_to 'マイトップページ', my_events_user_path(current_user.id) %></p>
-                  <p><%= link_to 'プロフィール編集', profile_path(current_user.profile.id) %></p>
+                  <p><%= link_to 'プロフィール詳細', profile_path(current_user.profile.id) %></p>
                   <p><%= link_to 'イベント履歴', event_history_user_path(current_user.id) %></p>
                   <p><%= link_to 'イベント参加履歴' %></p>
                   <p><%= link_to 'お気に入り' %></p>
@@ -54,7 +49,7 @@
           <div class= "col-md-9 float-right">
             <div class = "middle_contents">
               <% flash.each do |key, value| %>
-                <div class="alert <%= bootstrap_class_for(key) %>" ><%= value %></div>
+                <div class="alert <%= bootstrap_class_for(key) %> mb-0" ><%= value %></div>
               <% end %>
               <%= yield %>
             </div>

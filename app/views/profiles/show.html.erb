@@ -7,9 +7,9 @@
 
     <div class="profile_center">
       <div class="profile_figure d-block mx-auto">
-        <%= image_tag(@profile.icon_url) %>
+        <%= image_tag @profile.icon_url, class:'d-block mx-auto' %>
       </div>
-      <div class="profile_name">
+      <div class="profile_name text-center">
         <%= @profile.nickname %>
       </div>
       <div class="profile">

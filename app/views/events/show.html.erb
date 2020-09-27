@@ -4,7 +4,7 @@
 <table class="table table-borderless">
   <tr>
     <th><%= image_tag(@event.user.profile.icon_url) %></th>
-      <td class="first-td"><%=link_to @event.user.profile.nickname, profile_path(@event.user.profile.id) %></td>
+      <td class="first-td align-middle"><%=link_to @event.user.profile.nickname, profile_path(@event.user.profile.id) %></td>
   </tr>
   <tr>
     <th>タイトル</th>
