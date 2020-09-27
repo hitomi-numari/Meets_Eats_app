@@ -30,7 +30,7 @@ ja:
         gender: "性別"
         instagram_url: "Instagram URL"
         facebook_url: "Facebook URL"
-        details: "詳細"
+        details: "自己紹介"
         created_at: "作成日時"
         updated_at: "更新日時"
       genre:

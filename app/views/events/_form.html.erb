@@ -3,7 +3,7 @@
     <% if @event.errors.any? %>
       <div id="error_explanation">
         <div class="alert alert-danger">
-          <ul>
+          <ul class="d-flex flex-column">
           <% @event.errors.full_messages.each do |message| %>
             <li><%= message %></li>
           <% end %>
