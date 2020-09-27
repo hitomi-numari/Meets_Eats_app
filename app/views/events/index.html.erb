@@ -123,20 +123,24 @@
                   <li><%=event.food_category_i18n %><li>/
                   <li>予算：<%= event.budget_i18n %></li>
                 </ul>
-              <div class="middle-contents-item bottom_contents float-left">
+                <!-- いいね機能　卒業後実装予定 -->
+              <!-- <div class="middle-contents-item bottom_contents float-left"> -->
                 <%# unless event.user_id == current_user.id %>
                   <%# if picture.favorite_users.ids == current_user.id %>
                   <%#= link_to favorite_path(id: picture.favorites.ids), method: :delete do %>
-                  <i class="fas fa-heart"></i>
+                  <!-- <i class="fas fa-heart"></i> -->
                   <%# end %>
                 <%# else %>
                   <%#= link_to favorites_path(picture_id: picture.id), method: :post do %>
-                    <i class="far fa-heart"></i>
+                    <!-- <i class="far fa-heart"></i> -->
                   <%# end %>
                 <%# end %>
               <%# end %>
-                いいね！<%#= picture.favorite_users.count %>件
+                <!--いいね！-->
+                <%#= picture.favorite_users.count %>
+                <!-- 件 -->
               </div>
+              <!-- ここまで -->
             </div>
           </div>
           <div class="col-md-4 float-right">

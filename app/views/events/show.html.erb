@@ -62,7 +62,9 @@
       <% if @apply.present? %>
         <%= link_to 'キャンセルする', apply_for_event_path(id: @apply.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
       <% else %>
+      <!--チャット機能　卒業後実装予定-->
         <%= link_to 'チャットする', class: 'btn btn-secondary' %>
+      <!--ここまで-->
         <%= link_to '参加する', apply_for_events_path(event_id: @event.id), method: :post, class: 'btn btn-primary' %>
       <% end %>
     <% end %>
