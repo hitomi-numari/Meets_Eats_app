@@ -41,7 +41,6 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.8'
   gem 'spring-commands-rspec'
   gem 'factory_bot_rails'
-  gem 'faker'
   gem 'launchy'
   gem 'database_cleaner'
 end
@@ -74,3 +73,4 @@ gem 'kaminari-bootstrap'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
 gem 'webpacker'
+gem 'faker'
