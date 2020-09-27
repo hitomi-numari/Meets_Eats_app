@@ -4,8 +4,7 @@
     <% if @profile.errors.any? %>
     <div id="error_explanation">
     <div class="alert alert-danger">
-      <h2><%= pluralize(@profile.errors.count, "件") %>のエラーがあります</h2>
-      <ul>
+      <ul class="d-flex flex-column">
         <% @profile.errors.full_messages.each do |message| %>
           <li><%= message %></li>
           <% end %>
