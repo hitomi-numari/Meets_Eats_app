@@ -43,6 +43,11 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'launchy'
   gem 'database_cleaner'
+  gem 'capistrano', '3.6.0'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano-rbenv'
+  gem 'capistrano3-unicorn'
 end
 
 group :development do
@@ -76,3 +81,5 @@ gem 'webpacker'
 gem 'faker'
 gem 'dotenv-rails'
 gem 'fog-aws'
+gem 'unicorn'
+gem 'mini_racer', platforms: :ruby
