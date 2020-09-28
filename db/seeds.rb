@@ -128,7 +128,7 @@ end
   restaurant_url = Faker::Internet.url
   budget = Faker::Number.between(from: 0, to: 5)
   start_at = Faker::Time.forward(days: 30)
-  end_at = Faker::Time.between(from: start_at, to: start_at + 180 * 60)
+  end_at = Faker::Time.between(from: start_at + 60 * 60, to: (start_at + 60 * 60) + 180 * 60)
   check_in_time = Faker::Number.between(from: 0, to: 4)
   food_category = Faker::Number.between(from: 0, to: 4)
   user_id = Faker::Number.between(from: 1, to: 20)
@@ -170,42 +170,32 @@ Event.all.each do |event|
   )
 end
 
-3.times do |n|
-  user_id = Faker::Number.between(from: 1, to: 20)
-  ApplyForEvent.create!(
-    user_id: user_id,
-    event_id: Event.find(1).id,
-  )
-end
+user_id = Faker::Number.between(from: 1, to: 20)
+ApplyForEvent.create!(
+  user_id: user_id,
+  event_id: Event.find(1).id,
+)
 
-3.times do |n|
-  user_id = Faker::Number.between(from: 1, to: 20)
-  ApplyForEvent.create!(
-    user_id: user_id,
-    event_id: Event.find(2).id,
-  )
-end
+user_id = Faker::Number.between(from: 1, to: 5)
+ApplyForEvent.create!(
+  user_id: user_id,
+  event_id: Event.find(2).id,
+)
 
-3.times do |n|
-  user_id = Faker::Number.between(from: 1, to: 20)
-  ApplyForEvent.create!(
-    user_id: user_id,
-    event_id: Event.find(3).id,
-  )
-end
+user_id = Faker::Number.between(from: 6, to: 10)
+ApplyForEvent.create!(
+  user_id: user_id,
+  event_id: Event.find(3).id,
+)
 
-3.times do |n|
-  user_id = Faker::Number.between(from: 1, to: 20)
-  ApplyForEvent.create!(
-    user_id: user_id,
-    event_id: Event.find(4).id,
-  )
-end
+user_id = Faker::Number.between(from: 11, to: 15)
+ApplyForEvent.create!(
+  user_id: user_id,
+  event_id: Event.find(4).id,
+)
 
-3.times do |n|
-  user_id = Faker::Number.between(from: 1, to: 20)
-  ApplyForEvent.create!(
-    user_id: user_id,
-    event_id: Event.find(5).id,
-  )
-end
+user_id = Faker::Number.between(from: 16, to: 20)
+ApplyForEvent.create!(
+  user_id: user_id,
+  event_id: Event.find(5).id,
+)

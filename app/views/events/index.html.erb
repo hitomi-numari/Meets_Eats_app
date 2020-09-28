@@ -90,6 +90,7 @@
       <%= link_to '新着順', events_path(sort_created: "true"), class:"btn btn-light mr-5" %>
       <%= link_to '終了期限順', events_path(sort_expired: "true"), class:"btn btn-light mr-5" %>
     </div>
+  </div>
 
 <% @events.each do |event| %>
   <div class="list-group">
@@ -144,8 +145,8 @@
               </div>
               <!-- ここまで -->
             </div>
-          </div>
-          <div class="col-md-4 float-right">
+        </div>
+        <div class="col-md-4 float-right">
             <div class="schedule_time">
               <h3><%= simple_time_start_at(event.start_at) %>~<%= simple_time_end_at(event.end_at) %><h3>
             </div>
@@ -178,7 +179,6 @@
                 <% end %>
               <% end %>
               </ul>
-          </div>
         </div>
       </div>
     </div>
