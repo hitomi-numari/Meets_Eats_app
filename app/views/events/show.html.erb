@@ -1,5 +1,5 @@
 <div class="container">
-<h1 class="text-center">イベント詳細</h1>
+<h1 class="text-center"><%= t('views.event.show') %></h1>
 <div class="box">
 <table class="table table-borderless">
   <tr>
@@ -7,27 +7,27 @@
       <td class="first-td align-middle"><%=link_to @event.user.profile.nickname, profile_path(@event.user.profile.id) %></td>
   </tr>
   <tr>
-    <th>タイトル</th>
+    <th><%= t('views.event.title') %></th>
       <td><%= @event.title %></td>
   </tr>
   <tr>
-    <th>詳細</th>
+    <th><%= t('views.event.content') %></th>
       <td><%= @event.content %></td>
   </tr>
   <tr>
-    <th>年齢</th>
-      <td><%= @event.user.profile.calc_age %>歳</td>
+    <th><%= t('views.event.age') %></th>
+      <td><%= @event.user.profile.calc_age %><%= t('views.event.old') %></td>
   </tr>
   <tr>
-    <th>性別</th>
+    <th><%= t('views.event.gender') %></th>
       <td><%= gender_view(@event.user.profile.gender) %></td>
   </tr>
   <tr>
-    <th>料理</th>
+    <th><%= t('views.event.food_category') %></th>
       <td><%= @event.food_category %></td>
   </tr>
   <tr>
-    <th>話したいテーマ</th>
+    <th><%= t('views.genre.name') %></th>
       <td>
       <% @event.genres.each do |genre| %>
         <%= genre.name %>
@@ -35,23 +35,23 @@
       </td>
   </tr>
   <tr>
-    <th>レストランURL</th>
+    <th><%= t('views.event.restaurant_url') %></th>
       <td><%=link_to @event.restaurant_url %></td>
   </tr>
   <tr>
-    <th>予算</th>
+    <th><%= t('views.event.budget') %></th>
       <td><%= @event.budget_i18n %></td>
   </tr>
   <tr>
-    <th>エリア</th>
+    <th><%= t('views.area.name') %></th>
       <td><%= @event.area.name %></td>
   </tr>
   <tr>
-    <th>時間</th>
+    <th><%= t('views.event.time') %></th>
       <td><%= simple_time_start_at(@event.start_at) %>~<%= simple_time_end_at(@event.end_at) %></td>
   </tr>
   <tr>
-    <th>受付終了時間</th>
+    <th><%= t('views.event.check_in_time') %></th>
       <td><%= @event.check_in_time_i18n %></td>
   </tr>
 </table>
@@ -60,22 +60,22 @@
   <div class="float-right">
     <% unless @event.user_id == current_user.id %>
       <% if @apply.present? %>
-        <%= link_to 'キャンセルする', apply_for_event_path(id: @apply.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+        <%= link_to t('views.event.cancel'), apply_for_event_path(id: @apply.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
       <% else %>
       <!--チャット機能　卒業後実装予定-->
         <%= link_to 'チャットする', class: 'btn btn-secondary' %>
       <!--ここまで-->
-        <%= link_to '参加する', apply_for_events_path(event_id: @event.id), method: :post, class: 'btn btn-primary' %>
+        <%= link_to t('views.event.join'), apply_for_events_path(event_id: @event.id), method: :post, class: 'btn btn-primary' %>
       <% end %>
     <% end %>
     <% if @event.user_id == current_user.id %>
-      <%= link_to "編集", action: "edit"%> |
+      <%= link_to t('views.event.edit_button'), action: "edit"%> |
       <% if @genre.present? %>
-        <%= link_to "戻る", events_path(genre_id: @genre.id)%>
+        <%= link_to t('views.event.back'), events_path(genre_id: @genre.id)%>
       <% elsif @area.present? %>
-        <%= link_to "戻る", events_path(area_id: @area.id)%>
+        <%= link_to t('views.event.back'), events_path(area_id: @area.id)%>
       <% else %>
-        <%= link_to "戻る", events_path%>
+        <%= link_to t('views.event.back'), events_path%>
       <% end %>
     <% end %>
   </div>

@@ -12,6 +12,7 @@ ja:
       content: 詳細
       ages: 年代
       age: 年齢
+      old: 歳
       gender: 性別
       food_category: 料理ジャンル
       restaurant_url: 飲食店URL
@@ -20,15 +21,16 @@ ja:
       end_at: 終了時間
       create_at: 作成日時
       check_in_time: 受付終了時間
-      status: ステータス
-      task_lists: イベント一覧
-      new_task: イベントの新規作成
+      event_lists: イベント一覧
+      new_event: イベント新規作成
       new_task_complete: イベントの新規作成が完了しました。
-      new_button: 新規作成
+      new_button: 投稿する
       show: イベント詳細確認
       show_button: 確認
       edit: イベント編集
       edit_button: 編集
+      cancel: キャンセルする
+      join: 参加する
       edit_task_complete: イベントの更新が完了しました。
       destroy: 削除
       destroy_confirm: イベントを削除しますか？
@@ -36,8 +38,22 @@ ja:
       back: 戻る
       create_event: 登録
       not_save: このイベントを保存できませんでした
+      more_search: 詳細検索
+      title_search: タイトル検索
+      genre_search: ジャンル検索
+      from_genre: ジャンルから探す
+      from_area: エリアから探す
+      from_all: 全てのイベントから探す
+      all_events: イベント全件一覧を表示
+      choose_choice: 以下から選んでください。
       search: 検索
-      sort: 絞り込み
+      sort_created: 新着順
+      sort_expired: 終了期限順
+      required_time: 所要時間
+      time: 時間
+      apply_member: 応募者一覧
+      event_completed: さんとのイベントが成立しました！
+      rate_please: マイページのイベント履歴から食事相手を評価してください.
       login: ログインしてください
       label: ラベル
       label_lists: ラベル一覧

@@ -84,7 +84,7 @@
           <%= @area.name %>
           <%= form.hidden_field :area_id, :value => @area.id %>
         <% else %>
-          <%= form.collection_select :area_id, Area.all, :id, :name, {prompt: '選択してください'}, class:"custom-select" %>
+          <%= form.collection_select :area_id, Area.all, :id, :name, {prompt: t('views.event.choose_choice')}, class:"custom-select" %>
         <% end %>
       </div>
     </div>
@@ -130,12 +130,12 @@
       <div class="col-sm-10">
         <%= form.select :check_in_time,
                   Event.check_in_times.keys.map {|k| [I18n.t("enums.event.check_in_time.#{k}"), k]},
-                  {include_blank: "選択して下さい"},
+                  {include_blank: t('views.event.choose_choice')},
                   class:"custom-select" %>
       </div>
     </div>
     <div class="form-group　row">
-      <%= form.submit "投稿する", class:"float-right btn btn-secondary"%>
+      <%= form.submit t('views.event.new_button'), class:"float-right btn btn-secondary"%>
     </div>
   <% end %>
   </div>

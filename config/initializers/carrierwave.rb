@@ -15,10 +15,10 @@ CarrierWave.configure do |config|
   config.fog_attributes = {'Cache-Control' => 'public, max-age=86400'}
   case Rails.env
     when 'production'
-      config.fog_directory = 'meetseats-production'
-      config.asset_host = 'https://s3-ap-northeast-1.amazonaws.com/meetseats-production'
+      config.fog_directory = 'meets-production'
+      config.asset_host = 'https://s3-ap-northeast-1.amazonaws.com/meets-production'
     when 'development'
-      config.fog_directory = 'meetseats-development'
-      config.asset_host = 'https://s3-ap-northeast-1.amazonaws.com/meetseats-development'
+      config.fog_directory = 'meets-development'
+      config.asset_host = 'https://s3-ap-northeast-1.amazonaws.com/meets-development'
   end
 end

@@ -6,8 +6,8 @@
       </div>
   </div>
   <div class="complete_container col text-center d-flex flex-column">
-    <h3 class="mt-5 mb-3"><%=@apply.user.profile.nickname %>さんとイベントが成立しました！</h3>
-    <p class="mt-3 mb-3">マイページのイベント履歴から食事相手を評価してください</p>
-    <%= link_to "戻る", my_events_user_path(current_user), class:"mb-5 mt-3" %>
+    <h3 class="mt-5 mb-3"><%=@apply.user.profile.nickname %><%= t('views.event.event_completed') %></h3>
+    <p class="mt-3 mb-3"><%= t('views.event.rate_please') %></p>
+    <%= link_to t('views.event.back'), my_events_user_path(current_user), class:"mb-5 mt-3" %>
   </div>
 </div>

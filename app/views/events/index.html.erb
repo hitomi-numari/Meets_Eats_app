@@ -5,7 +5,7 @@
   <% elsif @area.present? %>
     <h1 class="text-center"><%= @area.name %></h1>
   <% else %>
-    <h1 class="text-center">イベント一覧</h1>
+    <h1 class="text-center"><%= t('views.event.event_lists') %></h1>
   <% end %>
 </div>
 <div class="container">
@@ -17,7 +17,7 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="myModalLabel">詳細検索</h5>
+            <h5 class="modal-title" id="myModalLabel"><%= t('views.event.more_search') %></h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -26,14 +26,14 @@
             <%= search_form_for @q do |f| %>
             <form>
               <div class="form-group row">
-                <%= f.label 'タイトル検索', {class:"col-sm-3 col-form-label"} %>
+                <%= f.label t('views.event.title_search'), {class:"col-sm-3 col-form-label"} %>
                 <div class="col-sm-9">
                   <%= f.search_field :title_cont, class:"form-control" %>
                 </div>
               </div>
               <% unless @genre.present? %>
               <div class="form-group row">
-                <%= f.label 'ジャンル検索', {class:"col-sm-3 col-form-label"} %>
+                <%= f.label t('views.event.genre_search'), {class:"col-sm-3 col-form-label"} %>
                 <div class="col-sm-9">
                   <% Genre.all.each do |genre| %>
                     <%= f.check_box :genres_id_eq_any, { multiple: true, checked: genre[:checked], disabled: genre[:disabled], include_hidden: false }, genre[:id]%>
@@ -43,22 +43,22 @@
               </div>
               <% end %>
               <div class="form-group row">
-                <%= f.label '料理ジャンル', {class:"col-sm-3 col-form-label"} %>
+                <%= f.label t('views.event.food_category'), {class:"col-sm-3 col-form-label"} %>
                 <div class="col-sm-9">
-                  <%= f.select :food_category_eq, [['イタリアン', 0], ['和食', 1], ['洋食', 2], ['中華', 3], ['その他', 4]], include_blank: '以下から選んでください', class:"form-control" %>
+                  <%= f.select :food_category_eq, Event.food_categories.map { |k,v| [Event.food_categories_i18n[k], v] }, include_blank: t('views.event.choose_choice'), class:"form-control" %>
                 </div>
               </div>
               <% unless @area.present? %>
               <div class="form-group row">
-                <%= f.label 'エリア', {class:"col-sm-3 col-form-label"} %>
+                <%= f.label t('views.area.name'), {class:"col-sm-3 col-form-label"} %>
                 <div class="col-sm-9">
-                  <%= f.select :area_id_eq, options_from_collection_for_select(Area.all, :id, :name), include_blank: '以下から選んでください', class:"form-control" %>
+                  <%= f.select :area_id_eq, options_from_collection_for_select(Area.all, :id, :name), include_blank: t('views.event.choose_choice'), class:"form-control" %>
                 </div>
               </div>
               <% end %>
               <div class="form-group row">
                 <div class="offset-sm-5 col-sm-5">
-                <%= f.submit "検索", class: "btn btn-primary" %>
+                <%= f.submit t('views.event.search'), class: "btn btn-primary" %>
                 </div>
               </div>
             </form>
@@ -73,22 +73,22 @@
     <div class="new_post">
         <% if @genre.present? %>
           <%= link_to new_event_path(genre_id: @genre.id), class:"new-event" do %>
-            <i class="fas fa-plus-square"></i><span>イベント作成</span>
+            <i class="fas fa-plus-square"></i><span><%= t('views.event.new_event') %></span>
           <% end %>
         <% elsif @area.present? %>
           <%= link_to new_event_path(area_id: @area.id), class:"new-event" do %>
-            <i class="fas fa-plus-square"></i><span>イベント作成</span>
+            <i class="fas fa-plus-square"></i><span><%= t('views.event.new_event') %></span>
           <% end %>
         <% else %>
           <%= link_to new_event_path, class:"new-event" do %>
-            <i class="fas fa-plus-square"></i><span>イベント作成</span>
+            <i class="fas fa-plus-square"></i><span><%= t('views.event.new_event') %></span>
           <% end %>
         <% end %>
     </div>
 
     <div class="sort my-4">
-      <%= link_to '新着順', events_path(sort_created: "true"), class:"btn btn-light mr-5" %>
-      <%= link_to '終了期限順', events_path(sort_expired: "true"), class:"btn btn-light mr-5" %>
+      <%= link_to t('views.event.sort_created'), events_path(sort_created: "true"), class:"btn btn-light mr-5" %>
+      <%= link_to t('views.event.sort_expired'), events_path(sort_expired: "true"), class:"btn btn-light mr-5" %>
     </div>
   </div>
 
@@ -100,7 +100,7 @@
           <%= image_tag(event.user.profile.icon_url, class: "d-block mx-auto" ) %>
             <div class="profile">
               <h5><%=event.user.profile.nickname %></h5>
-              <p><%=event.user.profile.calc_age %>歳</p>
+              <p><%=event.user.profile.calc_age %><%= t('views.event.old') %></p>
               <p><%=gender_view(event.user.profile.gender) %></p>
             </div>
         </div>
@@ -115,7 +115,7 @@
               </div>
               <div class="middle-contents-item content">
                 <%= truncate(event.content, length: 50) do %>
-                <p　class="float-right"><%= link_to '詳細', event_path(event.id) %></p>
+                <p　class="float-right"><%= link_to t('views.event.show'), event_path(event.id) %></p>
                 <% end %>
               </div>
               <div class="middle-contents-item restaurant_url">
@@ -124,7 +124,7 @@
                 <ul class="restaurant_info">
                   <li><%=event.area.name %></li>/
                   <li><%=event.food_category_i18n %><li>/
-                  <li>予算：<%= event.budget_i18n %></li>
+                  <li><%= t('views.event.budget') %>：<%= event.budget_i18n %></li>
                 </ul>
                 <!-- いいね機能　卒業後実装予定 -->
               <!-- <div class="middle-contents-item bottom_contents float-left"> -->
@@ -151,10 +151,10 @@
               <h3><%= simple_time_start_at(event.start_at) %>~<%= simple_time_end_at(event.end_at) %><h3>
             </div>
             <div class="required_time">
-              <p>所要時間：<%= event.required_time %>時間</p>
+              <p><%= t('views.event.required_time') %>：<%= event.required_time %><%= t('views.event.time') %></p>
             </div>
             <div class="check_in_time">
-              <p>受付終了時間：<%= event.check_in_time_i18n %></p>
+              <p><%= t('views.event.check_in_time') %>：<%= event.check_in_time_i18n %></p>
             </div>
               <ul class="link-list d-flex align-items-end">
                 <% if @genre.present? %>
