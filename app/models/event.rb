@@ -14,6 +14,8 @@ class Event < ApplicationRecord
   validates :start_at, presence: true
   validates :end_at, presence: true
   validates :check_in_time, presence: true
+  validate :end_check
+
   enum budget: {
     till_1000: 0,
     till_2000: 1,
@@ -44,16 +46,17 @@ class Event < ApplicationRecord
     done: 1
   }
 
+  def end_check
+    errors.add(:end_at, "開始時間より1時間以上後の設定にしてください。") unless
+    self.end_at >= self.start_at + 60 * 60
+  end
+
   def required_time
     if end_at.strftime("%H:%M") < start_at.strftime("%H:%M")
       required_time = ((end_at.strftime("%H:%M").to_i + 24) - start_at.strftime("%H:%M").to_i)
     else
       required_time = (end_at.strftime("%H:%M").to_i - start_at.strftime("%H:%M").to_i)
     end
-  end
-
-  def datetime_not_before_start_at
-    errors.add(:end_at, "は開始時間以降のものを選択してください") if end_at.nil? || end_at < start_at
   end
 
   def short_description

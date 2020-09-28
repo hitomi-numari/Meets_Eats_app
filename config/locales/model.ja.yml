@@ -18,6 +18,8 @@ ja:
         content: "詳細"
         budget: "予算"
         restaurant_url: "飲食店URL"
+        start_at: "開始時間:"
+        end_at: "終了時間:"
         check_in_time: "受付終了時間"
         area: "場所"
         created_at: "作成日時"

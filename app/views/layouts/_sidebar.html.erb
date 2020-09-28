@@ -48,9 +48,6 @@
           </div>
           <div class= "col-md-9 float-right">
             <div class = "middle_contents">
-              <% flash.each do |key, value| %>
-                <div class="alert <%= bootstrap_class_for(key) %> mb-0" ><%= value %></div>
-              <% end %>
               <%= yield %>
             </div>
             </div>
