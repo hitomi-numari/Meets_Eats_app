@@ -81,7 +81,7 @@ gem 'webpacker', '~> 5.x'
 gem 'faker'
 gem 'dotenv-rails'
 gem 'fog-aws'
-gem 'unicorn'
+gem 'unicorn', '5.7.0'
 gem 'mini_racer', platforms: :ruby
 gem 'ed25519'
 gem 'bcrypt_pbkdf'
