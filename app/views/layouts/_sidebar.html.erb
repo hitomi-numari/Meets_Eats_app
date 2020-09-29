@@ -14,17 +14,17 @@
         </h1>
         <ul class="float-right">
         <% unless user_signed_in? %>
-          <li><%= link_to 'ログイン', new_user_session_path %></li>
-          <li><%= link_to 'サインアップ', new_user_registration_path %></li>
+          <li><%= link_to t('views.application.login_link'), new_user_session_path %></li>
+          <li><%= link_to t('views.user.sign_up'), new_user_registration_path %></li>
         <% else %>
           <% if current_user.profile.nil? %>
-            <li><p>こんにちは、ゲストさん<p></li>
+            <li><p><%= t('views.application.hello_guest') %><p></li>
           <% else %>
-            <li><p>こんにちは、<%= current_user.profile.nickname %>さん</p></li>
-            <li><%= link_to 'イベントを探す', search_top_events_path %></li>
-            <li><%= link_to "マイページ", my_events_user_path(current_user.id) %></li>
+            <li><p><%= t('views.application.hello') %><%= current_user.profile.nickname %>さん</p></li>
+            <li><%= link_to t('views.application.search_event'), search_top_events_path %></li>
+            <li><%= link_to t('views.user.mypage'), my_events_user_path(current_user.id) %></li>
           <% end %>
-          <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+          <li><%= link_to t('views.application.logout_link'), destroy_user_session_path, method: :delete %></li>
         <% end %>
         </ul>
       </nav>
@@ -34,15 +34,15 @@
         <div class= "row">
           <div class= "col-md-12">
             <div class= "col-md-3 float-left">
-            <h2>マイページ</h2>
+            <h2><%= t('views.user.mypage') %></h2>
               <div class = "my_menu_buttons">
               <div class= "menu box">
-                <p>Menu</p>
-                  <p><%= link_to 'マイトップページ', my_events_user_path(current_user.id) %></p>
-                  <p><%= link_to 'プロフィール詳細', profile_path(current_user.profile.id) %></p>
-                  <p><%= link_to 'イベント履歴', event_history_user_path(current_user.id) %></p>
-                  <p><%= link_to 'イベント参加履歴' %></p>
-                  <p><%= link_to 'お気に入り' %></p>
+                <p><%= t('views.user.MENU') %></p>
+                  <p><%= link_to t('views.user.mypage_top'), my_events_user_path(current_user.id) %></p>
+                  <p><%= link_to t('views.user.user_details'), profile_path(current_user.profile.id) %></p>
+                  <p><%= link_to t('views.user.event_history'), event_history_user_path(current_user.id) %></p>
+                  <p><%= link_to t('views.user.joind_event_history') %></p>
+                  <p><%= link_to t('views.user.history') %></p>
               </div>
             </div>
           </div>
@@ -58,10 +58,10 @@
       <p class="footer-title">MeetsEats</p>
         <nav>
           <ul class="footer-list">
-            <li><a href="#">サイトマップ</a></li>
-            <li><a href="#">プライバシーポリシー</a></li>
-            <li><a href="#">サイト利用規約</a></li>
-            <li><a href="#">お問い合わせ</a></li>
+            <li><%= link_to t('views.application.site_map') %></li>
+            <li><%= link_to t('views.application.privacy_policy') %></li>
+            <li><%= link_to t('views.application.rule') %></li>
+            <li><%= link_to t('views.application.contact') %></li>
           </ul>
         </nav>
       <p class="footer-title">Copyright ©︎MeetsEats, Inc.<p/>

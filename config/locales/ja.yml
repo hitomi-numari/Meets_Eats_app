@@ -7,6 +7,17 @@ ja:
       previous: "&lsaquo; 前"
       next: "次 &rsaquo;"
       truncate: "..."
+    application:
+      login_link: ログイン
+      hello_guest: こんにちは、ゲストさん
+      hello: こんにちは、
+      search_event: イベントを探す
+      mypage_link: マイページ
+      logout_link: ログアウト
+      site_map: サイトマップ
+      privacy_policy: プライバシーポリシー
+      rule: サイト利用規約
+      contact: お問い合わせ
     event:
       title: タイトル
       content: 詳細
@@ -58,6 +69,18 @@ ja:
       label: ラベル
       label_lists: ラベル一覧
     user:
+      menu: MENU
+      mypage_top: マイページトップ
+      event_history: イベント履歴
+      user_details: プロフィール詳細
+      joind_event_history: イベント参加履歴
+      likes: お気に入り
+      rated: 評価済み
+      unrated: 評価待ち
+      rating: 評価する
+      pending_event: 募集中のイベント
+      expired: 締め切りが過ぎています！
+      re_new_event: イベントを削除して再投稿してください。
       mypage: マイページ
       page: のページ
       sign_up: ユーザー登録
