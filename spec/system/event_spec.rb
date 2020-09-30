@@ -25,18 +25,17 @@ RSpec.describe 'イベント機能', type: :system do
     create(:genre_tag2, event: @event02, genre: @genre02)
     create(:genre_tag3, event: @event03, genre: @genre03)
     sign_in @user01
-
   end
 
   describe 'イベント一覧画面' do
-    context 'カテゴリー別に一覧画面を選択する場合'
+    context 'カテゴリー別に一覧画面を選択する場合' do
       it 'カテゴリーが表示される' do
         visit search_top_events_path
         expect(page).to have_content 'ジャンルから探す'
         expect(page).to have_content 'エリアから探す'
         expect(page).to have_content '全てのイベントから探す'
       end
-
+    end
     context 'イベントを作成した場合' do
       it '作成済みのイベントが表示される' do
         visit events_path
@@ -99,7 +98,7 @@ RSpec.describe 'イベント機能', type: :system do
         fill_in 'event_title', with: 'Aの会'
         fill_in 'event_content', with: '渋谷でパスタを食べながら恋話をしたい'
         find('label', text: '恋愛', match: :first).click
-        choose 'event_food_category_イタリアン'
+        find('label[for=event_food_category_イタリアン]').click
         fill_in "event_restaurant_url", with: "https://tabelog.com/tokyo/A1303/A130301/13010743/"
         select "¥1,000~¥1,999", from: 'event_budget'
         select "渋谷", from: 'event[area_id]', match: :first
@@ -121,7 +120,7 @@ RSpec.describe 'イベント機能', type: :system do
         expect(page).to have_content 'Aの会'
         expect(page).to have_content '渋谷でパスタを食べながら恋話をしたい'
         expect(page).to have_content "恋愛"
-        expect(page).to have_content "その他"
+        expect(page).to have_content 'イタリアン'
         expect(page).to have_content "https://tabelog.com/tokyo/A1303/A130301/13010743/"
         expect(page).to have_content "渋谷"
         expect(page).to have_content "¥1,000~¥1,999"

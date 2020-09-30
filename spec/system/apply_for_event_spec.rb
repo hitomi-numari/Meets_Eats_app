@@ -88,23 +88,23 @@ RSpec.describe 'マッチング機能', type: :system do
      end
 
      context 'イベント主催者がこの人と行くボタンを押した場合' do
-       it '応募者一覧が表示される' do
+       it 'イベント成立のお知らせが表示される' do
          sign_in @user01
          visit apply_members_event_path(@event01.id)
          click_on 'この人と行く'
-         expect(page).to have_content '静香さんとイベントが成立しました'
+         expect(page).to have_content '静香さんとのイベントが成立しました！'
        end
      end
 
      context 'イベントが成立して戻るボタンを押した場合' do
        it '募集中イベントからイベントが消える' do
-         sign_in @user01
-         visit apply_members_event_path(@event01.id)
+         sign_in @user02
+         visit apply_members_event_path(@event02.id)
          click_on 'この人と行く'
-         expect(page).to have_content '静香さんとイベントが成立しました'
+         expect(page).to have_content 'スネ夫さんとのイベントが成立しました！'
          click_on '戻る'
-         expect(page).not_to have_content '渋谷でパスタを食べながら恋話をしたい'
-         expect(current_path).to eq my_events_user_path(@user01.id)
+         expect(page).not_to have_content '浅草で天ぷらを食べながら旦那の愚痴をしたい'
+         expect(current_path).to eq my_events_user_path(@user02.id)
        end
      end
 

@@ -20,5 +20,15 @@ CarrierWave.configure do |config|
     when 'development'
       config.fog_directory = 'meets-development'
       config.asset_host = 'https://s3-ap-northeast-1.amazonaws.com/meets-development'
+    when 'test'
+      config.fog_directory = 'meets-test'
+      config.asset_host = 'https://s3-ap-northeast-1.amazonaws.com/meets-test'
   end
 end
+
+if Rails.env.test?
+    CarrierWave.configure do |config|
+     config.storage = :file
+     config.enable_processing = false
+    end
+end 
