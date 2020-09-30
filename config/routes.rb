@@ -21,7 +21,5 @@ Rails.application.routes.draw do
   resources :apply_for_events, only: [:create, :destroy, :apply_members, :complete] do
     patch :toggle_status
   end
-  if Rails.env.development?
-    mount LetterOpenerWeb::Engine, at: "/letter_opener"
-  end
+  mount LetterOpenerWeb::Engine, at: "/letter_opener"
 end
