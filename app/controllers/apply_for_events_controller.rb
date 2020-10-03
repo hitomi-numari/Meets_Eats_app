@@ -18,7 +18,7 @@ class ApplyForEventsController < ApplicationController
     @event_status.save
     @matching_info = apply
     MatchingMailer.matching_mail(@matching_info).deliver
-    @unmatching_info = ApplyForEvent.where.not(id: apply.id)
+    @unmatching_info = apply.event.apply_for_events.where.not(id: apply.id)
     @unmatching_info.each do |unmatching_info|
       UnmatchingMailer.unmatching_mail(unmatching_info).deliver
     end

@@ -170,32 +170,72 @@ Event.all.each do |event|
   )
 end
 
-user_id = Faker::Number.between(from: 1, to: 20)
-ApplyForEvent.create!(
-  user_id: user_id,
-  event_id: Event.find(1).id,
-)
 
-user_id = Faker::Number.between(from: 1, to: 5)
-ApplyForEvent.create!(
-  user_id: user_id,
-  event_id: Event.find(2).id,
-)
 
-user_id = Faker::Number.between(from: 6, to: 10)
-ApplyForEvent.create!(
-  user_id: user_id,
-  event_id: Event.find(3).id,
-)
+event_users = User.all.select { |user| user.events.exists? }
 
-user_id = Faker::Number.between(from: 11, to: 15)
-ApplyForEvent.create!(
-  user_id: user_id,
-  event_id: Event.find(4).id,
-)
+event_users[0].events.each do |event|
+  user_id = rand(1..20)
+  if user_id == event_users[0].id
+    next
+  end
+  ApplyForEvent.create!(
+    user_id: user_id,
+    event_id: event.id
+  )
+end
 
-user_id = Faker::Number.between(from: 16, to: 20)
-ApplyForEvent.create!(
-  user_id: user_id,
-  event_id: Event.find(5).id,
-)
+event_users[1].events.each do |event|
+  user_id = rand(1..20)
+  if user_id == event_users[1].id
+    next
+  end
+  ApplyForEvent.create!(
+    user_id: user_id,
+    event_id: event.id
+  )
+end
+
+event_users[2].events.each do |event|
+  user_id = rand(1..20)
+  if user_id == event_users[2].id
+    next
+  end
+  ApplyForEvent.create!(
+    user_id: user_id,
+    event_id: event.id
+  )
+end
+
+event_users[3].events.each do |event|
+  user_id = rand(1..20)
+  if user_id == event_users[3].id
+    next
+  end
+  ApplyForEvent.create!(
+    user_id: user_id,
+    event_id: event.id
+  )
+end
+
+event_users[4].events.each do |event|
+  user_id = rand(1..20)
+  if user_id == event_users[4].id
+    next
+  end
+  ApplyForEvent.create!(
+    user_id: user_id,
+    event_id: event.id
+  )
+end
+
+event_users[5].events.each do |event|
+  user_id = rand(1..20)
+  if user_id == event_users[5].id
+    next
+  end
+  ApplyForEvent.create!(
+    user_id: user_id,
+    event_id: event.id
+  )
+end

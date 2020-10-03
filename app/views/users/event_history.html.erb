@@ -12,10 +12,14 @@
         <div class="middle-contents-item title">
           <h5><%=event.title %></h5>
         </div>
+        <div class="link-list d-flex align-items-end">
+          <li><%= link_to edit_event_path(event.id), method: :get do %></li>
+              <i class="fa fa-edit"></i>
+          <% end %>
       </div>
       <div class="col-md-4 float-right">
         <div class="schedule_time">
-          <p><%= simple_time_start_at(event.start_at) %>~<%= simple_time_end_at(event.end_at) %><p>
+          <h5><%= simple_time_start_at(event.start_at) %>~<%= simple_time_end_at(event.end_at) %><h5>
         </div>
         <div class="applies-lists text-center">
           <% if user_signed_in? %>
