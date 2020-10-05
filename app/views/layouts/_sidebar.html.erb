@@ -30,10 +30,10 @@
       </nav>
     </header>
 
-      <div class= "container">
-        <div class= "row">
-          <div class= "col-md-12">
-            <div class= "col-md-3 float-left">
+    <div class= "row">
+      <div class= "col-md-12">
+        <div class= "col-md-3 float-left">
+          <div class= "container">
             <h2><%= t('views.user.mypage') %></h2>
               <div class = "my_menu_buttons">
               <div class= "menu box">
@@ -47,10 +47,12 @@
               </div>
             </div>
           </div>
+        </div>
           <div class= "col-md-9 float-right">
             <div class = "middle_contents">
+              <div class="container">
               <%= yield %>
-            </div>
+              </div>
             </div>
           </div>
         </div>

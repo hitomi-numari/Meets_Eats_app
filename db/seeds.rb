@@ -95,7 +95,7 @@ Genre.create!(
   name:'その他'
 )
 
-20.times do |n|
+100.times do |n|
   email = Faker::Internet.email
   password = "password"
   User.create!(email: email,
@@ -122,7 +122,7 @@ User.all.each do |user|
   )
 end
 
-20.times do |n|
+50.times do |n|
   title = Faker::Food.dish
   content = Faker::Restaurant.description
   restaurant_url = Faker::Internet.url
@@ -131,7 +131,7 @@ end
   end_at = Faker::Time.between(from: start_at + 60 * 60, to: (start_at + 60 * 60) + 180 * 60)
   check_in_time = Faker::Number.between(from: 0, to: 4)
   food_category = Faker::Number.between(from: 0, to: 4)
-  user_id = Faker::Number.between(from: 1, to: 20)
+  user_id = Faker::Number.between(from: 1, to: 100)
   area_id = Faker::Number.between(from: 1, to: 23)
 
   if check_in_time == 0
@@ -170,72 +170,76 @@ Event.all.each do |event|
   )
 end
 
+event_users = User.all.select { |u| u.events.exists? }
 
-
-event_users = User.all.select { |user| user.events.exists? }
-
-event_users[0].events.each do |event|
-  user_id = rand(1..20)
-  if user_id == event_users[0].id
-    next
-  end
-  ApplyForEvent.create!(
-    user_id: user_id,
-    event_id: event.id
-  )
+except_users0 = User.all.reject { |u| u.id == event_users[0].id }
+except_users0.each.first(10).each do |i|
+  user_id = except_users0.sample.id
+  except_users0.pluck(:id).reject! { |u| u == user_id }
+    event_users[0].events.each do |event|
+    ApplyForEvent.create!(
+      user_id: user_id,
+      event_id: event.id
+    )
+    end
 end
 
-event_users[1].events.each do |event|
-  user_id = rand(1..20)
-  if user_id == event_users[1].id
-    next
-  end
-  ApplyForEvent.create!(
-    user_id: user_id,
-    event_id: event.id
-  )
-end
-
-event_users[2].events.each do |event|
-  user_id = rand(1..20)
-  if user_id == event_users[2].id
-    next
-  end
-  ApplyForEvent.create!(
-    user_id: user_id,
-    event_id: event.id
-  )
-end
-
-event_users[3].events.each do |event|
-  user_id = rand(1..20)
-  if user_id == event_users[3].id
-    next
-  end
-  ApplyForEvent.create!(
-    user_id: user_id,
-    event_id: event.id
-  )
-end
-
-event_users[4].events.each do |event|
-  user_id = rand(1..20)
-  if user_id == event_users[4].id
-    next
-  end
-  ApplyForEvent.create!(
-    user_id: user_id,
-    event_id: event.id
-  )
-end
-
-event_users[5].events.each do |event|
-  user_id = rand(1..20)
-  if user_id == event_users[5].id
-    next
-  end
-  ApplyForEvent.create!(
-    user_id: user_id,
-    event_id: event.id
-  )
-end
+# except_users1 = User.all.reject { |u| u.id == event_users[1].id }
+# except_users1.each.first(10).each do |i|
+#   user_id = except_users1.sample.id
+#   except_users1.pluck(:id).reject! { |u| u == user_id }
+#     event_users[1].events.each do |event|
+#     ApplyForEvent.create!(
+#       user_id: user_id,
+#       event_id: event.id
+#     )
+#     end
+# end
+#
+# except_users2 = User.all.reject { |u| u.id == event_users[2].id }
+# except_users2.each.first(10).each do |i|
+#   user_id = except_users2.sample.id
+#   except_users2.pluck(:id).reject! { |u| u == user_id }
+#     event_users[2].events.each do |event|
+#     ApplyForEvent.create!(
+#       user_id: user_id,
+#       event_id: event.id
+#     )
+#     end
+# end
+#
+# except_users3 = User.all.reject { |u| u.id == event_users[3].id }
+# except_users3.each.first(10).each do |i|
+#   user_id = except_users3.sample.id
+#   except_users3.pluck(:id).reject! { |u| u == user_id }
+#     event_users[3].events.each do |event|
+#     ApplyForEvent.create!(
+#       user_id: user_id,
+#       event_id: event.id
+#     )
+#     end
+# end
+#
+# except_users4 = User.all.reject { |u| u.id == event_users[4].id }
+# except_users4.each.first(10).each do |i|
+#   user_id = except_users4.sample.id
+#   except_users4.pluck(:id).reject! { |u| u == user_id }
+#     event_users[4].events.each do |event|
+#     ApplyForEvent.create!(
+#       user_id: user_id,
+#       event_id: event.id
+#     )
+#     end
+# end
+#
+# except_users5 = User.all.reject { |u| u.id == event_users[5].id }
+# except_users5.each.first(10).each do |i|
+#   user_id = except_users5.sample.id
+#   except_users5.pluck(:id).reject! { |u| u == user_id }
+#     event_users[5].events.each do |event|
+#     ApplyForEvent.create!(
+#       user_id: user_id,
+#       event_id: event.id
+#     )
+#     end
+# end

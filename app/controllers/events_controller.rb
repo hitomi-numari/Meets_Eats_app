@@ -67,6 +67,7 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     @event.user_id = current_user.id
     @event.expired_time = @event.calc_expired_time(@event.check_in_time, @event.start_at)
+    @event.save
     if params[:back]
       render :new
     else
@@ -81,6 +82,7 @@ class EventsController < ApplicationController
   def update
     if @event.update(event_params)
       @event.expired_time = @event.calc_expired_time(@event.check_in_time, @event.start_at)
+      @event.save
       redirect_to events_path
     else
       render :edit

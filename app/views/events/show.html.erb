@@ -58,7 +58,7 @@
 
 <div class="show-button">
   <div class="float-right">
-    <% unless @event.user_id == current_user.id %>
+    <% if @event.user_id != current_user.id %>
       <% if @apply.present? %>
         <%= link_to t('views.event.cancel'), apply_for_event_path(id: @apply.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
       <% else %>
@@ -67,8 +67,10 @@
       <!--ここまで-->
         <%= link_to t('views.event.join'), apply_for_events_path(event_id: @event.id), method: :post, class: 'btn btn-primary' %>
       <% end %>
-    <% end %>
-    <% if @event.user_id == current_user.id %>
+    <% elsif @event.event_status == "done" %>
+      <strong><h3>評価待ち</h3></strong>
+      <%= link_to t('views.event.back'), event_history_user_path(@event.user.id)%>
+    <% else %>
       <%= link_to t('views.event.edit_button'), action: "edit"%> |
       <% if @genre.present? %>
         <%= link_to t('views.event.back'), events_path(genre_id: @genre.id)%>
