@@ -173,73 +173,73 @@ end
 event_users = User.all.select { |u| u.events.exists? }
 
 except_users0 = User.all.reject { |u| u.id == event_users[0].id }
-except_users0.each.first(10).each do |i|
-  user_id = except_users0.sample.id
-  except_users0.pluck(:id).reject! { |u| u == user_id }
-    event_users[0].events.each do |event|
+10.times do |i|
+  event_users[0].events.each do |event|
+    user_id = except_users0.sample.id
+    except_users0.pluck(:id).reject! { |u| u == user_id }
     ApplyForEvent.create!(
       user_id: user_id,
       event_id: event.id
     )
-    end
+  end
 end
 
-# except_users1 = User.all.reject { |u| u.id == event_users[1].id }
-# except_users1.each.first(10).each do |i|
-#   user_id = except_users1.sample.id
-#   except_users1.pluck(:id).reject! { |u| u == user_id }
-#     event_users[1].events.each do |event|
-#     ApplyForEvent.create!(
-#       user_id: user_id,
-#       event_id: event.id
-#     )
-#     end
-# end
-#
-# except_users2 = User.all.reject { |u| u.id == event_users[2].id }
-# except_users2.each.first(10).each do |i|
-#   user_id = except_users2.sample.id
-#   except_users2.pluck(:id).reject! { |u| u == user_id }
-#     event_users[2].events.each do |event|
-#     ApplyForEvent.create!(
-#       user_id: user_id,
-#       event_id: event.id
-#     )
-#     end
-# end
-#
-# except_users3 = User.all.reject { |u| u.id == event_users[3].id }
-# except_users3.each.first(10).each do |i|
-#   user_id = except_users3.sample.id
-#   except_users3.pluck(:id).reject! { |u| u == user_id }
-#     event_users[3].events.each do |event|
-#     ApplyForEvent.create!(
-#       user_id: user_id,
-#       event_id: event.id
-#     )
-#     end
-# end
-#
-# except_users4 = User.all.reject { |u| u.id == event_users[4].id }
-# except_users4.each.first(10).each do |i|
-#   user_id = except_users4.sample.id
-#   except_users4.pluck(:id).reject! { |u| u == user_id }
-#     event_users[4].events.each do |event|
-#     ApplyForEvent.create!(
-#       user_id: user_id,
-#       event_id: event.id
-#     )
-#     end
-# end
-#
-# except_users5 = User.all.reject { |u| u.id == event_users[5].id }
-# except_users5.each.first(10).each do |i|
-#   user_id = except_users5.sample.id
-#   except_users5.pluck(:id).reject! { |u| u == user_id }
-#     event_users[5].events.each do |event|
-#     ApplyForEvent.create!(
-#       user_id: user_id,
-#       event_id: event.id
-#     )
-#     end
-# end
+except_users1 = User.all.reject { |u| u.id == event_users[1].id }
+10.times do |i|
+  event_users[1].events.each do |event|
+    user_id = except_users1.sample.id
+    except_users1.pluck(:id).reject! { |u| u == user_id }
+    ApplyForEvent.create!(
+      user_id: user_id,
+      event_id: event.id
+    )
+  end
+end
+
+except_users2 = User.all.reject { |u| u.id == event_users[2].id }
+10.times do |i|
+  event_users[2].events.each do |event|
+    user_id = except_users2.sample.id
+    except_users2.pluck(:id).reject! { |u| u == user_id }
+    ApplyForEvent.create!(
+      user_id: user_id,
+      event_id: event.id
+    )
+  end
+end
+
+except_users3 = User.all.reject { |u| u.id == event_users[3].id }
+10.times do |i|
+  event_users[3].events.each do |event|
+    user_id = except_users3.sample.id
+    except_users3.pluck(:id).reject! { |u| u == user_id }
+    ApplyForEvent.create!(
+      user_id: user_id,
+      event_id: event.id
+    )
+  end
+end
+
+except_users4 = User.all.reject { |u| u.id == event_users[4].id }
+10.times do |i|
+  event_users[4].events.each do |event|
+    user_id = except_users4.sample.id
+    except_users4.pluck(:id).reject! { |u| u == user_id }
+    ApplyForEvent.create!(
+      user_id: user_id,
+      event_id: event.id
+    )
+  end
+end
+
+except_users5 = User.all.reject { |u| u.id == event_users[5].id }
+10.times do |i|
+  event_users[5].events.each do |event|
+    user_id = except_users5.sample.id
+    except_users5.pluck(:id).reject! { |u| u == user_id }
+    ApplyForEvent.create!(
+      user_id: user_id,
+      event_id: event.id
+    )
+  end
+end

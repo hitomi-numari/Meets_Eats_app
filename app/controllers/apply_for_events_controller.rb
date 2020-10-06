@@ -1,5 +1,6 @@
 class ApplyForEventsController < ApplicationController
   before_action :prohibit_selected, only:[:toggle_status]
+  before_action :prohibit_organizer, only:[:create]
 
   def create
     apply = current_user.apply_for_events.create(event_id: params[:event_id])
@@ -30,7 +31,15 @@ class ApplyForEventsController < ApplicationController
   def prohibit_selected
     apply = ApplyForEvent.find(params[:apply_for_event_id])
     if apply.status == 'selected'
-      redirect_to my_events_user_path(current_user.id)
+      redirect_to my_event_user_path(current_user.id)
+    end
+  end
+
+  def prohibit_organizer
+    event = Event.find(params[:event_id])
+    if current_user.id == event.user.id
+      flash[:danger] = "このイベントには参加できません"
+      redirect_back fallback_location: event.id
     end
   end
 end

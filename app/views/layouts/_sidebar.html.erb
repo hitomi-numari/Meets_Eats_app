@@ -22,7 +22,8 @@
           <% else %>
             <li><p><%= t('views.application.hello') %><%= current_user.profile.nickname %>さん</p></li>
             <li><%= link_to t('views.application.search_event'), search_top_events_path %></li>
-            <li><%= link_to t('views.user.mypage'), my_events_user_path(current_user.id) %></li>
+            <li><%= link_to t('views.application.register_event'), new_event_path %></li>
+            <li><%= link_to t('views.user.mypage'), my_event_user_path(current_user.id) %></li>
           <% end %>
           <li><%= link_to t('views.application.logout_link'), destroy_user_session_path, method: :delete %></li>
         <% end %>
@@ -38,19 +39,19 @@
               <div class = "my_menu_buttons">
               <div class= "menu box">
                 <p><%= t('views.user.MENU') %></p>
-                  <p><%= link_to t('views.user.mypage_top'), my_events_user_path(current_user.id) %></p>
+                  <p><%= link_to t('views.user.mypage_top'), my_event_user_path(current_user.id) %></p>
                   <p><%= link_to t('views.user.user_details'), profile_path(current_user.profile.id) %></p>
                   <p><%= link_to t('views.user.event_history'), event_history_user_path(current_user.id) %></p>
+                  <p><%= link_to t('views.user.joind_event_history'), joined_event_history_user_path(current_user.id) %></p>
                   <!--おいおい--!>
-                  <!-- <p><%#= link_to t('views.user.joind_event_history') %></p> -->
                   <!-- <p><%#= link_to t('views.user.history') %></p> -->
               </div>
             </div>
           </div>
         </div>
           <div class= "col-md-9 float-right">
-            <div class = "middle_contents">
-              <div class="container">
+            <div class="container">
+              <div class = "middle_contents">
               <%= yield %>
               </div>
             </div>

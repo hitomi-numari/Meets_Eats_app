@@ -16,21 +16,22 @@
         </h1>
         <ul class="float-right">
         <% unless user_signed_in? %>
-          <li><%= link_to 'ログイン', new_user_session_path %></li>
-          <li><%= link_to 'サインアップ', new_user_registration_path %></li>
+          <li><%= link_to t('views.application.login_link'), new_user_session_path %></li>
+          <li><%= link_to t('views.user.sign_up'), new_user_registration_path %></li>
         <% else %>
           <% if current_user.profile.nil? %>
-            <li><p>こんにちは、ゲストさん<p></li>
+            <li><p><%= t('views.application.hello_guest') %><p></li>
           <% else %>
-            <li><p>こんにちは、<%= current_user.profile.nickname %>さん</p></li>
-            <li><%= link_to 'イベントを探す', search_top_events_path %></li>
-            <li><%= link_to "マイページ", my_events_user_path(current_user.id) %></li>
+            <li><p><%= t('views.application.hello') %><%= current_user.profile.nickname %>さん</p></li>
+            <li><%= link_to t('views.application.search_event'), search_top_events_path %></li>
+            <li><%= link_to t('views.application.register_event'), new_event_path %></li>
+            <li><%= link_to t('views.user.mypage'), my_event_user_path(current_user.id) %></li>
           <% end %>
-          <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+          <li><%= link_to t('views.application.logout_link'), destroy_user_session_path, method: :delete %></li>
         <% end %>
         </ul>
-        </nav>
-      </header>
+      </nav>
+    </header>
     <div class="main">
       <% flash.each do |key, value| %>
         <div class="alert <%= bootstrap_class_for(key) %> mb-0 "><%= value %></div>

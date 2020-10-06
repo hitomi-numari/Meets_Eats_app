@@ -1,8 +1,7 @@
 class ApplyForEvent < ApplicationRecord
   belongs_to :user
   belongs_to :event
-  validates :event_id, uniqueness: { scope: :user_id }
-  accepts_nested_attributes_for :event, allow_destroy: true
+  validates_uniqueness_of :event_id, :scope => :user_id
   enum status:{ unselected:0, selected:1}
 
   def toggle_status!(status)

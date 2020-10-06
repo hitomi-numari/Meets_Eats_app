@@ -1,5 +1,5 @@
 <div class="container">
-<h2>イベント履歴</h2>
+<h2>イベント参加履歴</h2>
 <%= link_to "評価待ち" %>
 <%= link_to "評価済み" %>
 <% @events.each do |event| %>
@@ -26,9 +26,9 @@
         <div class="applies-lists text-center">
           <% if user_signed_in? %>
             <% if event.event_status == "done" %>
-              <%= link_to "評価待ち", event_path(event.id), class:"btn btn-secondary" %>
-            <% else %>
               <%= link_to "評価してください", event_path(event.id), class:"btn btn-secondary" %>
+            <% else %>
+              <h4><strong>申請中</strong></h4>
             <% end %>
           <% end %>
         </div>
