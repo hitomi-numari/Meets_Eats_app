@@ -2,6 +2,9 @@
 <h2>イベント履歴</h2>
 <%= link_to "評価待ち" %>
 <%= link_to "評価済み" %>
+<% unless @events.exists? %>
+  <p>成立したイベントはありません</p>
+<% end %>
 <% @events.each do |event| %>
 <div class="wanted-group row">
   <div class="col-md-12 wanted-group-item">
