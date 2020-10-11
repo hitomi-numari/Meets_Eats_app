@@ -19,6 +19,8 @@ console.log('Hello World from Webpacker')
 
 import Rails from '@rails/ujs';
 Rails.start();
+import Turbolinks from 'turbolinks'
+Turbolinks.start()
 
 import "bootstrap"
 import '@fortawesome/fontawesome-free/js/all'
