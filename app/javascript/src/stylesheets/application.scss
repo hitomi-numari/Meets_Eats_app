@@ -316,10 +316,15 @@ ul {
   margin-bottom: 50px;
 }
 
+.outline {
+  height: 100px;
+}
+
 .row {
    margin-top: 30px;
    margin-bottom: 30px;
 }
+
 .profile_figure {
   width:150px;
   }
@@ -335,7 +340,31 @@ ul {
   margin-bottom: 30px;
 }
 
-.message-header {
+.row-eq-height {
+  height: 800px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.wrap {
+  min-height: 100vh ;
+  padding-bottom: 120px;
+  position: relative;
+}
+
+.message-contents {
+  height: 600px;
+  overflow: scroll;
+  padding: 50px 50px 10px 50px;
+}
+
+.message-footer {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+.message-person {
   color: white;
   background-color: #555555;
 }
@@ -384,12 +413,21 @@ ul {
   float: left;
 }
 /* 右からの吹き出しテキスト */
-.kaiwa-row {
+.kaiwa-row-left {
   display: flex;
   justify-content: flex-end;
 }
 
+.kaiwa-row-right {
+  display: flex;
+  justify-content: flex-start;
+}
+
 .read:first-child {
+  font-size: 10px;
+}
+
+.time:last-child {
   font-size: 10px;
 }
 
@@ -448,12 +486,6 @@ p.kaiwa-text:last-child {
   clear: both;
   content: "";
   display: block;
-}
-
-.background {
-  min-height: 100vh;
-  margin: 50px;
-  position: relative;/*←相対位置*/
 }
 
 .message_time {

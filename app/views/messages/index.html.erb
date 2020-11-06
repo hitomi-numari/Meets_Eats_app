@@ -1,57 +1,72 @@
 <% if @over_ten %>
   <%= link_to '以前のメッセージ', '?m=all' %>
 <% end %>
-<div class="box container">
-  <h3 class="message-header py-3 text-center">
-    <% if current_user.id == @room.sender.id %>
-      <%= @room.recipient.profile.nickname %>
-    <% else %>
-      <%= @room.sender.profile.nickname %>
-    <% end %>
-  </h3>
-
-<div class="background">
-  <% @messages.each do |message| %>
-    <% if message.content.present? %>
-      <% unless current_user.id == message.user.id %>
-      <div class="kaiwa">
-        <figure class="kaiwa-img-left">
-          <%= image_tag message.user.profile.icon_url %>
-        <figcaption class="kaiwa-img-description"><%= message.user.profile.nickname %></figcaption>
-        </figure>
-        <div class="kaiwa-text-right">
-          <p class="kaiwa-text"><%= message.content %></p>
-        </div>
-      </div>
+<div class="box container" id="container">
+  <div class="wrap">
+    <div class="message-header">
+      <h3 class="message-person py-3 text-center">
+      <% if current_user.id == @room.sender.id %>
+        <%= @room.recipient.profile.nickname %>
       <% else %>
-      <div class="kaiwa"">
-        <figure class="kaiwa-img-right">
-          <%= image_tag message.user.profile.icon_url %>
-        <figcaption class="kaiwa-img-description"><%= message.user.profile.nickname %></figcaption>
-        </figure>
-        <ul class="kaiwa-row">
-          <li class="read"><%= message.read ? '既読' : '未読' %><br><%= message.message_time %></li>
-          <li class="read kaiwa-text-left">
-            <p class="kaiwa-text"><%= message.content %></p>
-          </li>
-        </ul>
+        <%= @room.sender.profile.nickname %>
+      <% end %>
+      </h3>
+      <div class="message-contents" id="message-contents">
+        <% @messages.each do |message| %>
+          <% if message.content.present? %>
+            <% unless current_user.id == message.user.id %>
+            <div class="kaiwa">
+              <figure class="kaiwa-img-left">
+                <%= image_tag message.user.profile.icon_url %>
+              <figcaption class="kaiwa-img-description"><%= message.user.profile.nickname %></figcaption>
+              </figure>
+              <ul class="kaiwa-row-right">
+                <li class="time kaiwa-text-right">
+                  <%= simple_format(h(message.content), {}, wrapper_tag: "div") %>
+                </li>
+                <li class="time d-flex align-items-end"><%= message.message_time %></li>
+              </ul>
+            </div>
+            <% else %>
+            <div class="kaiwa">
+              <figure class="kaiwa-img-right">
+                <%= image_tag message.user.profile.icon_url %>
+              <figcaption class="kaiwa-img-description">
+                <%= message.user.profile.nickname %>
+              </figcaption>
+              </figure>
+              <ul class="kaiwa-row-left">
+                <li class="read d-flex align-items-end"><%= message.read ? '既読' : '未読' %><br><%= message.message_time %></li>
+                <li class="read kaiwa-text-left">
+                  <%= simple_format(h(message.content), {}, wrapper_tag: "div") %>
+                </li>
+              </ul>
+            </div>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="message-footer">
+      <%= form_with(model: [@room, @message]) do |f| %>
+      <div class="input-group">
+        <%= f.text_area :content, class: "form-control" %>
+        <%= f.text_field :user_id, value: current_user.id, type: "hidden"  %>
+      <div class="input-group-append">
+        <%= f.button :type => "submit", style: 'border-style: none; width: 60px;' do %>
+          <i class="far fa-paper-plane"></i>
+        <% end %>
+      </div>
       </div>
       <% end %>
-    <% end %>
-  <% end %>
-</div>
-
-<%= form_with(model: [@room, @message]) do |f| %>
-  <div class="message-footer">
-    <div class="field">
-      <%= f.text_area :content, class: "form-control" %>
     </div>
-      <%= f.text_field :user_id, value: current_user.id, type: "hidden"  %>
-    <div>
-      <%= f.button :type => "submit", style: 'border-style: none;' do %>
-        <i class="far fa-paper-plane"></i>
-      <% end %>
-    </div>
-  <% end %>
   </div>
 </div>
+
+<script>
+  var message = document.getElementById('message-contents');
+  message.scrollTop = message.scrollHeight;
+  var a = document.documentElement;
+  var y = a.scrollHeight - a.clientHeight;
+  window.scrollTo(0, y);
+</script>

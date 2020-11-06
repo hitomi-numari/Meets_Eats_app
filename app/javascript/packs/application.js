@@ -24,4 +24,4 @@ Turbolinks.start()
 
 import "bootstrap"
 import '@fortawesome/fontawesome-free/js/all'
-import "../stylesheets/application.scss"
+import "src/stylesheets/application.scss"
