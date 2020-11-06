@@ -14,13 +14,16 @@ Rails.application.routes.draw do
     get 'complete', :on => :member
     get 'search_top', :on => :collection
   end
-  resources :users, only: [:show, :my_events] do
+  resources :users, only: [:my_event, :event_history, :joined_event_history] do
     get "my_event", :on => :member
     get "event_history", :on => :member
     get "joined_event_history", :on => :member
   end
   resources :apply_for_events, only: [:create, :destroy, :apply_members, :complete] do
     patch :toggle_status
+  end
+  resources :rooms do
+    resources :messages
   end
   mount LetterOpenerWeb::Engine, at: "/letter_opener"
 end
