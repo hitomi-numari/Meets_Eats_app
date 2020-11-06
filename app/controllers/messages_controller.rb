@@ -1,5 +1,4 @@
 class MessagesController < ApplicationController
-  layout '_sidebar'
   before_action do
     @room = Room.find(params[:room_id])
   end
