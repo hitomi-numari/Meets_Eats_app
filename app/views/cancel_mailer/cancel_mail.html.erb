@@ -1,0 +1,4 @@
+<p><%= @cancel_info.event.user.profile.nickname %>様</p>
+<p><%= @cancel_info.event.title %>のイベントで成立致しました<%= @cancel_info.user.profile.nickname %>よりキャンセル依頼がありました。</p>
+<p>キャンセルを承認する場合は下記より承認してください。</p>
+<p><%= link_to t('views.event.cancel'), cancel_status_apply_for_event_url(@cancel_info.event.id), class: 'btn btn-danger' %></p>

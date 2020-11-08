@@ -1,0 +1,6 @@
+<div class="container">
+  <div class="complete_container col text-center d-flex flex-column">
+    <h3 class="mt-5 mb-3"><%=@apply.user.event.profile.nickname %><%= t('views.apply_for_event.event_canceling') %></h3>
+    <%= link_to t('views.event.back'), my_event_user_path(current_user), class:"mb-5 mt-3" %>
+  </div>
+</div>

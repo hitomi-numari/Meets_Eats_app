@@ -11,4 +11,5 @@ class ApplyForEvent < ApplicationRecord
       unselected!
     end
   end
+
 end

@@ -113,6 +113,10 @@ ja:
       name: 場所
     genre:
       name: 相談内容
+    apply_for_event:
+      event_canceling: さんにキャンセル申請しました。
+      event_canceled: キャンセル申請を承認しました。
+      notice_after_canceled: 受付期限が過ぎてないものはイベント一覧に再掲載されます。イベントをキャンセルする場合はイベントの削除をしてください。
   activerecord:
     errors:
       messages:

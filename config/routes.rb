@@ -19,8 +19,11 @@ Rails.application.routes.draw do
     get "event_history", :on => :member
     get "joined_event_history", :on => :member
   end
-  resources :apply_for_events, only: [:create, :destroy, :apply_members, :complete] do
+  resources :apply_for_events, only: [:create, :destroy, :toggle_status, :cancel_mail, :cancel_status] do
     patch :toggle_status
+    get "cancel_mail", :on => :member
+    get "cancel_status", :on => :member
+    get "cancel_complete", :on => :collection
   end
   resources :rooms do
     resources :messages
