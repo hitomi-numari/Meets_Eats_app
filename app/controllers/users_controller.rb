@@ -16,7 +16,7 @@ class UsersController < ApplicationController
         @events << user.event
       end
   end
-
+  
   private
 
   def set_user

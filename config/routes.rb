@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { registrations: 'users/registrations' }
+  devise_for :users, controllers: {
+    registrations: 'users/registrations',
+    passwords: 'users/passwords'
+  }
   devise_scope :user do
     authenticated :user do
       root :to => 'profiles#new', as: :authenticated_root
     end
     unauthenticated :user do
       root :to => 'devise/sessions#new', as: :unauthenticated_root
+      post 'users/guest_sign_in', to: 'users/sessions#new_guest'
     end
   end
   resources :profiles

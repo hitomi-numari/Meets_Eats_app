@@ -69,6 +69,9 @@ ja:
       login: ログインしてください
       label: ラベル
       label_lists: ラベル一覧
+      make_rate: 評価する
+      cancellation_request: キャンセル申請
+      direct_message: メッセージを送る
     user:
       menu: MENU
       mypage_top: マイページトップ
