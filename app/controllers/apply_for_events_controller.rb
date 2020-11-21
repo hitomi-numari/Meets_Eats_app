@@ -1,7 +1,7 @@
 class ApplyForEventsController < ApplicationController
   before_action :prohibit_selected, only:[:toggle_status]
   before_action :prohibit_organizer, only:[:create]
-  before_action :set_apply, only:[:toggle_status, :cancel_mail]
+  before_action :set_apply, only:[:toggle_status, :cancel_mail, :cancel]
 
   def create
     apply = current_user.apply_for_events.create(event_id: params[:event_id])
@@ -19,17 +19,24 @@ class ApplyForEventsController < ApplicationController
     @event_status.save
     @matching_info = @apply
     MatchingMailer.matching_mail(@matching_info).deliver
-    @unmatching_info = @apply.event.apply_for_events.where.not(id: apply.id)
+    @unmatching_info = @apply.event.apply_for_events.where.not(id: @apply.id)
     @unmatching_info.each do |unmatching_info|
       UnmatchingMailer.unmatching_mail(unmatching_info).deliver
     end
+    @unmatching_info.destroy_all
     redirect_to complete_event_path(id: @apply.id)
   end
 
   def cancel_mail
     @cancel_info = @apply
     CancelMailer.cancel_mail(@cancel_info).deliver
-    redirect_to cancel_complete_apply_for_events_path
+    event = Event.find(params[:id])
+    event.event_status = "cancelling"
+    event.save
+    redirect_to cancel_apply_for_event_path(apply_for_event_id: @apply.id)
+  end
+
+  def cancel
   end
 
   def cancel_status

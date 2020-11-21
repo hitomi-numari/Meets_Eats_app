@@ -43,7 +43,10 @@ class Event < ApplicationRecord
 
   enum event_status: {
     pending: 0,
-    done: 1
+    done: 1,
+    cancelling: 2,
+    rated: 3,
+    completed: 4
   }
 
   def end_check

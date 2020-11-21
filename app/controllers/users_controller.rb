@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   end
 
   def event_history
-    @events = current_user.events.where(event_status: "done")
+    @events = current_user.events.where(event_status: ["done", "cancelling"])
   end
 
   def joined_event_history
@@ -16,7 +16,7 @@ class UsersController < ApplicationController
         @events << user.event
       end
   end
-  
+
   private
 
   def set_user

@@ -71,6 +71,8 @@ ja:
       label_lists: ラベル一覧
       make_rate: 評価する
       cancellation_request: キャンセル申請
+      cancellation_request_notice: キャンセル依頼がありました。キャンセルを承認する場合は下記より承認してください。
+      cancellation_approved: キャンセル承認
       direct_message: メッセージを送る
     user:
       menu: MENU

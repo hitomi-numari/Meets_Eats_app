@@ -2,9 +2,15 @@
 
 class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
-  def new_guest
+  def new_guest1
     user = User.guest
     Profile.guest_profile(user)
+    sign_in user
+    redirect_to search_top_events_path, notice: 'ゲストユーザーとしてログインしました。'
+  end
+  def new_guest2
+    user = User.guest2
+    Profile.guest_profile2(user)
     sign_in user
     redirect_to search_top_events_path, notice: 'ゲストユーザーとしてログインしました。'
   end

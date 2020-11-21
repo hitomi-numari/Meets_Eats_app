@@ -30,6 +30,8 @@
           <% if user_signed_in? %>
             <% if event.event_status == "done" %>
               <%= link_to "評価してください", event_path(event.id), class:"btn btn-secondary" %>
+            <% elsif event.event_status == "cancelling" %>
+              <h4><strong>キャンセル申請中</strong></h4>
             <% else %>
               <h4><strong>申請中</strong></h4>
             <% end %>
