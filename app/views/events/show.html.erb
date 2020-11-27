@@ -73,9 +73,7 @@
           <%= link_to t('views.event.cancel'), apply_for_event_path(id: @apply.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
         <% end %>
       <% else %>
-      <!--チャット機能　卒業後実装予定-->
         <%= link_to t('views.event.direct_message'), rooms_path(sender_id: current_user.id, recipient_id: @event.user.id), method: :post %>
-      <!--ここまで-->
         <%= link_to t('views.event.join'), apply_for_events_path(event_id: @event.id), method: :post, class: 'btn btn-primary' %>
       <% end %>
     <% elsif @event.event_status == "done" %>

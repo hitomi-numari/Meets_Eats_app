@@ -8,7 +8,6 @@
   <div class="complete_container col text-center d-flex flex-column">
     <h3 class="mt-5 mb-3"><%=@event.user.profile.nickname %>さんを<%= t('views.event.make_rate') %></h3>
     <%= form_with(model: @event, local: true) do |form| %>
-    <%= form.label t('views.genre.name'), class:"col-sm-2 col-form-label" %>
       <div class="col-sm-10">
         <div class="form-check">
           <%#= form.collection_check_boxes(:genre_ids, Genre.all, :id, :name) do |b| %>
