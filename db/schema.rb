@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_18_070903) do
+ActiveRecord::Schema.define(version: 2020_11_29_125508) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,17 @@ ActiveRecord::Schema.define(version: 2020_10_18_070903) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "evaluations", force: :cascade do |t|
+    t.bigint "organizer_id"
+    t.bigint "paticipant_id"
+    t.integer "rate", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organizer_id", "paticipant_id"], name: "index_evaluations_on_organizer_id_and_paticipant_id", unique: true
+    t.index ["organizer_id"], name: "index_evaluations_on_organizer_id"
+    t.index ["paticipant_id"], name: "index_evaluations_on_paticipant_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -116,6 +127,8 @@ ActiveRecord::Schema.define(version: 2020_10_18_070903) do
 
   add_foreign_key "apply_for_events", "events"
   add_foreign_key "apply_for_events", "users"
+  add_foreign_key "evaluations", "users", column: "organizer_id"
+  add_foreign_key "evaluations", "users", column: "paticipant_id"
   add_foreign_key "events", "areas"
   add_foreign_key "events", "users"
   add_foreign_key "genre_tags", "events"
