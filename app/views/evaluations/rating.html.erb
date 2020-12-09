@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="matching_notice">
+    <%= image_tag(@event.user.profile.icon_url, class: "d-block mx-auto" ) %>
+      <div class="profile">
+        <h5><%=@event.user.profile.nickname %></h5>
+      </div>
+  </div>
+  <div class="complete_container col text-center d-flex flex-column">
+    <h5 class="mt-5 mb-4"><%=@event.user.profile.nickname %>さんを<%= t('views.event.make_rate') %></h5>
+    <%= form_with(model:@rate) do |form| %>
+      <%= form.hidden_field :paticipant_id, value: @user.id %>
+      <%= form.hidden_field :organizer_id, value: @event.user.id %>
+      <%= hidden_field_tag :event_id, @event.id %>
+      <div class="text-center mt-4 mb-5">
+        <%= form.collection_radio_buttons :rate, Evaluation.rates_i18n, :first, :last, include_hidden: false do |b| %>
+          <div class="custom-control custom-radio custom-control-inline">
+            <%= b.radio_button(class:"custom-control-input") %>
+            <%= b.label(class:"custom-control-label") %>
+          </div>
+        <% end %>
+      </div>
+      <div class="text-center mt-4 mb-5">
+        <%= form.submit t('views.event.make_rate'), class:"btn btn-secondary"%>
+      </div>
+    <% end %>
+    <%= link_to t('views.event.back'), my_event_user_path(current_user), class:"mb-5 mt-3" %>
+  </div>
+</div>

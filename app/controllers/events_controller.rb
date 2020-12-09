@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy, :apply_members, :rating, :prohibit_selected]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :apply_members, :prohibit_selected]
   before_action :ensure_correct_post, only: [:edit, :update, :destroy]
   def index
     if params[:genre_id]
@@ -104,10 +104,6 @@ class EventsController < ApplicationController
 
   def complete
     @apply = ApplyForEvent.find(params[:id])
-  end
-
-  def rating
-
   end
 
   private

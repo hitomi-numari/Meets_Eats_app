@@ -64,7 +64,7 @@
     <% if @event.user_id != current_user.id %>
       <% if @apply.present? %>
         <% if @event.event_status == "done" %>
-          <%= link_to t('views.event.make_rate'), rating_event_path(id: @event.id), class: 'btn btn-info' %>
+          <%= link_to t('views.event.make_rate'), rating_evaluation_path(id: @event.id, apply_for_event_id: @apply.id), class: 'btn btn-info' %>
           <%= link_to t('views.event.cancellation_request'), cancel_mail_apply_for_event_path(apply_for_event_id: @apply.id), class: 'btn btn-danger' %>
         <% elsif @event.event_status == "cancelling" %>
            <strong><h3>キャンセル申請中</h3></strong>

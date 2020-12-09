@@ -3,10 +3,19 @@ class Evaluation < ApplicationRecord
   belongs_to :paticipant, class_name: "User"
   validates :organizer_id, presence: true
   validates :paticipant_id, presence: true
+  validates :rate, presence: true
 
   enum rate: {
-    unrated: 0,
-    good: 1,
-    bad: 2,
+    good: 0,
+    bad: 1,
   }
+
+  # def evaluate!(other_user)
+  #   paticipant_evaluations.create!(organizer_id: other_user.id)
+  # end
+  #
+  # def evaluated?(other_user)
+  #   paticipant_evaluations.find_by(organizer_id: other_user.id)
+  # end
+
 end

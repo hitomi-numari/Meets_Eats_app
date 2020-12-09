@@ -15,25 +15,34 @@ Rails.application.routes.draw do
   end
   resources :profiles
   resources :events do
-    get 'apply_members', :on => :member
-    get 'complete', :on => :member
+    member do
+      get :apply_members, :complete
+    end
     get 'search_top', :on => :collection
-    get 'rating', :on => :member
+
   end
   resources :users, only: [:my_event, :event_history, :joined_event_history] do
-    get "my_event", :on => :member
-    get "event_history", :on => :member
-    get "joined_event_history", :on => :member
+    member do
+      get :my_event, :event_history, :joined_event_history
+    end
   end
   resources :apply_for_events, only: [:create, :destroy, :toggle_status, :cancel_mail, :cancel_status] do
     patch :toggle_status
-    get "cancel_mail", :on => :member
-    get "cancel_status", :on => :member
+      member do
+        get :cancel_mail, :cancel_status, :cancel
+      end
     get "cancel_complete", :on => :collection
-    get "cancel", :on => :member
   end
   resources :rooms do
     resources :messages
   end
+  resources :evaluations, only: [:create, :rating, :rated] do
+    member do
+      get :rating
+      get :rated
+    end
+  end
+
+
   mount LetterOpenerWeb::Engine, at: "/letter_opener"
 end

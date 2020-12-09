@@ -122,6 +122,8 @@ ja:
       event_canceling: さんにキャンセル申請しました。
       event_canceled: キャンセル申請を承認しました。
       notice_after_canceled: 受付期限が過ぎてないものはイベント一覧に再掲載されます。イベントをキャンセルする場合はイベントの削除をしてください。
+    evaluation:
+      rate_completed: さんの評価が完了しました。
   activerecord:
     errors:
       messages:
@@ -155,6 +157,10 @@ ja:
     apply_for_event:
       status:
         unselected: この人と行く
+    evaluation:
+      rate:
+        good: 良かった
+        bad: 悪かった
   date:
     abbr_day_names:
     - 日

@@ -1,0 +1,45 @@
+class EvaluationsController < ApplicationController
+  before_action :set_event, only: [:rating, :rated]
+  before_action :rate_params, only:[:create]
+
+  def create
+    # binding.pry
+    if user_signed_in?
+      @rate = Evaluation.new(rate_params)
+      if params[:back]
+        render :new
+      else
+        binding.pry
+        if @rate.save
+          # @rate.paticipant_id.apply_for_events.where(status: "selected")
+          @event = Event.find(params[:event_id])
+          @event.event_status = "rated"
+          @event.save
+          redirect_to rated_evaluation_path(@event)
+        else
+          render :new
+        end
+      end
+    end
+  end
+
+  def rating
+    @user = ApplyForEvent.find(params[:apply_for_event_id]).user
+    @rate = Evaluation.new
+  end
+
+  def rated
+
+  end
+
+  private
+
+  def set_event
+    @event = Event.find(params[:id])
+  end
+
+  def rate_params
+    params.require(:evaluation).permit(:rate, :organizer_id, :paticipant_id)
+  end
+
+end
