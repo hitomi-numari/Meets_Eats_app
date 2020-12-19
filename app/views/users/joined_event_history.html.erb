@@ -32,8 +32,12 @@
               <%= link_to "評価してください", event_path(event.id), class:"btn btn-secondary" %>
             <% elsif event.event_status == "cancelling" %>
               <h4><strong>キャンセル申請中</strong></h4>
-            <% else %>
+            <% elsif event.event_status == "rated" %>
+              <h4><strong>評価待ち</strong></h4>
+            <% elsif event.event_status == "pending" %>
               <h4><strong>申請中</strong></h4>
+            <% else %>
+              <h4><strong>評価済み</strong></h4>
             <% end %>
           <% end %>
         </div>

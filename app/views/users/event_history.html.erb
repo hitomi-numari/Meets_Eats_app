@@ -30,8 +30,10 @@
           <% if user_signed_in? %>
             <% if event.event_status == "done" %>
               <strong><h3>評価待ち</h3></strong>
-            <% else %>
+            <% elsif event.event_status == "rated" %>
               <%= link_to "評価してください", event_path(event.id), class:"btn btn-secondary" %>
+            <% else %>
+              <h4><strong>評価済み</strong></h4>
             <% end %>
           <% end %>
         </div>

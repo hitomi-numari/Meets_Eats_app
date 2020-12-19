@@ -37,6 +37,8 @@
     <div class="text-right m-5">
       <% if @profile.user == current_user %>
         <%= link_to '編集', edit_profile_path(@profile.id) %>
+      <% else %>
+      <%= link_to t('views.event.direct_message'), rooms_path(sender_id: current_user.id, recipient_id: @profile.user.id), method: :post %>
       <% end %>
     </div>
   </div>

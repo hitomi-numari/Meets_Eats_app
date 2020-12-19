@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   end
 
   def event_history
-    @events = current_user.events.where(event_status: ["done", "cancelling"])
+    @events = current_user.events.where.not(event_status: "pending")
   end
 
   def joined_event_history

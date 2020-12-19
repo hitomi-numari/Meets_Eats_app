@@ -10,12 +10,4 @@ class Evaluation < ApplicationRecord
     bad: 1,
   }
 
-  # def evaluate!(other_user)
-  #   paticipant_evaluations.create!(organizer_id: other_user.id)
-  # end
-  #
-  # def evaluated?(other_user)
-  #   paticipant_evaluations.find_by(organizer_id: other_user.id)
-  # end
-
 end

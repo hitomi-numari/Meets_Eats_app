@@ -3,17 +3,18 @@ class EvaluationsController < ApplicationController
   before_action :rate_params, only:[:create]
 
   def create
-    # binding.pry
     if user_signed_in?
       @rate = Evaluation.new(rate_params)
       if params[:back]
         render :new
       else
-        binding.pry
         if @rate.save
-          # @rate.paticipant_id.apply_for_events.where(status: "selected")
           @event = Event.find(params[:event_id])
-          @event.event_status = "rated"
+          if @rate.organizer_id == @event.user.id
+            @event.event_status = "rated"
+          else
+            @event.event_status = "completed"
+          end
           @event.save
           redirect_to rated_evaluation_path(@event)
         else
@@ -24,6 +25,7 @@ class EvaluationsController < ApplicationController
   end
 
   def rating
+    # binding.pry
     @user = ApplyForEvent.find(params[:apply_for_event_id]).user
     @rate = Evaluation.new
   end
