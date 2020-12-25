@@ -23,8 +23,9 @@
     <%= f.submit "ログインする" %>
   </div>
 
-  <%= link_to 'ゲストA男ログイン（閲覧用）', users_guest1_sign_in_path, method: :post, class: "btn btn-warning" %>
-  <%= link_to 'ゲストB子ログイン（閲覧用）', users_guest2_sign_in_path, method: :post, class: "btn btn-info" %>
+    <%= link_to 'ゲストA男ログイン（閲覧用）', users_guest1_sign_in_path, method: :post, class: "btn btn-warning" %>
+    <%= link_to 'ゲストB子ログイン（閲覧用）', users_guest2_sign_in_path, method: :post, class: "btn btn-info" %>
+
 <% end %>
 
 <%= render "devise/shared/links" %>

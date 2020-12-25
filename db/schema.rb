@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_29_125508) do
+ActiveRecord::Schema.define(version: 2020_12_25_021648) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2020_11_29_125508) do
     t.integer "rate", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["organizer_id", "paticipant_id"], name: "index_evaluations_on_organizer_id_and_paticipant_id", unique: true
+    t.index ["organizer_id", "paticipant_id"], name: "index_evaluations_on_organizer_id_and_paticipant_id"
     t.index ["organizer_id"], name: "index_evaluations_on_organizer_id"
     t.index ["paticipant_id"], name: "index_evaluations_on_paticipant_id"
   end

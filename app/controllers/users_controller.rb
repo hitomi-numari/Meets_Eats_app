@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 
   def joined_event_history
     @events = []
-      User.find(current_user.id).apply_for_events.each do |user|
+      current_user.apply_for_events.order("created_at DESC").each do |user|
         @events << user.event
       end
   end
