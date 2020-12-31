@@ -11,9 +11,14 @@ class UsersController < ApplicationController
   end
 
   def joined_event_history
-    @events = []
+    @unrated_events = []
+    @rated_events = []
       current_user.apply_for_events.order("created_at DESC").each do |user|
-        @events << user.event
+        unless user.event.event_status == "completed"
+          @unrated_events << user.event
+        else
+          @rated_events << user.event
+        end
       end
   end
 

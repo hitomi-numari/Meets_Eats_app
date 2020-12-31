@@ -1,49 +1,105 @@
 <div class="container">
-<h2>イベント参加履歴</h2>
-<%= link_to "評価待ち" %>
-<%= link_to "評価済み" %>
-<% if @events.blank? %>
-  <p>参加したイベントはありません</p>
-<% end %>
-<% @events.each do |event| %>
-<div class="wanted-group row">
-  <div class="col-md-12 wanted-group-item">
-    <div class="wanted-body">
-      <div class="col-md-8 float-left">
-        <% event.genre_tags.each do |genre| %>
-          <span class= 'badge <%=genre_tags(genre.genre.id)%>' ><%=genre.genre.name %></span>
+  <h2 class="mb-5">イベント参加履歴</h2>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="unrated-tab" data-toggle="tab" href="#unrated" role="tab" aria-controls="unrated" aria-selected="true">評価待ち</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="rated-tab" data-toggle="tab" href="#rated" role="tab" aria-controls="rated" aria-selected="false">評価済み</a>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="unrated" role="tabpanel" aria-labelledby="unrated-tab">
+        <% if @unrated_events.blank? %>
+          <p>参加したイベントはありません</p>
         <% end %>
-        <div class="middle-contents-item title">
-          <h5><%=event.title %></h5>
-        </div>
-        <ul class="link-list d-flex align-items-end">
-          <li><%= link_to event_path(event.id), method: :get do %></li>
-                <i class="fa fa-info-circle"></i>
-              <% end %>
-        </ul>
+        <% @unrated_events.each do |event| %>
+          <div class="wanted-group row">
+            <div class="col-md-12 wanted-group-item">
+              <div class="wanted-body">
+                <div class="col-md-8 float-left">
+                  <% event.genre_tags.each do |genre| %>
+                    <span class= 'badge <%=genre_tags(genre.genre.id)%>' ><%=genre.genre.name %></span>
+                  <% end %>
+                  <div class="middle-contents-item title">
+                    <h5><%=event.title %></h5>
+                  </div>
+                  <ul class="link-list d-flex align-items-end">
+                    <li><%= link_to event_path(event.id), method: :get do %></li>
+                          <i class="fa fa-info-circle"></i>
+                        <% end %>
+                  </ul>
+                </div>
+                <div class="col-md-4 float-right">
+                  <div class="schedule_time">
+                    <p><%= simple_time_start_at(event.start_at) %>~<%= simple_time_end_at(event.end_at) %></p>
+                  </div>
+                  <div class="applies-lists text-center">
+                    <% if user_signed_in? %>
+                      <% if event.event_status == "done" %>
+                        <%= link_to "評価してください", event_path(event.id), class:"btn btn-secondary" %>
+                      <% elsif event.event_status == "cancelling" %>
+                        <h4><strong>キャンセル申請中</strong></h4>
+                      <% elsif event.event_status == "rated" %>
+                        <h4><strong>評価待ち</strong></h4>
+                      <% elsif event.event_status == "pending" %>
+                        <h4><strong>申請中</strong></h4>
+                      <% else %>
+                        <h4><strong>評価済み</strong></h4>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
       </div>
-      <div class="col-md-4 float-right">
-        <div class="schedule_time">
-          <p><%= simple_time_start_at(event.start_at) %>~<%= simple_time_end_at(event.end_at) %></p>
-        </div>
-        <div class="applies-lists text-center">
-          <% if user_signed_in? %>
-            <% if event.event_status == "done" %>
-              <%= link_to "評価してください", event_path(event.id), class:"btn btn-secondary" %>
-            <% elsif event.event_status == "cancelling" %>
-              <h4><strong>キャンセル申請中</strong></h4>
-            <% elsif event.event_status == "rated" %>
-              <h4><strong>評価待ち</strong></h4>
-            <% elsif event.event_status == "pending" %>
-              <h4><strong>申請中</strong></h4>
-            <% else %>
-              <h4><strong>評価済み</strong></h4>
-            <% end %>
-          <% end %>
-        </div>
+      <div class="tab-pane fade" id="rated" role="tabpanel" aria-labelledby="rated-tab">
+        <% if @rated_events.blank? %>
+          <p>参加したイベントはありません</p>
+        <% end %>
+        <% @rated_events.each do |event| %>
+          <div class="wanted-group row">
+            <div class="col-md-12 wanted-group-item">
+              <div class="wanted-body">
+                <div class="col-md-8 float-left">
+                  <% event.genre_tags.each do |genre| %>
+                    <span class= 'badge <%=genre_tags(genre.genre.id)%>' ><%=genre.genre.name %></span>
+                  <% end %>
+                  <div class="middle-contents-item title">
+                    <h5><%=event.title %></h5>
+                  </div>
+                  <ul class="link-list d-flex align-items-end">
+                    <li><%= link_to event_path(event.id), method: :get do %></li>
+                          <i class="fa fa-info-circle"></i>
+                        <% end %>
+                  </ul>
+                </div>
+                <div class="col-md-4 float-right">
+                  <div class="schedule_time">
+                    <p><%= simple_time_start_at(event.start_at) %>~<%= simple_time_end_at(event.end_at) %></p>
+                  </div>
+                  <div class="applies-lists text-center">
+                    <% if user_signed_in? %>
+                      <% if event.event_status == "done" %>
+                        <%= link_to "評価してください", event_path(event.id), class:"btn btn-secondary" %>
+                      <% elsif event.event_status == "cancelling" %>
+                        <h4><strong>キャンセル申請中</strong></h4>
+                      <% elsif event.event_status == "rated" %>
+                        <h4><strong>評価待ち</strong></h4>
+                      <% elsif event.event_status == "pending" %>
+                        <h4><strong>申請中</strong></h4>
+                      <% else %>
+                        <h4><strong>評価済み</strong></h4>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
-  </div>
-</div>
-<% end %>
 </div>

@@ -126,15 +126,6 @@ footer p {
   color: black;
 }
 
-.top-image {
-  filter: grayscale(100%);
-  height: 620px;
-  display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-  position: relative;/*相対配置*/
-}
-
 .top-image h1 {
   position: absolute;
   color: white;
@@ -166,26 +157,6 @@ footer p {
 	display: flex;
   position: relative;/*相対配置*/
 }
-
-.top-image h1 {
-  position: absolute;
-  color: #6cb4e4;
-  text-align: center;
-  padding: 0.25em;
-  border-top: solid 2px #6cb4e4;
-  border-bottom: solid 2px #6cb4e4;
-  background: -webkit-repeating-linear-gradient(-45deg, #f0f8ff, #f0f8ff 3px,#e9f4ff 3px, #e9f4ff 7px);
-  background: repeating-linear-gradient(-45deg, #f0f8ff, #f0f8ff 3px,#e9f4ff 3px, #e9f4ff 7px);
-  top: 50%;
-  left: 50%;
-  font-size: 100px;
-  -ms-transform: translate(-50%,-50%);
-  -webkit-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
-  margin:0;
-  padding:0;
-  }
-
 
 li {
   display: inline-block;
