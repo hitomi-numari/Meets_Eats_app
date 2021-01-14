@@ -1,3 +1,6 @@
+@import "~bootstrap/scss/bootstrap";
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+
 dl, ol, ul {
   margin-top: 5px;
   margin-bottom: 5px;
@@ -472,6 +475,3 @@ p.kaiwa-text:last-child {
   text-align: center;
   padding: 30px 0;
 }
-
-@import "~bootstrap/scss/bootstrap";
-@import '~@fortawesome/fontawesome-free/scss/fontawesome';
