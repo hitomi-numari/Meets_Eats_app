@@ -1,7 +1,7 @@
 <div class="container">
-  <h2 class="mb-5">イベント履歴</h2>
+  <h2 class="mb-5"><%= t('views.user.event_history') %></h2>
     <% if @events.blank? %>
-      <p>成立したイベントはありません</p>
+      <p><%= t('views.user.no_events') %></p>
     <% end %>
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item">
@@ -37,11 +37,11 @@
                 <div class="applies-lists text-center">
                   <% if user_signed_in? %>
                     <% if event.event_status == "done" %>
-                      <strong><h3>評価待ち</h3></strong>
+                      <h4><strong><%= t('views.user.unrated') %></strong></h4>
                     <% elsif event.event_status == "rated" %>
-                      <%= link_to "評価してください", event_path(event.id), class:"btn btn-secondary" %>
+                      <%= link_to t('views.user.rate_please'), event_path(event.id), class:"btn btn-secondary" %>
                     <% else %>
-                      <h4><strong>評価済み</strong></h4>
+                      <h4><strong><%= t('views.user.rating') %></strong></h4>
                     <% end %>
                   <% end %>
                 </div>
@@ -76,15 +76,15 @@
                   <div class="applies-lists text-center">
                     <% if user_signed_in? %>
                       <% if event.event_status == "done" %>
-                        <%= link_to "評価してください", event_path(event.id), class:"btn btn-secondary" %>
+                        <%= link_to t('views.user.rate_please'), event_path(event.id), class:"btn btn-secondary" %>
                       <% elsif event.event_status == "cancelling" %>
-                        <h4><strong>キャンセル申請中</strong></h4>
+                        <h4><strong><%= t('views.user.cancelling') %></strong></h4>
                       <% elsif event.event_status == "rated" %>
-                        <h4><strong>評価待ち</strong></h4>
+                        <h4><strong><%= t('views.user.unrated') %></strong></h4>
                       <% elsif event.event_status == "pending" %>
-                        <h4><strong>申請中</strong></h4>
+                        <h4><strong><%= t('views.user.applying') %></strong></h4>
                       <% else %>
-                        <h4><strong>評価済み</strong></h4>
+                        <h4><strong><%= t('views.user.rated') %></strong></h4>
                       <% end %>
                     <% end %>
                   </div>

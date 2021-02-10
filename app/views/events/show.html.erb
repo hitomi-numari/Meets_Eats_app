@@ -68,13 +68,13 @@
           <%= link_to t('views.event.cancellation_request'), cancel_mail_apply_for_event_path(apply_for_event_id: @apply.id), class: 'btn btn-danger' %> |
           <%= link_to t('views.event.back'), joined_event_history_user_path(@apply.user.id)%>
         <% elsif @event.event_status == "cancelling" %>
-           <strong><h3>キャンセル申請中</h3></strong>
+           <h3><strong><%= t('views.user.cancelling') %></strong></h3>
            <%= link_to t('views.event.back'), event_history_user_path(current_user.id)%>
         <% elsif @event.event_status == "rated" %>
-          <strong><h3>評価待ち</h3>イベント主催者からの評価をお待ちください</strong>
+          <h3><strong><%= t('views.user.unrated') %></strong><%= t('views.user.wait_for_host') %></h3>
           <%= link_to t('views.event.back'), event_history_user_path(@apply.user.id)%>
         <% elsif @event.event_status == "completed" %>
-          <strong><h3>評価済み</h3></strong>
+          <h3><strong><%= t('views.user.rated') %></strong></h3>
           <%= link_to t('views.event.back'), event_history_user_path(@apply.user.id)%>
         <% else %>
           <%= link_to t('views.event.cancel'), apply_for_event_path(id: @apply.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %> |
@@ -87,7 +87,7 @@
           <% end %>
         <% end %>
       <% else %>
-        <%= link_to t('views.event.direct_message'), rooms_path(sender_id: current_user.id, recipient_id: @event.user.id), method: :post %>
+        <%= link_to t('views.event.direct_message'), rooms_path(sender_id: current_user.id, recipient_id: @event.user.id), method: :post, class: 'btn btn-info' %>
         <%= link_to t('views.event.join'), apply_for_events_path(event_id: @event.id), method: :post, class: 'btn btn-primary' %> |
         <% if @genre.present? %>
           <%= link_to t('views.event.back'), events_path(genre_id: @genre.id)%>
@@ -108,7 +108,7 @@
           <%= link_to t('views.event.back'), events_path%>
         <% end %>
       <% elsif @event.event_status == "done" %>
-        <strong><h3>評価待ち</h3>イベント参加者からの評価をお待ちください</strong>
+        <h3><strong><%= t('views.user.unrated') %></strong><%= t('views.user.wait_for_apply') %></h3>
         <%= link_to t('views.event.back'), event_history_user_path(@event.user.id)%>
       <% elsif @event.event_status == "cancelling" %>
         <p><%= link_to t('views.event.cancellation_approved'), cancel_status_apply_for_event_path(@event.id), class: 'btn btn-danger' %></p>
@@ -119,7 +119,7 @@
           <%= link_to t('views.event.back'), event_history_user_path(@event.user.id)%>
         <% end %>
       <% else %>
-        <strong><h3>評価済み</h3></strong>
+        <h3><strong><%= t('views.user.rated') %></strong></h3>
         <%= link_to t('views.event.back'), event_history_user_path(@event.user.id)%>
       <% end %>
     <% end %>

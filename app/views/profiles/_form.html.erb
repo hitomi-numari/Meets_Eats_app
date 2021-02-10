@@ -77,7 +77,7 @@
     <div class="form-group row float-right">
       <%= f.submit "プロフィール登録", class: "btn btn-secondary" %>
       <% if @profile.id.present? %>｜
-      <%= link_to "戻る", my_events_user_path(current_user) %>
+      <%= link_to "戻る", my_event_user_path(current_user) %>
       <% end %>
     </div>
     <% end %>

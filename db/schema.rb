@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_25_021648) do
+ActiveRecord::Schema.define(version: 2021_02_03_130957) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,16 @@ ActiveRecord::Schema.define(version: 2020_12_25_021648) do
     t.datetime "expired_time"
     t.index ["area_id"], name: "index_events_on_area_id"
     t.index ["user_id"], name: "index_events_on_user_id"
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_favorites_on_event_id"
+    t.index ["user_id", "event_id"], name: "index_favorites_on_user_id_and_event_id", unique: true
+    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "genre_tags", force: :cascade do |t|
@@ -131,6 +141,8 @@ ActiveRecord::Schema.define(version: 2020_12_25_021648) do
   add_foreign_key "evaluations", "users", column: "paticipant_id"
   add_foreign_key "events", "areas"
   add_foreign_key "events", "users"
+  add_foreign_key "favorites", "events"
+  add_foreign_key "favorites", "users"
   add_foreign_key "genre_tags", "events"
   add_foreign_key "genre_tags", "genres"
   add_foreign_key "messages", "rooms"
