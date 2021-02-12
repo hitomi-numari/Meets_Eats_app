@@ -37,24 +37,25 @@
             <% if user_signed_in? %>
             <h2><%= t('views.user.mypage') %></h2>
               <div class = "my_menu_buttons">
-              <div class= "menu box">
-                <div class="profile_center">
-                  <div class="profile_figure d-block mx-auto">
-                    <%= image_tag current_user.profile.icon_url, class:'d-block mx-auto' %>
+                <div class= "menu box">
+                  <div class="profile_center">
+                    <div class="profile_figure d-block mx-auto">
+                      <%= image_tag current_user.profile.icon_url, class:'d-block mx-auto' %>
+                    </div>
+                    <div class="profile_name text-center" style="color: #444444;">
+                      <%= current_user.profile.nickname %>
+                    </div>
                   </div>
-                  <div class="profile_name text-center">
-                    <%= current_user.profile.nickname %>
-                  </div>
+                    <div class="menu-lists my-5">
+                      <p class="menu-list-item"><%= link_to t('views.user.mypage_top'), my_event_user_path(current_user.id) %></p>
+                      <p class="menu-list-item"><%= link_to t('views.user.user_details'), profile_path(current_user.profile.id) %></p>
+                      <p class="menu-list-item"><%= link_to t('views.user.event_history'), event_history_user_path(current_user.id) %></p>
+                      <p class="menu-list-item"><%= link_to t('views.user.joined_event_history'), joined_event_history_user_path(current_user.id) %></p>
+                      <p class="menu-list-item"><%= link_to t('views.user.messages'), rooms_path(current_user.id) %></p>
+                      <p class="menu-list-item"><%= link_to t('views.user.favorites_lists'), favorite_lists_user_path(current_user.id) %></p>
+                   </div>
                 </div>
-                  <p><%= link_to t('views.user.mypage_top'), my_event_user_path(current_user.id) %></p>
-                  <p><%= link_to t('views.user.user_details'), profile_path(current_user.profile.id) %></p>
-                  <p><%= link_to t('views.user.event_history'), event_history_user_path(current_user.id) %></p>
-                  <p><%= link_to t('views.user.joind_event_history'), joined_event_history_user_path(current_user.id) %></p>
-                  <p><%= link_to t('views.user.messages'), rooms_path(current_user.id) %></p>
-                  <!--おいおい--!>
-                  <!-- <p><%#= link_to t('views.user.history') %></p> -->
               </div>
-            </div>
             <% end %>
           </div>
         </div>

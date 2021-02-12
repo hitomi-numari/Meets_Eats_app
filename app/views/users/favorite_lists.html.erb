@@ -1,0 +1,81 @@
+<div class="container">
+  <h2><%= t('views.user.favorites_lists')%></h2>
+    <% @events.each do |event| %>
+      <div class="list-group">
+        <div class="list-group-item">
+          <div class="media">
+            <div class="col-md-2">
+              <%= image_tag(event.user.profile.icon_url, class: "d-block mx-auto" ) %>
+                <div class="profile">
+                  <h5><%=event.user.profile.nickname %></h5>
+                  <p><%=event.user.profile.calc_age %><%= t('views.event.old') %></p>
+                  <p><%=gender_view(event.user.profile.gender) %></p>
+                </div>
+            </div>
+            <div class="media-body">
+              <div class="col-md-8 float-left">
+                <% event.genre_tags.each do |genre| %>
+                  <span class= 'badge <%=genre_tags(genre.genre.id)%>' ><%=genre.genre.name %></span>
+                <% end %>
+                <div class="middle-contents">
+                  <div class="middle-contents-item title">
+                    <h3><%=event.title %></h3>
+                  </div>
+                  <div class="middle-contents-item content">
+                    <%= truncate(event.content, length: 50) do %>
+                    <p　class="float-right"><%= link_to t('views.event.show'), event_path(event.id) %></p>
+                    <% end %>
+                  </div>
+                  <div class="middle-contents-item restaurant_url">
+                    <%= link_to event.restaurant_url %>
+                  </div>
+                    <ul class="restaurant_info">
+                      <li><%=event.area.name %></li>/
+                      <li><%=event.food_category_i18n %><li>/
+                      <li><%= t('views.event.budget') %>：<%= event.budget_i18n %></li>
+                    </ul>
+                  <div class="middle-contents-item bottom_contents float-left">
+                    <%= link_to "いいねリストから削除する", destroy_from_lists_event_favorite_path(event_id: event.id, id: event.favorite(current_user).id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-light' %>
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-4 float-right">
+                <div class="schedule_time">
+                  <h3><%= simple_time_start_at(event.start_at) %>~<%= simple_time_end_at(event.end_at) %><h3>
+                </div>
+                <div class="required_time">
+                  <p><%= t('views.event.required_time') %>：<%= event.required_time %><%= t('views.event.time') %></p>
+                </div>
+                <div class="check_in_time">
+                  <p><%= t('views.event.check_in_time') %>：<%= event.check_in_time_i18n %></p>
+                </div>
+                  <ul class="link-list d-flex align-items-end">
+                    <% if @genre.present? %>
+                    <li><%= link_to event_path(event.id, genre_id: @genre.id), method: :get do %></li>
+                          <i class="fa fa-info-circle"></i>
+                        <% end %>
+                    <% elsif @area.present? %>
+                    <li><%= link_to event_path(event.id, area_id: @area.id), method: :get do %></li>
+                          <i class="fa fa-info-circle"></i>
+                        <% end %>
+                    <% else %>
+                    <li><%= link_to event_path(event.id), method: :get do %></li>
+                          <i class="fa fa-info-circle"></i>
+                        <% end %>
+                    <% end %>
+                  <% if event.user == current_user %>
+                    <li><%= link_to edit_event_path(event.id), method: :get do %></li>
+                        <i class="fa fa-edit"></i>
+                    <% end %>
+                    <li><%= link_to event_path(event.id), method: :delete, data: { confirm: 'Are you sure?' }, method: :delete do %></li>
+                        <i class="fa fa-trash"></i>
+                    <% end %>
+                  <% end %>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    <% end %>
+</div>

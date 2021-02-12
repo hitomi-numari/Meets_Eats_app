@@ -79,13 +79,20 @@ ja:
       mypage_top: マイページトップ
       event_history: イベント履歴
       user_details: プロフィール詳細
-      joind_event_history: イベント参加履歴
+      joined_event_history: イベント参加履歴
+      no_events: 成立したイベントはありません
+      no_joined_events: 参加したイベントはありません
       messages: メッセージ
-      likes: お気に入り
+      favorites_lists: いいね！リスト
       rated: 評価済み
       unrated: 評価待ち
       rating: 評価する
+      rate_please: 評価してください
+      cancelling: キャンセル申請中
+      applying: 申請中
       pending_event: 募集中のイベント
+      wait_for_host: イベント主催者からの評価をお待ちください
+      wait_for_apply: イベント参加者からの評価をお待ちください
       expired: 締め切りが過ぎています！
       re_new_event: イベントを削除して再投稿してください。
       mypage: マイページ
@@ -106,6 +113,7 @@ ja:
       destroy_confirm: ユーザーを削除しますか？
       user_admin_page: ユーザー管理画面
       destroy_error: 削除にエラーがあります。現在あなたのみが管理人のためユーザー削除できません。
+      favorites: いいね！
     profile:
       nickname: ユーザー名
       icon: 画像

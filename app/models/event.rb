@@ -1,6 +1,8 @@
 class Event < ApplicationRecord
   belongs_to :user
   belongs_to :area
+  has_many :favorites, dependent: :destroy
+  has_many :favorite_users, through: :favorites, source: :user
   has_many :apply_for_events, dependent: :destroy
   has_many :apply_for_events_of_user, through: :apply_for_events, source: :user
   has_many :genre_tags, dependent: :destroy
@@ -49,6 +51,14 @@ class Event < ApplicationRecord
     completed: 4
   }
 
+  def liked_by?(user)
+    favorites.where(user_id: user.id).exists?
+  end
+
+  def favorite(user)
+    favorites.find_by(user_id: user.id)
+  end
+
   def end_check
     errors.add(:end_at, "開始時間より1時間以上後の設定にしてください。") unless
     self.end_at >= self.start_at + 60 * 60
@@ -85,6 +95,8 @@ class Event < ApplicationRecord
   scope :pending, -> { where(event_status: "pending") }
   scope :sort_created, -> { order(created_at: :desc) }
   scope :sort_expired, -> { order(expired_time: :asc) }
+  scope :unrated, -> { where.not(event_status: "completed")}
+  scope :rated, -> { where(event_status: "completed") }
 
   paginates_per 15
 end

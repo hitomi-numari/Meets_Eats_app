@@ -1,7 +1,7 @@
 <div class="container">
-  <h2 class="mb-5">イベント履歴</h2>
-    <% if @events.blank? %>
-      <p>成立したイベントはありません</p>
+  <h2 class="mb-5"><%= t('views.user.event_history') %></h2>
+    <% if @unrated_events.blank? %>
+      <p><%= t('views.user.no_events') %></p>
     <% end %>
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item">
@@ -13,7 +13,7 @@
     </ul>
     <div class="tab-content" id="myTabContent">
       <div class="tab-pane fade show active" id="unrated" role="tabpanel" aria-labelledby="unrated-tab">
-        <% @events.where.not(event_status: "completed").each do |event| %>
+        <% @unrated_events.each do |event| %>
         <div class="wanted-group row">
           <div class="col-md-12 wanted-group-item">
             <div class="wanted-body">
@@ -36,13 +36,7 @@
                 </div>
                 <div class="applies-lists text-center">
                   <% if user_signed_in? %>
-                    <% if event.event_status == "done" %>
-                      <strong><h3>評価待ち</h3></strong>
-                    <% elsif event.event_status == "rated" %>
-                      <%= link_to "評価してください", event_path(event.id), class:"btn btn-secondary" %>
-                    <% else %>
-                      <h4><strong>評価済み</strong></h4>
-                    <% end %>
+                    <%= if_event_status?(event) %>
                   <% end %>
                 </div>
               </div>
@@ -52,7 +46,7 @@
         <% end %>
       </div>
       <div class="tab-pane fade" id="rated" role="tabpanel" aria-labelledby="rated-tab">
-        <% @events.where(event_status:"completed").each do |event| %>
+        <% @rated_events.each do |event| %>
           <div class="wanted-group row">
             <div class="col-md-12 wanted-group-item">
               <div class="wanted-body">
@@ -75,17 +69,7 @@
                   </div>
                   <div class="applies-lists text-center">
                     <% if user_signed_in? %>
-                      <% if event.event_status == "done" %>
-                        <%= link_to "評価してください", event_path(event.id), class:"btn btn-secondary" %>
-                      <% elsif event.event_status == "cancelling" %>
-                        <h4><strong>キャンセル申請中</strong></h4>
-                      <% elsif event.event_status == "rated" %>
-                        <h4><strong>評価待ち</strong></h4>
-                      <% elsif event.event_status == "pending" %>
-                        <h4><strong>申請中</strong></h4>
-                      <% else %>
-                        <h4><strong>評価済み</strong></h4>
-                      <% end %>
+                      <%= if_event_status?(event) %>
                     <% end %>
                   </div>
                 </div>

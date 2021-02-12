@@ -1,0 +1,15 @@
+<% unless event.user_id == current_user.id %>
+  <% if event.liked_by?(current_user) %>
+    <%= link_to event_favorite_path(event_id: event.id, id: event.favorite(current_user).id), method: :delete, remote: true do %>
+      <i class="fas fa-heart" style="color: red;"></i>
+    <% end %>
+    <span><%= t('views.user.favorites')%></span><%= event.favorite_users.count %>
+  <% else %>
+    <%= link_to event_favorites_path(event_id: event.id), method: :post, remote: true do %>
+      <i class="far fa-heart" style="color: red;"></i>
+    <% end %>
+    <span><%= t('views.user.favorites')%></span><%= event.favorite_users.count %>
+  <% end %>
+<% else %>
+  <span><%= t('views.user.favorites')%></span><%= event.favorite_users.count %>
+<% end %>

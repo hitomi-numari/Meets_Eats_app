@@ -35,4 +35,14 @@ module EventsHelper
     end
   end
 
+  def back(genre, area)
+    if genre.present?
+      link_to t('views.event.back'), events_path(genre_id: genre.id)
+    elsif area.present?
+      link_to t('views.event.back'), events_path(area_id: area.id)
+    else
+      link_to t('views.event.back'), events_path
+    end
+  end
+
 end

@@ -2,24 +2,23 @@ class UsersController < ApplicationController
   before_action :ensure_correct_user
   before_action :set_user, only: [:show, :my_events, :event_history]
   layout '_sidebar'
+
   def my_event
-    @events = current_user.events.where(event_status: "pending")
+    @events = current_user.events.pending
   end
 
   def event_history
-    @events = current_user.events.where.not(event_status: "pending")
+    @unrated_events = current_user.events.unrated.sort_created
+    @rated_events = current_user.events.rated.sort_created
   end
 
   def joined_event_history
-    @unrated_events = []
-    @rated_events = []
-      current_user.apply_for_events.order("created_at DESC").each do |user|
-        unless user.event.event_status == "completed"
-          @unrated_events << user.event
-        else
-          @rated_events << user.event
-        end
-      end
+    @unrated_events = current_user.apply_for_events_of_event.unrated.sort_created
+    @rated_events = current_user.apply_for_events_of_event.rated.sort_created
+  end
+
+  def favorite_lists
+    @events = current_user.favorite_users.sort_created
   end
 
   private

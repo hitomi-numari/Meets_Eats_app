@@ -15,17 +15,21 @@ Rails.application.routes.draw do
   end
   resources :profiles
   resources :events do
+    resources :favorites, only: [:create, :destroy, :destroy_from_lists] do
+      delete 'destroy_from_lists', :on => :member
+    end
     member do
       get :apply_members, :complete
     end
     get 'search_top', :on => :collection
-
   end
-  resources :users, only: [:my_event, :event_history, :joined_event_history] do
+
+  resources :users, only: [:my_event, :event_history, :joined_event_history, :favorite_lists] do
     member do
-      get :my_event, :event_history, :joined_event_history
+      get :my_event, :event_history, :joined_event_history, :favorite_lists
     end
   end
+
   resources :apply_for_events, only: [:create, :destroy, :toggle_status, :cancel_mail, :cancel_status] do
     patch :toggle_status
       member do
