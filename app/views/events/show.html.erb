@@ -78,35 +78,17 @@
           <%= link_to t('views.event.back'), event_history_user_path(@apply.user.id)%>
         <% else %>
           <%= link_to t('views.event.cancel'), apply_for_event_path(id: @apply.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %> |
-          <% if @genre.present? %>
-            <%= link_to t('views.event.back'), events_path(genre_id: @genre.id)%>
-          <% elsif @area.present? %>
-            <%= link_to t('views.event.back'), events_path(area_id: @area.id)%>
-          <% else %>
-            <%= link_to t('views.event.back'), events_path%>
-          <% end %>
+          <%= back(@genre, @area) %>
         <% end %>
       <% else %>
         <%= link_to t('views.event.direct_message'), rooms_path(sender_id: current_user.id, recipient_id: @event.user.id), method: :post, class: 'btn btn-info' %>
         <%= link_to t('views.event.join'), apply_for_events_path(event_id: @event.id), method: :post, class: 'btn btn-primary' %> |
-        <% if @genre.present? %>
-          <%= link_to t('views.event.back'), events_path(genre_id: @genre.id)%>
-        <% elsif @area.present? %>
-          <%= link_to t('views.event.back'), events_path(area_id: @area.id)%>
-        <% else %>
-          <%= link_to t('views.event.back'), events_path%>
-        <% end %>
+        <%= back(@genre, @area) %>
       <% end %>
     <% else %>
       <% if @event.event_status == "pending" %>
         <%= link_to t('views.event.edit_button'), action: "edit"%> |
-        <% if @genre.present? %>
-          <%= link_to t('views.event.back'), events_path(genre_id: @genre.id)%>
-        <% elsif @area.present? %>
-          <%= link_to t('views.event.back'), events_path(area_id: @area.id)%>
-        <% else %>
-          <%= link_to t('views.event.back'), events_path%>
-        <% end %>
+        <%= back(@genre, @area) %>
       <% elsif @event.event_status == "done" %>
         <h3><strong><%= t('views.user.unrated') %></strong><%= t('views.user.wait_for_apply') %></h3>
         <%= link_to t('views.event.back'), event_history_user_path(@event.user.id)%>

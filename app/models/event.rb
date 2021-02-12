@@ -97,8 +97,6 @@ class Event < ApplicationRecord
   scope :sort_expired, -> { order(expired_time: :asc) }
   scope :unrated, -> { where.not(event_status: "completed")}
   scope :rated, -> { where(event_status: "completed") }
-  scope :done, -> { where.not(event_status: "pending")}
-  scope :pending, -> { where(event_status: "pending") }
 
   paginates_per 15
 end

@@ -8,7 +8,8 @@ class UsersController < ApplicationController
   end
 
   def event_history
-    @events = current_user.events.done
+    @unrated_events = current_user.events.unrated.sort_created
+    @rated_events = current_user.events.rated.sort_created
   end
 
   def joined_event_history
