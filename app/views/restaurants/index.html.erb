@@ -1,31 +1,38 @@
+<div class="container">
 <%= form_with(url: restaurants_path, method: :get, local: true) do |f| %>
   <%= f.text_field :search %>
   <%= select_tag :large_area, options_for_select(@large_area_select) %>
-  <% @large_middle_select.each_with_index do |group, index| %>
-    <div id="<%= group[0][0][0] %>" class="select"><%= select_tag :middle_area, options_for_select(@large_middle_select[index][0][1,1]) %></div>
-  <% end %>
+  <div id="selects">
+    <% @large_area_group.each_with_index do |group, index| %>
+      <div id="<%= group[0] %>" class="selectbox"><%= select_tag :middle_area, options_for_select(group[1]) %></div>
+    <% end %>
+  </div>
   <%= f.submit 'Search' %>
 <% end %>
-
-<table>
 <% if @results.present? %>
   <% @results.each do |result| %>
-<tr>
-    <th>名前</th>
-    <td><%= result["name"] %></td>
-  </tr>
-  <tr>
-    <th>住所</th>
-    <td><%= result["address"] %></td>
-  </tr>
-  <tr>
-    <th>ジャンル</th>
-    <td><%= result["genre"]["name"] %></td>
-  </tr>
-  <tr>
-    <th>画像</th>
-    <td><%= image_tag result["photo"]["pc"]["l"] %></td>
-  </tr>
+  <div class="card mb-3" style="max-width: 100%;">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        <%= image_tag result["photo"]["pc"]["l"], class: "d-block mx-auto" %>
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title"><%= result["name"] %></h5>
+          <p class="card-text"><%= result["access"] %></p>
+          <p class="card-text"><%= result["address"] %></p>
+          <p class="card-text"><%= result["budget"]["average"] %></p>
+          <p class="card-text"><%= result["open"] %></p>
+          <p class="card-text"><%= link_to result["urls"]["pc"] %></p>
+          <p class="card-text"><small class="text-muted"><%= result["genre"]["name"] %></small></p>
+        </div>
+        <div class="mx-5 float-right">
+          <%= link_to "ここのお店にする", new_event_path(info: result), class:"btn btn-outline-dark" %>
+        </div>
+      </div>
+    </div>
+  </div>
   <% end %>
 <% end %>
-</table>
+</div>
+<%= javascript_pack_tag "shops" %>

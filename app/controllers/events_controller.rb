@@ -51,10 +51,12 @@ class EventsController < ApplicationController
   end
 
   def new
-    if params[:genre_id]
-      @genre = Genre.find(params[:genre_id])
+    if params[:info]
+      @restaurant_info = params[:info]
     elsif params[:area_id]
       @area = Area.find(params[:area_id])
+    elsif params[:genre_id]
+      @genre = Genre.find(params[:genre_id])
     end
 
     @event = Event.new

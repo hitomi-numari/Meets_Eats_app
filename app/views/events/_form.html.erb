@@ -12,6 +12,9 @@
       </div>
     <% end %>
     <%= form_with(model: @event, local: true) do |form| %>
+    <% if @restaurant_info.present? %>
+      <%= form.hidden_field :restaurant_url, :value => @restaurant_info %>
+
     <div class="form-group row">
       <%= form.label t('views.event.title'), class: "col-sm-2 col-form-label" %>
       <div class="col-sm-10">
@@ -66,26 +69,22 @@
     <div class="form-group row">
       <%= form.label t('views.event.restaurant_url'), class:"col-sm-2 col-form-label" %>
       <div class="col-sm-10">
-        <%= form.text_field :restaurant_url, class:"form-control" %>
+          <%= @restaurant_info["urls"]["pc"] %>
       </div>
     </div>
 
     <div class="form-group row">
       <%= form.label t('views.event.budget'), class:"col-sm-2 col-form-label" %>
       <div class="col-sm-10">
-        <%= form.select :budget, Event.budgets_i18n.keys.map {|k| [I18n.t("enums.event.budget.#{k}"), k]}, {include_blank: "選択して下さい"}, class:"custom-select" %>
+        <%= @restaurant_info["budget"]["average"] %>
       </div>
     </div>
 
     <div class="form-group row">
       <%= form.label t('views.area.name'), class:"col-sm-2 col-form-label" %>
       <div class="col-sm-10">
-        <% if @area.present? %>
-          <%= @area.name %>
-          <%= form.hidden_field :area_id, :value => @area.id %>
-        <% else %>
-          <%= form.collection_select :area_id, Area.all, :id, :name, {prompt: t('views.event.choose_choice')}, class:"custom-select" %>
-        <% end %>
+          <%= @restaurant_info["middle_area"]["name"] %>
+          <%= form.hidden_field :area_id, :value => @restaurant_info["middle_area"]["name"] %>
       </div>
     </div>
 
@@ -137,6 +136,7 @@
     <div class="form-group　row">
       <%= form.submit t('views.event.new_button'), class:"float-right btn btn-secondary"%>
     </div>
+    <% end %>
   <% end %>
   </div>
 </div>

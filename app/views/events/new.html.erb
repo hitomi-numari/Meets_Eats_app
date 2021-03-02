@@ -1,10 +1,10 @@
 <div class="container">
   <h1 class= "text-ceter"><%= t('views.event.new_event') %></h1>
-  <% if @genre.present? %>
-    <%= render 'form', genre_id: @genre.id %>
+  <% if @restaurant_info.present? %>
+    <%= render 'form', restaurant_info: @restaurant_info %>
   <% elsif @area.present? %>
     <%= render 'form', area_id: @area.id %>
-  <% else %>
-    <%= render 'form' %>
+  <% elsif @genre.present? %>
+    <%= render 'form', genre_id: @genre.id %>
   <% end %>
 </div>
