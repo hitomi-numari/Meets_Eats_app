@@ -6,75 +6,42 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+
+api_key = ENV["API"]
+url = "http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=#{api_key}&format=json"
+
+large_area_url = "http://webservice.recruit.co.jp/hotpepper/large_area/v1/?key=#{api_key}&format=json"
+large_area_url=URI.encode(large_area_url) #エスケープ
+uri = URI.parse(large_area_url)
+json = Net::HTTP.get(uri)
+before_large_area_select = JSON.parse(json)["results"]["large_area"]
+large_area_select = before_large_area_select.map { |r| ["#{r['name']}", "#{r['code']}"] }
+
+middle_area_url = "http://webservice.recruit.co.jp/hotpepper/middle_area/v1/?key=#{api_key}&format=json"
+middle_area_url=URI.encode(middle_area_url) #エスケープ
+uri = URI.parse(middle_area_url)
+json = Net::HTTP.get(uri)
+before_middle_area_select = JSON.parse(json)["results"]["middle_area"]
+middle_area_select = before_middle_area_select.map { |r| ["#{r['name']}", "#{r['code']}"] }
+large_area_group = []
+before_large_area_select.each do |l|
+  a = []
+  b = []
+  a << l['code']
+  before_middle_area_select.each do |m|
+    if m["large_area"]["name"] == l["name"]
+      b << ["#{m['name']}", "#{m['code']}"]
+    end
+  end
+  a << b
+  large_area_group << a
+end
+
+large_area_group[0][1].each do |group|
 Area.create!(
-  name:'千代田区'
+  name:group[0]
 )
-Area.create!(
-  name:'中央区'
-)
-Area.create!(
-  name:'港区'
-)
-Area.create!(
-  name:'新宿区'
-)
-Area.create!(
-  name:'文京区'
-)
-Area.create!(
-  name:'台東区'
-)
-Area.create!(
-  name:'墨田区'
-)
-Area.create!(
-  name:'江東区'
-)
-Area.create!(
-  name:'品川区'
-)
-Area.create!(
-  name:'目黒区'
-)
-Area.create!(
-  name:'太田区'
-)
-Area.create!(
-  name:'世田谷区'
-)
-Area.create!(
-  name:'渋谷区'
-)
-Area.create!(
-  name:'中野区'
-)
-Area.create!(
-  name:'杉並区'
-)
-Area.create!(
-  name:'豊島区'
-)
-Area.create!(
-  name:'北区'
-)
-Area.create!(
-  name:'荒川区'
-)
-Area.create!(
-  name:'板橋区'
-)
-Area.create!(
-  name:'練馬区'
-)
-Area.create!(
-  name:'足立区'
-)
-Area.create!(
-  name:'葛飾区'
-)
-Area.create!(
-  name:'江戸川区'
-)
+end
 
 Genre.create!(
   name:'恋愛'
@@ -125,14 +92,22 @@ end
 50.times do |n|
   title = Faker::Food.dish
   content = Faker::Restaurant.description
-  restaurant_url = Faker::Internet.url
-  budget = Faker::Number.between(from: 0, to: 5)
   start_at = Faker::Time.forward(days: 30)
   end_at = Faker::Time.between(from: start_at + 60 * 60, to: (start_at + 60 * 60) + 180 * 60)
   check_in_time = Faker::Number.between(from: 0, to: 4)
   food_category = Faker::Number.between(from: 0, to: 4)
   user_id = Faker::Number.between(from: 1, to: 100)
-  area_id = Faker::Number.between(from: 1, to: 23)
+  area_id = Faker::Number.between(from: 1, to: 48)
+  restaurant_name = Faker::Restaurant.name
+  restaurant_access = Faker::Address.street_address
+
+  budget_url = "http://webservice.recruit.co.jp/hotpepper/budget/v1/?key=#{api_key}&format=json"
+  budget_url=URI.encode(budget_url)
+  uri = URI.parse(budget_url)
+  json = Net::HTTP.get(uri)
+  budget_select = JSON.parse(json)["results"]["budget"]
+  budget_select = budget_select.map{ |r| r['name']}
+  budget = budget_select.sample
 
   if check_in_time == 0
     expired_time = start_at - 60 * 60
@@ -149,16 +124,18 @@ end
   Event.create!(
     title: title,
     content: content,
-    restaurant_url: restaurant_url,
-    budget: budget,
     start_at: start_at,
     end_at: end_at,
     check_in_time: check_in_time,
     food_category: food_category,
     user_id: user_id,
     event_status: 0,
+    expired_time: expired_time,
     area_id: area_id,
-    expired_time: expired_time
+    restaurant_name: restaurant_name,
+    restaurant_access: restaurant_access,
+    # restaurant_img: File.open('./public/uploads/profile/icon/restaurant_9983-300x300.png'),
+    budget: budget
   )
 end
 

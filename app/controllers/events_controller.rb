@@ -51,10 +51,12 @@ class EventsController < ApplicationController
   end
 
   def new
-    if params[:genre_id]
-      @genre = Genre.find(params[:genre_id])
+    if params[:restaurant_info]
+      @restaurant_info = params[:restaurant_info]
     elsif params[:area_id]
       @area = Area.find(params[:area_id])
+    elsif params[:genre_id]
+      @genre = Genre.find(params[:genre_id])
     end
 
     @event = Event.new
@@ -71,7 +73,7 @@ class EventsController < ApplicationController
     if params[:back]
       render :new
     else
-      if @event.save
+      if @event.save!
         redirect_to events_path
       else
         render :new
@@ -114,7 +116,8 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:title, :content, :restaurant_url, :budget, :start_at, :end_at,
-                                  :check_in_time, :food_category, :area_id, { genre_ids: [] })
+                                  :check_in_time, :food_category, :area_id, :restaurant_name, :restaurant_img,
+                                  :restaurant_access, { genre_ids: [] })
   end
 
   def ensure_correct_post

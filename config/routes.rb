@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'users/registrations',
-    passwords: 'users/passwords'
+    passwords: 'users/passwords',
+    omniauth_callbacks: "users/omniauth_callbacks"
   }
   devise_scope :user do
     authenticated :user do
@@ -47,6 +48,7 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/restaurants', to:'restaurants#index'
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener"
 end

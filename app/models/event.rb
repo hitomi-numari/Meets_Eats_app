@@ -10,22 +10,13 @@ class Event < ApplicationRecord
   validates :title, presence: true
   validates :content, presence: true
   validates :food_category, presence: true
-  validates :restaurant_url, presence: true,
-            format: URI::regexp(%w(http https))
+  # validates :restaurant_url, presence: true,
+  #           format: URI::regexp(%w(http https))
   validates :budget, presence: true
   validates :start_at, presence: true
   validates :end_at, presence: true
   validates :check_in_time, presence: true
   validate :end_check
-
-  enum budget: {
-    till_1000: 0,
-    till_2000: 1,
-    till_3000: 2,
-    till_4000: 3,
-    till_5000: 4,
-    over_5000: 5,
-  },  _prefix: true
 
   enum check_in_time: {
     before_1hour: 0,

@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :omniauthable
   has_many :events
   has_many :favorites, dependent: :destroy
   has_many :favorite_users, through: :favorites, source: :event

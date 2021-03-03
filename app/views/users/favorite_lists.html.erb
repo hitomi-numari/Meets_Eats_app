@@ -27,12 +27,12 @@
                     <% end %>
                   </div>
                   <div class="middle-contents-item restaurant_url">
-                    <%= link_to event.restaurant_url %>
+                    <%= link_to "#{event.restaurant_name}", "#{event.restaurant_url}"%>
                   </div>
                     <ul class="restaurant_info">
                       <li><%=event.area.name %></li>/
                       <li><%=event.food_category_i18n %><li>/
-                      <li><%= t('views.event.budget') %>：<%= event.budget_i18n %></li>
+                      <li><%= t('views.event.budget') %>：<%= event.budget %></li>
                     </ul>
                   <div class="middle-contents-item bottom_contents float-left">
                     <%= link_to "いいねリストから削除する", destroy_from_lists_event_favorite_path(event_id: event.id, id: event.favorite(current_user).id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-light' %>
