@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_03_130957) do
+ActiveRecord::Schema.define(version: 2021_03_02_130943) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,7 +47,6 @@ ActiveRecord::Schema.define(version: 2021_02_03_130957) do
     t.string "title", default: "", null: false
     t.text "content", default: "", null: false
     t.string "restaurant_url", default: "", null: false
-    t.integer "budget"
     t.datetime "start_at"
     t.datetime "end_at"
     t.integer "check_in_time"
@@ -58,6 +57,10 @@ ActiveRecord::Schema.define(version: 2021_02_03_130957) do
     t.integer "event_status", default: 0, null: false
     t.bigint "area_id"
     t.datetime "expired_time"
+    t.string "restaurant_name", default: "", null: false
+    t.string "restaurant_img", default: "", null: false
+    t.string "restaurant_access", default: "", null: false
+    t.string "budget", default: "", null: false
     t.index ["area_id"], name: "index_events_on_area_id"
     t.index ["user_id"], name: "index_events_on_user_id"
   end

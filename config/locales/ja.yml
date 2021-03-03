@@ -74,6 +74,8 @@ ja:
       cancellation_request_notice: キャンセル依頼がありました。キャンセルを承認する場合は下記より承認してください。
       cancellation_approved: キャンセル承認
       direct_message: メッセージを送る
+      rebook_please: お店の情報を変更する場合は再度投稿し直してください.
+      attention: 注意!
     user:
       menu: MENU
       mypage_top: マイページトップ

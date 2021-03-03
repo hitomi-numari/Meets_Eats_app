@@ -72,15 +72,15 @@
     </div>
     <div class="new_post">
         <% if @genre.present? %>
-          <%= link_to new_event_path(genre_id: @genre.id), class:"new-event" do %>
+          <%= link_to restaurants_path(genre_id: @genre.id), class:"new-event" do %>
             <i class="fas fa-plus-square"></i><span><%= t('views.event.new_event') %></span>
           <% end %>
         <% elsif @area.present? %>
-          <%= link_to new_event_path(area_id: @area.id), class:"new-event" do %>
+          <%= link_to restaurants_path(area_id: @area.id), class:"new-event" do %>
             <i class="fas fa-plus-square"></i><span><%= t('views.event.new_event') %></span>
           <% end %>
         <% else %>
-          <%= link_to new_event_path, class:"new-event" do %>
+          <%= link_to restaurants_path, class:"new-event" do %>
             <i class="fas fa-plus-square"></i><span><%= t('views.event.new_event') %></span>
           <% end %>
         <% end %>
@@ -118,14 +118,24 @@
                 <p　class="float-right"><%= link_to t('views.event.show'), event_path(event.id) %></p>
                 <% end %>
               </div>
-              <div class="middle-contents-item restaurant_url">
-                <%= link_to event.restaurant_url %>
+              <div class="card mb-3" style="max-width: 100%;">
+                <div class="row my-0 no-gutters">
+                  <div class="col-md-2 d-flex align-items-center justify-content-center">
+                    <%= image_tag(event.restaurant_img)%>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="card-title"><%= link_to "#{event.restaurant_name}", "#{event.restaurant_url}" %></p>
+                      <p class="card-text"><small><%= event.restaurant_access %></small></p>
+                    <ul class="d-flex flex-column bd-highlight mb-3">
+                      <li><small class="text-muted"><%=event.area.name %></small></li>
+                      <li><small class="text-muted"><%=event.food_category_i18n %></small></li>
+                      <li><small class="text-muted"><%= t('views.event.budget') %>：<%= event.budget %></small></li>
+                    </ul>
+                    </div>
+                  </div>
+                </div>
               </div>
-                <ul class="restaurant_info">
-                  <li><%=event.area.name %></li>/
-                  <li><%=event.food_category_i18n %><li>/
-                  <li><%= t('views.event.budget') %>：<%= event.budget_i18n %></li>
-                </ul>
               <div class="middle-contents-item bottom_contents float-left">
                 <div id="likes_buttons_<%= event.id %>">
                   <%= render partial: 'favorites/favorite', locals: { event: event} %>

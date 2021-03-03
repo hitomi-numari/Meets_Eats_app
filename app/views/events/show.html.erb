@@ -6,8 +6,8 @@
   <% end %>
 <table class="table table-borderless">
   <tr>
-    <th><%= image_tag(@event.user.profile.icon_url) %></th>
-      <td class="first-td align-middle"><%=link_to @event.user.profile.nickname, profile_path(@event.user.profile.id) %></td>
+    <th width="25%"><%= image_tag(@event.user.profile.icon_url) %></th>
+      <td width="75%" class="first-td align-middle"><%=link_to @event.user.profile.nickname, profile_path(@event.user.profile.id) %></td>
   </tr>
   <tr>
     <th><%= t('views.event.title') %></th>
@@ -39,11 +39,11 @@
   </tr>
   <tr>
     <th><%= t('views.event.restaurant_url') %></th>
-      <td><%=link_to @event.restaurant_url %></td>
+      <td><%= link_to "#{@event.restaurant_name}", "#{@event.restaurant_url}" %></td>
   </tr>
   <tr>
     <th><%= t('views.event.budget') %></th>
-      <td><%= @event.budget_i18n %></td>
+      <td><%= @event.budget %></td>
   </tr>
   <tr>
     <th><%= t('views.area.name') %></th>
