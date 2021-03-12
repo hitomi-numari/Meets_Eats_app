@@ -48,7 +48,8 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/restaurants', to:'restaurants#index'
+  get 'restaurants', to:'restaurants#index'
+  get 'api', to: 'restaurants#api'
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener"
 end

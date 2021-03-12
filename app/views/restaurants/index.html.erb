@@ -3,14 +3,10 @@
   <div class="form-group">
 
   <%= form_with(url: restaurants_path, method: :get, local: true) do |f| %>
-    <%= f.text_field :search, class:"search_container form-group", placeholder:"キーワード検索", size:"25" %>
-    <div><%= select_tag :large_area, options_for_select(@large_area_select), class:"form-group" %></div>
-    <div id="selects">
-      <% @large_area_group.each_with_index do |group, index| %>
-        <div id="<%= group[0] %>" class="selectbox"><%= select_tag :middle_area, options_for_select(group[1]) %></div>
-      <% end %>
-    </div>
-    <%= f.submit 'Search', class:"btn btn-secondary" %>
+    <%= f.text_field :keyword, class:"search_container form-group", placeholder:"キーワード検索", size:"25" %>
+    <div class="form-group"><%= select_tag :large_area, options_for_select(@large_area_select), class:"form-control", style:"width: 300px;" %></div>
+    <div class="form-group"><select id="middle_area_box" class="form-control" name="middle_area" style="width: 300px;"></select></div>
+      <%= f.submit '検索', class:"btn btn-primary"%>
   <% end %>
 </div>
 <% if @results.present? %>
