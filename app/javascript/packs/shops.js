@@ -4,7 +4,7 @@ $(document).on('turbolinks:load', function() {
   $('#' + large_area_code).show().appendTo($('#selects'));
   $('#large_area').change(function() {
   large_area_code = $('option:selected', this).val();
-  $('#' + large_area_code).show();
+  $('#' + large_area_code).show().appendTo($('#selects'));
   $('.selectbox').not($('#' + large_area_code)).hide();
 });
 });
