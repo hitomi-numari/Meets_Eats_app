@@ -28,7 +28,6 @@ $(document).on('turbolinks:load', function() {
       }
     }
   });
-
   $('#large_area').change(function() {
       large_area_code = $('#large_area option:selected').val();
       $('#middle_area_box').empty();

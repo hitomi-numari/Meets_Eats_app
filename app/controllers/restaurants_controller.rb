@@ -15,7 +15,7 @@ class RestaurantsController < ApplicationController
     uri = URI.parse(middle_area_url)
     json = Net::HTTP.get(uri)
     @before_middle_area_select = JSON.parse(json)["results"]["middle_area"]
-    @middle_area_select = @before_middle_area_select.map { |r| [r['name'], r['code']] }
+    @middle_area_select = @before_middle_area_select.map { |r| ["r['name']", "r['code']"] }
     @large_area_group = []
     @before_large_area_select.each do |l|
       a = []
@@ -23,12 +23,13 @@ class RestaurantsController < ApplicationController
       a << l['code']
       @before_middle_area_select.each do |m|
         if m["large_area"]["name"] == l["name"]
-          b << [m['name'], m['code']]
+          b << ["m['name']", "m['code']"]
         end
       end
       a << b
       @large_area_group << a
     end
+   @results = nil
 
     if params[:keyword]
       word = params[:keyword]
