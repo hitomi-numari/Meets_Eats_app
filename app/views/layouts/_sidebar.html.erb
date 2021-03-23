@@ -22,7 +22,7 @@
           <% else %>
             <li><p><%= t('views.application.hello') %><%= current_user.profile.nickname %>さん</p></li>
             <li><%= link_to t('views.application.search_event'), search_top_events_path %></li>
-            <li><%= link_to t('views.application.register_event'), new_event_path %></li>
+            <li><%= link_to t('views.application.register_event'), restaurants_path %></li>
             <li><%= link_to t('views.user.mypage'), my_event_user_path(current_user.id) %></li>
           <% end %>
           <li><%= link_to t('views.application.logout_link'), destroy_user_session_path, method: :delete %></li>
